@@ -65,7 +65,27 @@ nav {
 #socials:hover {
   box-shadow: 0 12px 24px rgba(30, 64, 175, 0.12);
 }
-
+#socials-grid{
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 50px;
+  align-items: center;
+  justify-items: center;
+  margin-left: 50px;
+}
+#socials-input {
+  width: 60%;
+  text-align: center;
+}
+#socials-input:focus::placeholder {
+  color: transparent;
+}
+#socials-item{
+  align-items: center;
+  display: flex;
+  
+}
 /* Input and textarea styles */
 input, textarea {
   margin-left: 12px;
