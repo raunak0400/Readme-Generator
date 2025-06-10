@@ -1,4 +1,6 @@
 import React from "react";
+import { SiBuymeacoffee } from "react-icons/si";
+
 // Importing icons from react-icons
 import {
   FaGithub, FaTwitter, FaDev, FaCodepen, FaStackOverflow, FaLinkedin, FaFacebook, FaInstagram,
@@ -39,6 +41,22 @@ const SocialsSection = ({ formData, setFormData }) => {
     });
   };
 
+  // State for modal visibility
+  const [showModal, setShowModal] = React.useState(false);
+
+  // Example payment methods (add your own as needed)
+  const paymentMethods = [
+    {
+      name: "UPI",
+      details: "abhijeetbhale7-2@okaxis", 
+      icon: <SiBuymeacoffee size={32} />,
+      description: "Scan the QR or use the UPI ID to pay.",
+      qr: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=abhijeetbhale7-2@okaxis",
+    },
+    // Add more payment methods here if needed
+    // { name: "PayPal", details: "your-paypal-link", icon: <FaPaypal />, ... }
+  ];
+
   return (
     <div className="mb-6" id="socials">
       <h2 className="text-xl font-bold mb-2">Socials</h2>
@@ -59,6 +77,72 @@ const SocialsSection = ({ formData, setFormData }) => {
           </div>
         ))}
       </div>
+
+      {/* Buy Me a Coffee Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          style={{ backdropFilter: "blur(2px)" }}
+        >
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h3 className="text-lg font-bold mb-4">Support Me</h3>
+            {paymentMethods.map((method) => (
+              <div key={method.name} className="mb-4 flex flex-col items-center">
+                <div className="flex items-center gap-2 mb-2">
+                  {method.icon}
+                  <span className="font-semibold">{method.name}</span>
+                </div>
+                <div className="mb-2 text-sm text-gray-700">{method.description}</div>
+                {method.qr && (
+                  <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32" />
+                )}
+                <div className="text-xs text-gray-600 break-all">{method.details}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Sticky Buy Me a Coffee Button */}
+      {!showModal && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "24px",
+            right: "24px",
+            zIndex: 1000,
+          }}
+        >
+          <button
+            type="button"
+            className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
+            style={{
+              borderWidth: "4px",
+              borderColor: "#fb923c",
+              borderRadius: "50%",
+              width: "64px",
+              height: "64px",
+              aspectRatio: "1/1",
+              marginRight: "56px",
+              backgroundColor: "#fb923c",
+              color: "#fff",
+            }}
+            onClick={() => setShowModal(true)}
+            title="Buy me a coffee"
+          >
+            <span>
+              <SiBuymeacoffee size={40} />
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
