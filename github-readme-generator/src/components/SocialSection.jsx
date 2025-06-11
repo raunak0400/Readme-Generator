@@ -26,7 +26,6 @@ const SOCIALS = [
   { name: 'Behance', key: 'behance', placeholder: 'Behance username', icon: <FaBehance /> },
   { name: 'Pinterest', key: 'pinterest', placeholder: 'Pinterest username', icon: <FaPinterest /> },
   { name: 'Telegram', key: 'telegram', placeholder: 'Telegram username', icon: <FaTelegram /> },
-  { name: 'Slack', key: 'slack', placeholder: 'Slack workspace or username', icon: <FaSlack /> },
   { name: 'WhatsApp', key: 'whatsapp', placeholder: 'WhatsApp number or link', icon: <FaWhatsapp /> },
 ];
 
@@ -47,9 +46,9 @@ const SocialsSection = ({ formData, setFormData }) => {
   // Example payment methods (add your own as needed)
   const paymentMethods = [
     {
-      name: "UPI",
-      details: "abhijeetbhale7-2@okaxis", 
-      icon: <SiBuymeacoffee size={32} />,
+      // name: "UPI",
+      details: "abhijeetbhale7-2@okaxis",
+      // icon: <SiBuymeacoffee size={32} />,
       description: "Scan the QR or use the UPI ID to pay.",
       qr: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=abhijeetbhale7-2@okaxis",
     },
@@ -58,68 +57,39 @@ const SocialsSection = ({ formData, setFormData }) => {
   ];
 
   return (
-    <div className="mb-6" id="socials">
-      <h2 className="text-xl font-bold mb-2">Socials</h2>
-      <div className="grid gap-3" id="socials-grid">
-        {SOCIALS.map((social) => (
-          <div key={social.key} className="flex items-center gap-2" id="socials-item">
-            <span className="text-xl w-6 flex-shrink-0" style={{ fontSize: 34 }}>
-              {social.icon}
-            </span>
-            <input
-              id="socials-input"
-              type="url"
-              className="flex-1 border rounded px-2 py-1"
-              placeholder={social.name}
-              value={formData.socials?.[social.key] || ''}
-              onChange={(e) => handleChange(social.key, e.target.value)}
-            />
-          </div>
-        ))}
+    <>
+      {/* Socials Card */}
+      <div className="mb-6" id="socials">
+        <h2 className="text-xl font-bold mb-2">Socials</h2>
+        <div className="grid gap-3" id="socials-grid">
+          {SOCIALS.map((social) => (
+            <div key={social.key} className="flex items-center gap-2" id="socials-item">
+              <span className="text-xl w-6 flex-shrink-0" style={{ fontSize: 34 }}>
+                {social.icon}
+              </span>
+              <input
+                id="socials-input"
+                type="url"
+                className="flex-1 border rounded px-2 py-1"
+                placeholder={social.name}
+                value={formData.socials?.[social.key] || ''}
+                onChange={(e) => handleChange(social.key, e.target.value)}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Buy Me a Coffee Modal */}
-      {showModal && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          style={{ backdropFilter: "blur(2px)" }}
-        >
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
-              onClick={() => setShowModal(false)}
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <h3 className="text-lg font-bold mb-4">Support Me</h3>
-            {paymentMethods.map((method) => (
-              <div key={method.name} className="mb-4 flex flex-col items-center">
-                <div className="flex items-center gap-2 mb-2">
-                  {method.icon}
-                  <span className="font-semibold">{method.name}</span>
-                </div>
-                <div className="mb-2 text-sm text-gray-700">{method.description}</div>
-                {method.qr && (
-                  <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32" />
-                )}
-                <div className="text-xs text-gray-600 break-all">{method.details}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Sticky Buy Me a Coffee Button */}
-      {!showModal && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "24px",
-            right: "24px",
-            zIndex: 1000,
-          }}
-        >
+      {/* Floating Buy Me a Coffee Button */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          zIndex: 1000,
+        }}
+      >
+        {!showModal && (
           <button
             type="button"
             className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
@@ -128,9 +98,9 @@ const SocialsSection = ({ formData, setFormData }) => {
               borderColor: "#fb923c",
               borderRadius: "50%",
               width: "64px",
+              marginRight: "36px",
               height: "64px",
               aspectRatio: "1/1",
-              marginRight: "56px",
               backgroundColor: "#fb923c",
               color: "#fff",
             }}
@@ -141,9 +111,86 @@ const SocialsSection = ({ formData, setFormData }) => {
               <SiBuymeacoffee size={40} />
             </span>
           </button>
-        </div>
-      )}
-    </div>
+        )}
+
+        {/* Modal just above the button */}
+        {showModal && (
+          <>
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50"
+              style={{ zIndex: 1040 }}
+              onClick={() => setShowModal(false)}
+            />
+            {/* Modal */}
+            <div
+              className="absolute"
+              style={{
+                bottom: "80px", // 64px button + 16px gap
+                right: "0px",
+                zIndex: 1050,
+                minWidth: "320px",
+                maxWidth: "360px",
+              }}
+            >
+              <div
+                className="relative bg-white rounded-lg shadow-lg flex flex-col items-center border"
+                style={{
+                  borderColor: "#e5e7eb",
+                  background: "#fff",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+                  minHeight: "350px",
+                  justifyContent: "center",
+                  padding: "2rem 2rem 2rem 2rem",
+                }}
+              >
+                {/* Close Button at Top Right */}
+                <button
+                  className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  onClick={() => setShowModal(false)}
+                  aria-label="Close"
+                  style={{
+                    background: "rgba(255,255,255,0.7)",
+                    border: "none",
+                    borderRadius: "50%",
+                    width: "32px",
+                    height: "32px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                  }}
+                >
+                  {/* Cross icon from react-icons */}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <div className="flex flex-col items-center justify-center w-full h-full text-center">
+                  <h2 className="text-xl font-bold mb-4 mt-2 w-full">Support Me</h2>
+                  <div className="grid gap-4 w-full justify-items-center">
+                    {paymentMethods.map((method) => (
+                      <div key={method.name} className="flex flex-col items-center border rounded px-4 py-4 bg-gray-50 w-full">
+                        <div className="flex items-center gap-2 mb-2 justify-center">
+                          {method.icon}
+                          <span className="font-semibold">{method.name}</span>
+                        </div>
+                        <div className="mb-2 text-sm text-gray-700 text-center">{method.description}</div>
+                        {method.qr && (
+                          <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32 rounded shadow mx-auto" />
+                        )}
+                        <div className="text-xs text-gray-600 break-all text-center">{method.details}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
