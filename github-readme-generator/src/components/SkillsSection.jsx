@@ -208,7 +208,7 @@ const SkillsSection = ({ formData, setFormData }) => {
     ],
   };
 
-  
+
 
   const toggleSkill = (category, skill) => {
     const updatedSkills = { ...formData.skills };
@@ -243,7 +243,7 @@ const SkillsSection = ({ formData, setFormData }) => {
                       <div
                         key={skill.name}
                         id='skill-icons'
-                        className="d-flex align-items-center p-2 rounded hover-shadow"
+                        className="d-flex align-items-center p-2 rounded hover-shadow position-relative"
                         style={{ minWidth: 0 }}
                       >
                         <input
@@ -252,16 +252,50 @@ const SkillsSection = ({ formData, setFormData }) => {
                           onChange={() => toggleSkill(category, skill.name)}
                           className="form-check-input me-2"
                           title={`Toggle ${skill.name}`}
-                          style={{ accentColor: '#0d6efd' }}
+                          style={{ accentColor: '#0d6efd', width: '24px', height: '24px' }}
                         />
-                        <img
-                          src={skill.icon}
-                          alt={`${skill.name} icon`}
-                          className="img-fluid me-2"
-                          style={{ width: '28px', height: '28px', objectFit: 'contain', flexShrink: 0 }}
-                          onError={(e) => (e.target.src = 'https://via.placeholder.com/28?text=?')}
-                        />
-                        <span className="text-dark small text-nowrap">{skill.name}</span>
+                        <div className="skill-icon-tooltip-wrapper" style={{ position: 'relative', display: 'inline-block' }}>
+                          <img
+                            src={skill.icon}
+                            alt={`${skill.name} icon`}
+                            className="img-fluid me-2"
+                            style={{ width: '28px', height: '28px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
+                            onError={(e) => (e.target.src = 'https://via.placeholder.com/28?text=?')}
+                            onMouseEnter={e => {
+                              const tooltip = e.target.nextSibling;
+                              tooltip.style.visibility = 'visible';
+                              tooltip.style.opacity = 1;
+                            }}
+                            onMouseLeave={e => {
+                              const tooltip = e.target.nextSibling;
+                              tooltip.style.visibility = 'hidden';
+                              tooltip.style.opacity = 0;
+                            }}
+                          />
+                          <span
+                            className="skill-tooltip"
+                            style={{
+                              visibility: 'hidden',
+                              opacity: 0,
+                              transition: 'opacity .99s',
+                              position: 'absolute',
+                              zIndex: 10,
+                              background: '#222',
+                              color: '#fff',
+                              padding: '4px 10px',
+                              borderRadius: '4px',
+                              fontSize: '0.85rem',
+                              left: '200%',
+                              top: '40%',
+                              transform: 'translateY(-50%)',
+                              whiteSpace: 'nowrap',
+                              pointerEvents: 'none'
+                            }}
+                          >
+                            {skill.name}
+                          </span>
+                        </div>
+                        {/* <span className="text-dark small text-nowrap">{skill.name}</span> */}
                       </div>
                     ))}
                   </div>

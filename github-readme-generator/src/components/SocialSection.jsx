@@ -80,40 +80,51 @@ const SocialsSection = ({ formData, setFormData }) => {
         </div>
       </div>
 
-      {/* Floating Buy Me a Coffee Button */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "24px",
-          right: "24px",
-          zIndex: 1000,
-        }}
-      >
-        {!showModal && (
-          <button
-            type="button"
-            className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
+        <div
+          style={{
+            position: "fixed",
+            bottom: "24px",
+            right: "24px",
+            zIndex: 1000,
+          }}
+        >
+          {!showModal && (
+            <button
+          type="button"
+          className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
+          style={{
+            borderWidth: "4px",
+            borderColor: "#fb923c",
+            borderRadius: "50%",
+            width: "64px",
+            marginRight: "36px",
+            height: "64px",
+            aspectRatio: "1/1",
+            backgroundColor: "#fb923c",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 0,
+          }}
+          onClick={() => setShowModal(true)}
+          title="Buy me a coffee"
+            >
+          <span
             style={{
-              borderWidth: "4px",
-              borderColor: "#fb923c",
-              borderRadius: "50%",
-              width: "64px",
-              marginRight: "36px",
-              height: "64px",
-              aspectRatio: "1/1",
-              backgroundColor: "#fb923c",
-              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
             }}
-            onClick={() => setShowModal(true)}
-            title="Buy me a coffee"
           >
-            <span>
-              <SiBuymeacoffee size={40} />
-            </span>
-          </button>
-        )}
+            <SiBuymeacoffee size={40} style={{ display: "block", margin: "auto" }} />
+          </span>
+            </button>
+          )}
 
-        {/* Modal just above the button */}
+          {/* Modal just above the button */}
         {showModal && (
           <>
             {/* Backdrop */}

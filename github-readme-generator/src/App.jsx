@@ -215,12 +215,14 @@ const App = () => {
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
         <SocialsSection formData={formData} setFormData={setFormData} />
-        <button
-          onClick={generateMarkdown}
-          className="mt-4 w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md "
-        >
-          Generate README
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={generateMarkdown}
+            className="mt-4 w-full sm:w-auto bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md"
+          >
+            Generate README
+          </button>
+        </div>
       </div>
     </div>
   );

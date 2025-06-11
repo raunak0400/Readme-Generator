@@ -19,8 +19,8 @@ body {
 
 /* Container for layout */
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  /* max-width: 800px; */
+  /* margin: 0 auto; */
   padding: 2rem;
 }
 
@@ -109,15 +109,6 @@ input:focus, textarea:focus {
   overflow: auto;
   background: #fff;
 }
-#description{
-  height: 140px;
-  width: 100%;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  margin-left: 0px;
-  margin-right: 0px;
-  resize: none;
-}
 /* Skill icons */
 .skill-icon {
   display: flex;
@@ -153,14 +144,14 @@ input:focus, textarea:focus {
   justify-content: flex-start;
   align-items: center;
   /* width: 100%; */
-  font-size: 15px;
-  gap: 15px;
+  /* font-size: 15px; */
+  gap: 165px;
 }
 
 /* Button styles */
 button {
-  display: flex;
-  margin-left: 40%;
+  display: block;
+  margin: 2rem auto;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
