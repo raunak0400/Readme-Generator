@@ -208,6 +208,8 @@ const SkillsSection = ({ formData, setFormData }) => {
     ],
   };
 
+  
+
   const toggleSkill = (category, skill) => {
     const updatedSkills = { ...formData.skills };
     if (!updatedSkills[category]) updatedSkills[category] = [];
