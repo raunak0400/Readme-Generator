@@ -28,17 +28,3 @@ A simple web application to help you generate professional and customizable READ
     ```
 
 4. Open [http://localhost:5173](http://localhost:5173) to view the app in your browser.
-
-## Built With
-
-- [React](https://react.dev/)
-- [Vite](https://vitejs.dev/)
-- [ESLint](https://eslint.org/)
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
