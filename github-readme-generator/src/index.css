@@ -148,7 +148,7 @@ input:focus, textarea:focus {
   align-items: center;
   /* width: 100%; */
   /* font-size: 15px; */
-  gap: 165px;
+  gap: 155px;
 }
 #skill-checkbox{
   margin-right: -120px ;
