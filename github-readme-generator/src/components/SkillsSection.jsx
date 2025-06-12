@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 const SkillsSection = ({ formData, setFormData }) => {
   const skillSets = {
@@ -36,6 +37,7 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'Prolog', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prolog/prolog-original.svg' },
       { name: 'OCaml', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ocaml/ocaml-original.svg' },
       { name: 'PowerShell', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg' },
+      { name: 'Rust', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg' },
     ],
     'Frontend Development': [
       { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -116,6 +118,8 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'D3.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/d3js/d3js-original.svg' },
       { name: 'Plotly', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/plotly/plotly-original.svg' },
       { name: 'Google Charts', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg' },
+      { name: 'ZingChart', icon: 'https://www.zingchart.com/favicon.ico' },
+      { name: 'Matlab', icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matlab/matlab-original.svg" },
     ],
     'Devops': [
       { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
@@ -182,91 +186,147 @@ const SkillsSection = ({ formData, setFormData }) => {
     setFormData({ ...formData, skills: updatedSkills });
   };
 
+  const [search, setSearch] = React.useState('');
+
+  // Flatten all skills for search
+  const allSkills = Object.entries(skillSets).flatMap(([category, skills]) =>
+    skills.map(skill => ({ ...skill, category }))
+  );
+
+  // Filtered skills by search
+  const filteredSkillSets = React.useMemo(() => {
+    if (!search.trim()) return skillSets;
+    const lower = search.toLowerCase();
+    const filtered = {};
+    allSkills.forEach(skill => {
+      if (skill.name.toLowerCase().includes(lower)) {
+        if (!filtered[skill.category]) filtered[skill.category] = [];
+        filtered[skill.category].push({ name: skill.name, icon: skill.icon });
+      }
+    });
+    return filtered;
+  }, [search, skillSets, allSkills]);
+
   return (
     <div className="card container text-center my-4">
-      <h2 className="text-2xl font-bold mb-3 text-dark" style={{ fontSize: '2rem' }}>Skills</h2>
-
-      {Object.entries(skillSets).map(([category, skills]) => {
-        // Split skills into rows of 3 items each (horizontal arrangement)
-        const rows = [];
-        for (let i = 0; i < skills.length; i += 5) {
-          rows.push(skills.slice(i, i + 5));
+      <div className="row align-items-center mb-3" style={{ minHeight: 56 }}>
+        <div className="col text-start">
+          <h2 className="text-2xl font-bold text-dark m-0" style={{ fontSize: '2rem' }}>Skills</h2>
+          <input
+           id='skill-search'
+            type="text"
+            placeholder="Search skills..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="form-control"
+            style={{ maxWidth: 250 }}
+          />
+        </div>
+        {/* <div className="col-auto d-flex justify-content-end">
+          <input
+          id='skill-search'
+            type="text"
+            placeholder="Search skills..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="form-control"
+            style={{ maxWidth: 250 }}
+          />
+        </div> */}
+      </div>
+      {Object.entries(filteredSkillSets).length === 0 && (
+        <div className="text-muted mb-4">No skills found.</div>
+      )}
+      <div
+        style={
+          search.trim()
+            ? { display: 'flex', justifyContent: 'flex-start', paddingLeft: 0 }
+            : {}
         }
+      >
+        <div style={{ width: '100%' }}>
+          {Object.entries(filteredSkillSets).map(([category, skills]) => {
+            // Split skills into rows of 5 items each (horizontal arrangement)
+            const rows = [];
+            for (let i = 0; i < skills.length; i += 5) {
+              rows.push(skills.slice(i, i + 5));
+            }
 
-        return (
-          <div key={category} className="mb-5 text-start">
-            <h3 className="text-lg font-medium text-secondary mb-3"style={{ fontSize: '1.5rem' }}>{category}</h3>
-            <div className="container skills-section" id='skills'>
-              <div className="d-flex flex-column gap-2">
-                {rows.map((row, rowIdx) => (
-                  <div key={rowIdx} className="d-flex justify-content-center gap-3 mb-2" id='skill-icons'>
-                    {row.map((skill) => (
-                      <div
-                        key={skill.name}
-                        id='skill-icons'
-                        className="d-flex align-items-center p-2 rounded hover-shadow position-relative"
-                        style={{ minWidth: 0 }}
-                      >
-                        <input
-                          id='skill-checkbox'
-                          type="checkbox"
-                          checked={!!formData.skills[category]?.includes(skill.name)}
-                          onChange={() => toggleSkill(category, skill.name)}
-                          className="form-check-input me-2"
-                          title={`Toggle ${skill.name}`}
-                          style={{ accentColor: '#0d6efd', width: '24px', height: '24px' }}
-                        />
-                        <div className="skill-icon-tooltip-wrapper" style={{ position: 'relative', display: 'inline-block' }}>
-                          <img
-                            src={skill.icon}
-                            alt={`${skill.name} icon`}
-                            className="img-fluid me-2"
-                            style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
-                            onError={(e) => (e.target.src = 'https://via.placeholder.com/28?text=?')}
-                            onMouseEnter={e => {
-                              const tooltip = e.target.nextSibling;
-                              tooltip.style.visibility = 'visible';
-                              tooltip.style.opacity = 1;
-                            }}
-                            onMouseLeave={e => {
-                              const tooltip = e.target.nextSibling;
-                              tooltip.style.visibility = 'hidden';
-                              tooltip.style.opacity = 0;
-                            }}
-                          />
-                          <span
-                            className="skill-tooltip"
-                            style={{
-                              visibility: 'hidden',
-                              opacity: 0,
-                              transition: 'opacity .99s',
-                              position: 'absolute',
-                              zIndex: 10,
-                              background: '#222',
-                              color: '#fff',
-                              padding: '4px 10px',
-                              borderRadius: '4px',
-                              fontSize: '0.85rem',
-                              left: '200%',
-                              top: '40%',
-                              transform: 'translateY(-50%)',
-                              whiteSpace: 'nowrap',
-                              pointerEvents: 'none'
-                            }}
+            return (
+              <div key={category} className="mb-5 text-start">
+                <h3 className="text-lg font-medium text-secondary mb-3" style={{ fontSize: '1.5rem' }}>{category}</h3>
+                <div className="container skills-section" id='skills'>
+                  <div className="d-flex flex-column gap-2">
+                    {rows.map((row, rowIdx) => (
+                      <div key={rowIdx} className="d-flex justify-content-center gap-3 mb-2" id='skill-icons'>
+                        {row.map((skill) => (
+                          <div
+                            key={skill.name}
+                            id='skill-icons'
+                            className="d-flex align-items-center p-2 rounded hover-shadow position-relative"
+                            style={{ minWidth: 0 }}
                           >
-                            {skill.name}
-                          </span>
-                        </div>
-                        {/* <span className="text-dark small text-nowrap">{skill.name}</span> */}
+                            <input
+                              id='skill-checkbox'
+                              type="checkbox"
+                              checked={!!formData.skills[category]?.includes(skill.name)}
+                              onChange={() => toggleSkill(category, skill.name)}
+                              className="form-check-input me-2"
+                              title={`Toggle ${skill.name}`}
+                              style={{ accentColor: '#0d6efd', width: '24px', height: '24px' }}
+                            />
+                            <div className="skill-icon-tooltip-wrapper" style={{ position: 'relative', display: 'inline-block' }}>
+                              <img
+                                src={skill.icon}
+                                alt={`${skill.name} icon`}
+                                className="img-fluid me-2"
+                                style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
+                                onError={e => (e.target.src = 'https://via.placeholder.com/28?text=?')}
+                                onMouseEnter={e => {
+                                  const tooltip = e.target.nextSibling;
+                                  tooltip.style.visibility = 'visible';
+                                  tooltip.style.opacity = 1;
+                                }}
+                                onMouseLeave={e => {
+                                  const tooltip = e.target.nextSibling;
+                                  tooltip.style.visibility = 'hidden';
+                                  tooltip.style.opacity = 0;
+                                }}
+                              />
+                              <span
+                                className="skill-tooltip"
+                                style={{
+                                  visibility: 'hidden',
+                                  opacity: 0,
+                                  transition: 'opacity .99s',
+                                  position: 'absolute',
+                                  zIndex: 10,
+                                  background: '#222',
+                                  color: '#fff',
+                                  padding: '4px 10px',
+                                  borderRadius: '4px',
+                                  fontSize: '0.85rem',
+                                  left: '180%',
+                                  top: '40%',
+                                  transform: 'translateY(-50%)',
+                                  whiteSpace: 'nowrap',
+                                  pointerEvents: 'none'
+                                }}
+                              >
+                                {skill.name}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };

@@ -153,6 +153,15 @@ input:focus, textarea:focus {
 #skill-checkbox{
   margin-right: -120px ;
 }
+#skill-search{
+  display: flex;
+  position: relative;
+  top: -40px;
+  left: 80%;
+  justify-content: end;
+  width: 60%;
+  text-align: start;
+}
 
 /* Button styles */
 button {
