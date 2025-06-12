@@ -60,7 +60,7 @@ const SocialsSection = ({ formData, setFormData }) => {
     <>
       {/* Socials Card */}
       <div className="mb-6" id="socials">
-        <h2 className="text-xl font-bold mb-2">Socials</h2>
+        <h2 className="text-xl font-bold mb-2"style={{ fontSize: '2rem' }}>Socials</h2>
         <div className="grid gap-3" id="socials-grid">
           {SOCIALS.map((social) => (
             <div key={social.key} className="flex items-center gap-2" id="socials-item">

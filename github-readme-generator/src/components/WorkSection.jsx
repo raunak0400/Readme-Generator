@@ -22,7 +22,7 @@ const WorkSection = ({ formData, setFormData }) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-3 text-gray-800">Work</h2>
+      <h2 className="text-xl font-semibold mb-3 text-gray-800"style={{ fontSize: '2rem' }}>Work</h2>
       {workFields.map((field, index) => (
         <div key={field.name} className="mb-4">
           <label className="block font-medium text-gray-600 mb-1">{field.label}</label>

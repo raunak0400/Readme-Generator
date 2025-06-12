@@ -158,7 +158,7 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'Nginx', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg' },
       { name: 'Apache', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg' },
     ],
-    'Backend as a Service': [
+    'Backend as a Service(BaaS)': [
       { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
       // { name: 'AWS Amplify', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg' },
       { name: 'Heroku', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg' },
@@ -223,18 +223,18 @@ const SkillsSection = ({ formData, setFormData }) => {
 
   return (
     <div className="card container text-center my-4">
-      <h2 className="text-xl font-semibold mb-3 text-dark">Skills</h2>
+      <h2 className="text-2xl font-bold mb-3 text-dark" style={{ fontSize: '2rem' }}>Skills</h2>
 
       {Object.entries(skillSets).map(([category, skills]) => {
         // Split skills into rows of 3 items each (horizontal arrangement)
         const rows = [];
-        for (let i = 0; i < skills.length; i += 3) {
-          rows.push(skills.slice(i, i + 3));
+        for (let i = 0; i < skills.length; i += 5) {
+          rows.push(skills.slice(i, i + 5));
         }
 
         return (
           <div key={category} className="mb-5 text-start">
-            <h3 className="text-lg font-medium text-secondary mb-3">{category}</h3>
+            <h3 className="text-lg font-medium text-secondary mb-3"style={{ fontSize: '1.5rem' }}>{category}</h3>
             <div className="container skills-section" id='skills'>
               <div className="d-flex flex-column gap-2">
                 {rows.map((row, rowIdx) => (
@@ -247,6 +247,7 @@ const SkillsSection = ({ formData, setFormData }) => {
                         style={{ minWidth: 0 }}
                       >
                         <input
+                          id='skill-checkbox'
                           type="checkbox"
                           checked={!!formData.skills[category]?.includes(skill.name)}
                           onChange={() => toggleSkill(category, skill.name)}
@@ -259,7 +260,7 @@ const SkillsSection = ({ formData, setFormData }) => {
                             src={skill.icon}
                             alt={`${skill.name} icon`}
                             className="img-fluid me-2"
-                            style={{ width: '28px', height: '28px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
+                            style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
                             onError={(e) => (e.target.src = 'https://via.placeholder.com/28?text=?')}
                             onMouseEnter={e => {
                               const tooltip = e.target.nextSibling;

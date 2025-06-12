@@ -10,7 +10,7 @@ const TitleSection = ({ formData, setFormData }) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-3 text-gray-800">Title</h2>
+      <h2 className="text-xl font-semibold mb-3 text-gray-800"style={{ fontSize: '2rem' }}>Title</h2>
       <input
         type="text"
         name="title"
@@ -21,7 +21,7 @@ const TitleSection = ({ formData, setFormData }) => {
         placeholder={!formData.title && !titleFocused ? "Hi 🙋‍♂️, I'm" : ''}
         className="w-full p-3 mb-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
       />
-      <h2 className="text-xl font-semibold mb-3 text-gray-800">Subtitle</h2>
+      <h2 className="text-xl font-semibold mb-3 text-gray-800"style={{ fontSize: '2rem' }}>Subtitle</h2>
       <input
         type="text"
         name="description"
