@@ -5,6 +5,7 @@ import TitleSection from './components/TitleSection';
 import WorkSection from './components/WorkSection';
 import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
+import NotificationModel from './components/NotificationModel';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -168,8 +169,23 @@ const App = () => {
   };
 
   const generateMarkdown = () => {
-    const { projectName, tagline, description, work, skills, socials } = formData;
-    let markdown = `# ${projectName}\n\n${tagline}\n\n${description}\n\n## Work\n`;
+    const { name, projectName, tagline, description, work, skills, socials } = formData;
+    let markdown = '';
+
+    // Add the "Hi I'm ..." line if name is present
+    if (name && name.trim() !== '') {
+      markdown += `# Hi, I'm ${name}!\n\n`;
+    }
+
+    // Project name as main heading if not already included in the name
+    if (projectName && (!name || projectName !== name)) {
+      markdown += `## ${projectName}\n\n`;
+    }
+
+    if (tagline) markdown += `${tagline}\n\n`;
+    if (description) markdown += `${description}\n\n`;
+
+    markdown += '## Work\n';
 
     if (work[0].projectName)
       markdown += `- I'm currently working on [${work[0].projectName}](${work[0].projectLink})\n`;
@@ -211,6 +227,7 @@ const App = () => {
     <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       <div className="container mx-auto p-4 max-w-4xl">
+        <NotificationModel/>
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
