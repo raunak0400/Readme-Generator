@@ -2,9 +2,11 @@
 
 # 🛠️ GitHub Readme Generator
 
+</div>
+
 A simple web application to help you generate professional and customizable README files for your GitHub projects.
 
-</div>
+
 
 ## Features
 
@@ -39,5 +41,10 @@ A simple web application to help you generate professional and customizable READ
 
 ## Live Demo
 
-🔗 [Deployed Website](https://readme-generator-github-abhijeetbhale.netlify.app/)
+🔗 [Live Demo](https://readme-generator-github-abhijeetbhale.netlify.app/)
+
+## 📸 Screenshot
+
+![Readme Generator GitHub](https://github.com/abhijeetBhale/Portfolio/blob/058af283a0133c9718137c82755af89a34f5b30b/assets/readme-generator-ss.png)
+![Readme Generator GitHub](https://github.com/abhijeetBhale/Portfolio/blob/058af283a0133c9718137c82755af89a34f5b30b/assets/readme-generator-ss2.png)
 
