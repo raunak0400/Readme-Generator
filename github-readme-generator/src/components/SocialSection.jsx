@@ -60,7 +60,7 @@ const SocialsSection = ({ formData, setFormData }) => {
     <>
       {/* Socials Card */}
       <div className="mb-6" id="socials">
-        <h2 className="text-xl font-bold mb-2"style={{ fontSize: '2rem' }}>Socials</h2>
+        <h2 className="text-xl font-bold mb-2" style={{ fontSize: '2rem' }}>Socials</h2>
         <div className="grid gap-3" id="socials-grid">
           {SOCIALS.map((social) => (
             <div key={social.key} className="flex items-center gap-2" id="socials-item">
@@ -80,51 +80,51 @@ const SocialsSection = ({ formData, setFormData }) => {
         </div>
       </div>
 
-        <div
-          style={{
-            position: "fixed",
-            bottom: "24px",
-            right: "24px",
-            zIndex: 1000,
-          }}
-        >
-          {!showModal && (
-            <button
-          type="button"
-          className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
-          style={{
-            borderWidth: "4px",
-            borderColor: "#fb923c",
-            borderRadius: "50%",
-            width: "64px",
-            marginRight: "36px",
-            height: "64px",
-            aspectRatio: "1/1",
-            backgroundColor: "#fb923c",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 0,
-          }}
-          onClick={() => setShowModal(true)}
-          title="Buy me a coffee"
-            >
-          <span
+      <div
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          zIndex: 1000,
+        }}
+      >
+        {!showModal && (
+          <button
+            type="button"
+            className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
             style={{
+              borderWidth: "4px",
+              borderColor: "#fb923c",
+              borderRadius: "50%",
+              width: "64px",
+              marginRight: "36px",
+              height: "64px",
+              aspectRatio: "1/1",
+              backgroundColor: "#fb923c",
+              color: "#fff",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "100%",
-              height: "100%",
+              padding: 0,
             }}
+            onClick={() => setShowModal(true)}
+            title="Buy me a coffee"
           >
-            <SiBuymeacoffee size={40} style={{ display: "block", margin: "auto" }} />
-          </span>
-            </button>
-          )}
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <SiBuymeacoffee size={40} style={{ display: "block", margin: "auto" }} />
+            </span>
+          </button>
+        )}
 
-          {/* Modal just above the button */}
+        {/* Modal just above the button */}
         {showModal && (
           <>
             {/* Backdrop */}
@@ -157,13 +157,11 @@ const SocialsSection = ({ formData, setFormData }) => {
               >
                 {/* Close Button at Top Right */}
                 <button
-                  className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  id="close-btn"
+                  className="absolute top-2 right-2 p-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition"
                   onClick={() => setShowModal(false)}
                   aria-label="Close"
                   style={{
-                    background: "rgba(255,255,255,0.7)",
-                    border: "none",
-                    borderRadius: "50%",
                     width: "32px",
                     height: "32px",
                     display: "flex",
@@ -173,12 +171,11 @@ const SocialsSection = ({ formData, setFormData }) => {
                     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
                   }}
                 >
-                  {/* Cross icon from react-icons */}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                  <span>&#x2715;</span>
                 </button>
-                <div className="flex flex-col items-center justify-center w-full h-full text-center">
+
+                <div className="flex flex-col items-center justify-center w-full h-full text-center" id="support">
                   <h2 className="text-xl font-bold mb-4 mt-2 w-full">Support Me</h2>
                   <div className="grid gap-4 w-full justify-items-center">
                     {paymentMethods.map((method) => (

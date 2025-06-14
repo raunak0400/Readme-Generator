@@ -299,6 +299,20 @@ button:hover, button:focus {
   outline: none;
 }
 
+#close-btn{
+  /* background-color: red; */
+  color: black;
+  position: absolute;
+  right: 15px;
+  top: -22px;
+}
+#support{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .container {
