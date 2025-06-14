@@ -174,7 +174,7 @@ const App = () => {
 
     // Add the "Hi I'm ..." line if name is present
     if (name && name.trim() !== '') {
-      markdown += `# Hi, I'm ${name}!\n\n`;
+      markdown += `# Hi 👋, I'm ${name}!\n\n`;
     }
 
     // Project name as main heading if not already included in the name
@@ -185,20 +185,23 @@ const App = () => {
     if (tagline) markdown += `${tagline}\n\n`;
     if (description) markdown += `${description}\n\n`;
 
-    markdown += '## Work\n';
+    // Add "Work" section only if at least one project is present
+    const hasWorkContent = work.some(item => item.projectName);
+    if (hasWorkContent) {
+      markdown += '## Work\n';
+      work.forEach(({ projectName, projectLink }) => {
+        if (projectName) {
+          markdown += `- ${projectLink ? `I'm currently working on [${projectName}](${projectLink})` : `I'm currently working on ${projectName}`}\n`;
+        }
+      });
+      markdown += '\n';
+    }
 
-    if (work[0].projectName)
-      markdown += `- I'm currently working on [${work[0].projectName}](${work[0].projectLink})\n`;
-    if (work[1].projectName)
-      markdown += `- I'm looking to collaborate on [${work[1].projectName}](${work[1].projectLink})\n`;
-    if (work[2].projectName)
-      markdown += `- I'm looking for help with [${work[2].projectName}](${work[2].projectLink})\n`;
-
-    markdown += '\n## Skills\n';
+    // Skills Section
+    markdown += '## Skills\n';
     Object.entries(skills).forEach(([category, skillList]) => {
       if (skillList.length > 0) {
         markdown += `### ${category}\n`;
-        // Horizontal arrangement: only icons, no names
         const skillIconsRow = skillList.map((skill) => {
           return skillIcons[skill]
             ? `<img src="${skillIcons[skill]}" alt="${skill}" width="32" height="32" style="vertical-align:middle; margin-right:8px;"/>`
@@ -220,7 +223,7 @@ const App = () => {
 
     const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
     saveAs(blob, 'README.md');
-  };
+};
 
 
   return (

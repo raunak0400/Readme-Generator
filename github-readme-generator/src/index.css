@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
   box-sizing: border-box;
 }
 
@@ -17,13 +18,13 @@ body {
   line-height: 1.6;
   background-color: #f9fafb;
   padding-top: 4.5rem; /* Prevent content under navbar */
+  overflow-x: hidden; 
 }
 
 /* Container for layout */
 .container {
-  /* max-width: 800px; */
-  /* margin: 0 auto; */
-  padding: 2rem;
+  margin-right: 0px;
+  padding: 2rem ; /* Removes horizontal padding */
 }
 
 /* Navbar */
@@ -91,6 +92,7 @@ nav {
 }
 /* Input and textarea styles */
 input, textarea {
+  user-select: none;
   margin-left: 12px;
   margin-right: 12px;
   margin-bottom: 10px;

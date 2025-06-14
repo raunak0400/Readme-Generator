@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function NotificationModel() {
     const [open, setOpen] = useState(true);
     
+    useEffect(() => {
+        const timer = setTimeout(() => setOpen(false), 1000); // Auto-close after 1.5 seconds
+        return () => clearTimeout(timer); // Cleanup timer on unmount
+    }, []);
+
+
     if (!open) return null;
 
     // Inline styles from Uiverse.io by akshat-patel28
@@ -135,3 +141,76 @@ export default function NotificationModel() {
         </div>
     );
 }
+
+// import React, { useState, useEffect } from "react";
+
+// export default function NotificationLegend() {
+//     const [visible, setVisible] = useState(false);
+
+//     useEffect(() => {
+//         // Check if notification has already appeared in this session
+//         if (!localStorage.getItem("notificationShown")) {
+//             setVisible(true);
+//             localStorage.setItem("notificationShown", "true"); // Set flag in localStorage
+//         }
+        
+//         // Auto-hide notification after 2 seconds
+//         const timer = setTimeout(() => setVisible(false), 2000);
+//         return () => clearTimeout(timer);
+//     }, []);
+
+//     if (!visible) return null;
+
+//     const legendStyle = {
+//         position: "fixed",
+//         top: "50%",
+//         left: "50%",
+//         transform: "translate(-50%, -50%)",
+//         maxWidth: "250px",
+//         padding: "10px",
+//         borderRadius: "8px",
+//         backgroundColor: "#ffffff",
+//         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+//         display: "flex",
+//         alignItems: "center",
+//         gap: "10px",
+//         zIndex: 9999,
+//     };
+
+//     const iconContainerStyle = {
+//         width: "30px",
+//         height: "30px",
+//         display: "flex",
+//         justifyContent: "center",
+//         alignItems: "center",
+//         backgroundColor: "#ffa30d48",
+//         borderRadius: "50%",
+//     };
+
+//     const messageTextStyle = {
+//         color: "#db970e",
+//         fontSize: "15px",
+//         fontWeight: 700,
+//         margin: 0,
+//     };
+
+//     const subTextStyle = {
+//         fontSize: "12px",
+//         color: "#555",
+//         margin: 0,
+//     };
+
+//     return (
+//         <div style={legendStyle}>
+//             <div style={iconContainerStyle}>
+//                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="20px" height="20px" fill="currentColor">
+//                     <path d="M236.8,188.09L149.35,36.22a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+//                 </svg>
+//             </div>
+//             <div>
+//                 <p style={messageTextStyle}>Notification</p>
+//                 <p style={subTextStyle}>Hover icons for <strong>Name</strong></p>
+//             </div>
+//         </div>
+//     );
+// }
