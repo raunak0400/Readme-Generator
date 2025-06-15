@@ -174,7 +174,7 @@ const App = () => {
 
     // Add the "Hi I'm ..." line if name is present
     if (name && name.trim() !== '') {
-      markdown += `# Hi 👋, I'm ${name}!\n\n`;
+      markdown += `<div align="center">\n\n# Hi 👋, I'm ${name}!\n\n</div>\n\n`;
     }
 
     // Project name as main heading if not already included in the name
@@ -188,7 +188,7 @@ const App = () => {
     // Add "Work" section only if at least one project is present
     const hasWorkContent = work.some(item => item.projectName);
     if (hasWorkContent) {
-      markdown += '## Work\n';
+      markdown += '## 💻 Work\n';
       work.forEach(({ projectName, projectLink }) => {
         if (projectName) {
           markdown += `- ${projectLink ? `I'm currently working on [${projectName}](${projectLink})` : `I'm currently working on ${projectName}`}\n`;
@@ -198,7 +198,7 @@ const App = () => {
     }
 
     // Skills Section
-    markdown += '## Skills\n';
+    markdown += '## ⚒️ Skills\n';
     Object.entries(skills).forEach(([category, skillList]) => {
       if (skillList.length > 0) {
         markdown += `### ${category}\n`;
@@ -213,7 +213,7 @@ const App = () => {
 
     // Add Socials section
     if (socials && Object.values(socials).some(link => link)) {
-      markdown += '\n## Socials\n';
+      markdown += '\n## 📱 Socials\n';
       Object.entries(socials).forEach(([platform, link]) => {
         if (link) {
           markdown += `- [${platform.charAt(0).toUpperCase() + platform.slice(1)}](${link})\n`;
@@ -223,21 +223,21 @@ const App = () => {
 
     const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
     saveAs(blob, 'README.md');
-};
+  };
 
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       <div className="container mx-auto p-4 max-w-4xl">
-        <NotificationModel/>
+        <NotificationModel />
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
         <SocialsSection formData={formData} setFormData={setFormData} />
         <div className="flex justify-center">
           <button class="cssbuttons-io-button"
-          onClick={generateMarkdown}>
+            onClick={generateMarkdown}>
             Generate README
             <div class="icon">
               <svg
