@@ -20,6 +20,81 @@ const App = () => {
     skills: {},
   });
 
+  const socialBadges = {
+    github: {
+      urlPrefix: "https://github.com/",
+      badge: "https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"
+    },
+    twitter: {
+      urlPrefix: "https://twitter.com/",
+      badge: "https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"
+    },
+    devto: {
+      urlPrefix: "https://dev.to/",
+      badge: "https://img.shields.io/badge/Dev.to-0A0A0A?style=for-the-badge&logo=devdotto&logoColor=white"
+    },
+    codepen: {
+      urlPrefix: "https://codepen.io/",
+      badge: "https://img.shields.io/badge/CodePen-000000?style=for-the-badge&logo=codepen&logoColor=white"
+    },
+    stackoverflow: {
+      urlPrefix: "https://stackoverflow.com/users/",
+      badge: "https://img.shields.io/badge/StackOverflow-F58025?style=for-the-badge&logo=stackoverflow&logoColor=white"
+    },
+    linkedin: {
+      urlPrefix: "https://linkedin.com/in/",
+      badge: "https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"
+    },
+    facebook: {
+      urlPrefix: "https://facebook.com/",
+      badge: "https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white"
+    },
+    instagram: {
+      urlPrefix: "https://instagram.com/",
+      badge: "https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"
+    },
+    medium: {
+      urlPrefix: "https://medium.com/",
+      badge: "https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white"
+    },
+    youtube: {
+      urlPrefix: "https://youtube.com/",
+      badge: "https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white"
+    },
+    reddit: {
+      urlPrefix: "https://reddit.com/user/",
+      badge: "https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white"
+    },
+    twitch: {
+      urlPrefix: "https://twitch.tv/",
+      badge: "https://img.shields.io/badge/Twitch-9146FF?style=for-the-badge&logo=twitch&logoColor=white"
+    },
+    discord: {
+      urlPrefix: "https://discord.com/users/", // adjust if you're using invite or tag
+      badge: "https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"
+    },
+    dribbble: {
+      urlPrefix: "https://dribbble.com/",
+      badge: "https://img.shields.io/badge/Dribbble-EA4C89?style=for-the-badge&logo=dribbble&logoColor=white"
+    },
+    behance: {
+      urlPrefix: "https://behance.net/",
+      badge: "https://img.shields.io/badge/Behance-1769FF?style=for-the-badge&logo=behance&logoColor=white"
+    },
+    pinterest: {
+      urlPrefix: "https://pinterest.com/",
+      badge: "https://img.shields.io/badge/Pinterest-E60023?style=for-the-badge&logo=pinterest&logoColor=white"
+    },
+    telegram: {
+      urlPrefix: "https://t.me/",
+      badge: "https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"
+    },
+    whatsapp: {
+      urlPrefix: "https://wa.me/", // Or use 'https://api.whatsapp.com/send?phone=' for international format
+      badge: "https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"
+    }
+  };
+
   // Place this above the generateMarkdown function, so you can use skillIcons inside it
   const skillIcons = {
     // Programming Languages
@@ -212,13 +287,20 @@ const App = () => {
     });
 
     // Add Socials section
-    if (socials && Object.values(socials).some(link => link)) {
-      markdown += '\n## 📱 Socials\n';
-      Object.entries(socials).forEach(([platform, link]) => {
-        if (link) {
-          markdown += `- [${platform.charAt(0).toUpperCase() + platform.slice(1)}](${link})\n`;
+    if (socials && Object.values(socials).some(username => username)) {
+      markdown += '\n## 📱 Socials\n\n';
+      markdown += `<p align="left">\n`;
+
+      Object.entries(socials).forEach(([platform, username]) => {
+        const data = socialBadges[platform];
+        if (data && username) {
+          const fullLink = `${data.urlPrefix}${username}`;
+          markdown += `  <a href="${fullLink}" target="_blank"><img src="${data.badge}" /></a>\n`;
         }
       });
+
+
+      markdown += `</p>\n`;
     }
 
     const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
