@@ -91,6 +91,7 @@ const SocialsSection = ({ formData, setFormData }) => {
         {!showModal && (
           <button
             type="button"
+            id="support-btn"
             className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
             style={{
               borderWidth: "4px",
@@ -142,6 +143,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                 zIndex: 1050,
                 minWidth: "320px",
                 maxWidth: "360px",
+                
               }}
             >
               <div
@@ -153,6 +155,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                   minHeight: "350px",
                   justifyContent: "center",
                   padding: "2rem 2rem 2rem 2rem",
+                  borderRadius: "12px",
                 }}
               >
                 {/* Close Button at Top Right */}
@@ -171,7 +174,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                     boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
                   }}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                  {/* <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> */}
                   <span>&#x2715;</span>
                 </button>
 

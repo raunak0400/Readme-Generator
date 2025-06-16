@@ -317,7 +317,7 @@ const App = () => {
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
         <SocialsSection formData={formData} setFormData={setFormData} />
-        <div className="flex justify-center">
+        <div className="flex justify-center" id='generate-btn'>
           <button class="cssbuttons-io-button"
             onClick={generateMarkdown}>
             Generate README
