@@ -20,6 +20,8 @@ const App = () => {
     skills: {},
   });
 
+  const [copySuccess, setCopySuccess] = useState(false);
+
   const socialBadges = {
     github: {
       urlPrefix: "https://github.com/",
@@ -299,14 +301,28 @@ const App = () => {
         }
       });
 
-
       markdown += `</p>\n`;
     }
 
+    return markdown;
+  };
+
+  const handleCopyToClipboard = async () => {
+    const markdown = generateMarkdown();
+    try {
+      await navigator.clipboard.writeText(markdown);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  const handleGenerate = () => {
+    const markdown = generateMarkdown();
     const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
     saveAs(blob, 'README.md');
   };
-
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -317,11 +333,14 @@ const App = () => {
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
         <SocialsSection formData={formData} setFormData={setFormData} />
-        <div className="flex justify-center" id='generate-btn'>
-          <button class="cssbuttons-io-button"
-            onClick={generateMarkdown}>
+        <div className="flex justify-center gap-4" id='generate-btn'>
+          <button 
+            className="cssbuttons-io-button"
+            onClick={handleGenerate}
+            type="button"
+          >
             Generate README
-            <div class="icon">
+            <div className="icon">
               <svg
                 height="24"
                 width="24"
@@ -331,6 +350,27 @@ const App = () => {
                 <path d="M0 0h24v24H0z" fill="none"></path>
                 <path
                   d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <button 
+            className={`cssbuttons-io-button ${copySuccess ? 'success' : ''}`}
+            onClick={handleCopyToClipboard}
+            type="button"
+          >
+            {copySuccess ? 'Copied!' : 'Copy to Clipboard'}
+            <div className="icon">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
                   fill="currentColor"
                 ></path>
               </svg>
