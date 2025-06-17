@@ -6,18 +6,28 @@ import WorkSection from './components/WorkSection';
 import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
 import NotificationModel from './components/NotificationModel';
+import GitHubProfileSection from './components/GitHubProfileSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
+    name: '',
     projectName: '',
     tagline: '',
     description: '',
+    githubUsername: '',
     work: [
       { projectName: '', projectLink: '' },
       { projectName: '', projectLink: '' },
       { projectName: '', projectLink: '' },
     ],
     skills: {},
+    analytics: {
+      showStatsCard: false,
+      showLanguages: false,
+      showContributions: false,
+      showProfileViews: false,
+      showTrafficStats: false
+    }
   });
 
   const [copySuccess, setCopySuccess] = useState(false);
@@ -246,7 +256,7 @@ const App = () => {
   };
 
   const generateMarkdown = () => {
-    const { name, projectName, tagline, description, work, skills, socials } = formData;
+    const { name, projectName, tagline, description, work, skills, socials, analytics, githubUsername } = formData;
     let markdown = '';
 
     // Add the "Hi I'm ..." line if name is present
@@ -261,6 +271,31 @@ const App = () => {
 
     if (tagline) markdown += `${tagline}\n\n`;
     if (description) markdown += `${description}\n\n`;
+
+    // Analytics Section
+    if (analytics && Object.values(analytics).some(value => value)) {
+      markdown += '## 📊 Analytics & Statistics\n\n';
+      
+      if (analytics.showStatsCard) {
+        markdown += `<img src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&theme=radical" alt="GitHub Stats" />\n\n`;
+      }
+
+      if (analytics.showLanguages) {
+        markdown += `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${githubUsername}&layout=compact&theme=radical" alt="Most Used Languages" />\n\n`;
+      }
+
+      if (analytics.showContributions) {
+        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=radical" alt="Contribution Graph" />\n\n`;
+      }
+
+      if (analytics.showProfileViews) {
+        markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
+      }
+
+      if (analytics.showTrafficStats) {
+        markdown += '> Note: Repository traffic stats are only visible to repository owners and require GitHub authentication.\n\n';
+      }
+    }
 
     // Add "Work" section only if at least one project is present
     const hasWorkContent = work.some(item => item.projectName);
@@ -333,6 +368,7 @@ const App = () => {
         <WorkSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} />
         <SocialsSection formData={formData} setFormData={setFormData} />
+        <GitHubProfileSection formData={formData} setFormData={setFormData} />
         <div className="flex justify-center gap-4" id='generate-btn'>
           <button 
             className="cssbuttons-io-button"

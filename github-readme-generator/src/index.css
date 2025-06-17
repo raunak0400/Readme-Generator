@@ -522,3 +522,28 @@ input:focus, textarea:focus {
   /* margin-right: 10px; */
 }
 
+#github-profile-section input{
+  width: 1%;
+}
+
+#github-profile-section label{
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+}
+
+#github-profile-preview img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-radius: 30px; */
+  width: auto;
+  height: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}

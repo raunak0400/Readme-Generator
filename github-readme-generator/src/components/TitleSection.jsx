@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TitleSection = ({ formData, setFormData }) => {
+  const [titleFocused, setTitleFocused] = useState(false);
+  const [descFocused, setDescFocused] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const [titleFocused, setTitleFocused] = React.useState(false);
-  const [descFocused, setDescFocused] = React.useState(false);
 
   return (
     <div className="card">
