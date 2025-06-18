@@ -60,13 +60,25 @@ const AnalyticsSection = ({ formData, setFormData }) => {
             />
             <span className="text-sm sm:text-base text-gray-600">Show GitHub Streak Stats</span>
           </div>
-          {analytics.showStreakStats && (
+          {analytics.showStreakStats && formData.githubUsername && (
             <div className="mt-3 sm:mt-4">
               <img
-                src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername || 'your-username'}&theme=radical`}
+                src={`https://streak-stats.demolab.com/?user=${formData.githubUsername}&theme=radical&hide_border=true&card_width=400`}
                 alt="GitHub Streak Stats"
                 className="rounded-lg w-full max-w-full"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'block';
+                }}
               />
+              <div className="hidden text-center text-gray-500 text-sm p-4 bg-gray-100 rounded-lg">
+                Unable to load streak stats. Please check your GitHub username.
+              </div>
+            </div>
+          )}
+          {analytics.showStreakStats && !formData.githubUsername && (
+            <div className="mt-3 sm:mt-4 text-center text-gray-500 text-sm p-4 bg-gray-100 rounded-lg">
+              Please enter your GitHub username to view streak stats.
             </div>
           )}
         </div>

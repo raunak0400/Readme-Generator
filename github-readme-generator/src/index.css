@@ -534,11 +534,15 @@ input:focus, textarea:focus {
   color: black;
 }
 
-#github-profile-preview img{
+#github-profile-preview{
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border-radius: 30px; */
+  flex-direction: column;
+  text-align: center;
+}
+
+#github-profile-preview img{
   width: auto;
   height: auto;
   margin-left: 10px;

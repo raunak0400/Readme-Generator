@@ -23,7 +23,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
   return (
     <div className="card">
       <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>GitHub Profile Add-ons</h2>
-      
+
       <div className="mb-4">
         <input
           type="text"
@@ -144,11 +144,11 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
                 />
               </div>
             )}
-            {analytics.showContributions && (
+            {analytics.showStreakStats && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-activity-graph.vercel.app/graph?username=${formData.githubUsername}&theme=radical`}
-                  alt="Contribution Graph"
+                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=radical`}
+                  alt="GitHub Streak Stats"
                   className="w-full rounded-lg"
                 />
               </div>
@@ -162,11 +162,11 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
                 />
               </div>
             )}
-            {analytics.showStreakStats && (
+            {analytics.showContributions && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=radical`}
-                  alt="GitHub Streak Stats"
+                  src={`https://github-readme-activity-graph.vercel.app/graph?username=${formData.githubUsername}&theme=radical`}
+                  alt="Contribution Graph"
                   className="w-full rounded-lg"
                 />
               </div>

@@ -329,6 +329,13 @@ const App = () => {
         }
       }
 
+      // Streak stats centered
+      if (analytics.showStreakStats) {
+        markdown += '<div align="center">\n\n';
+        markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=radical" alt="GitHub Streak Stats" />\n\n`;
+        markdown += '</div>\n\n';
+      }
+
       // Contribution graph at 100% width
       if (analytics.showContributions) {
         markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=radical" alt="Contribution Graph" />\n\n`;
@@ -338,13 +345,6 @@ const App = () => {
       if (analytics.showProfileViews) {
         markdown += '<div align="center">\n\n';
         markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
-        markdown += '</div>\n\n';
-      }
-
-      // Streak stats centered
-      if (analytics.showStreakStats) {
-        markdown += '<div align="center">\n\n';
-        markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=radical" alt="GitHub Streak Stats" />\n\n`;
         markdown += '</div>\n\n';
       }
 
