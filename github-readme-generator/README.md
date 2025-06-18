@@ -22,32 +22,21 @@ A comprehensive web application to help you generate professional and customizab
 - **GitHub Trophies** - Display your GitHub achievements
 
 #### 📱 Social Media Integration
-- **Twitter Badge** - Show your Twitter follower count
 - **Social Media Badges** - Support for 15+ social platforms
 - **Customizable Social Links** - Easy integration with your social profiles
-
-#### 📝 Dynamic Blog Integration
-- **dev.to Blogs** - Automatically display latest posts from dev.to
-- **Medium Blogs** - Show latest Medium articles
-- **Personal Blog** - Integrate your personal blog posts
-- **GitHub Actions Support** - Automated updates via GitHub Actions
 
 #### 🛠️ Skills & Technologies
 - **Technology Icons** - 100+ programming languages and frameworks
 - **Categorized Skills** - Organize skills by category
 - **Visual Skill Display** - Beautiful icon-based skill representation
 
-## 🎯 New Features Added
+## 🎯 Features Included
 
 ✅ **Visitors Count Badge** - Shows profile view count  
 ✅ **GitHub Trophy** - Displays GitHub achievements  
 ✅ **GitHub Profile Stats Card** - Shows GitHub statistics  
 ✅ **Top Skills** - Displays most used languages  
 ✅ **GitHub Streak Stats** - Shows contribution streaks  
-✅ **Twitter Badge** - Shows Twitter follower count  
-✅ **Dynamic dev.to Blogs** - Latest posts from dev.to  
-✅ **Dynamic Medium Blogs** - Latest posts from Medium  
-✅ **Dynamic Personal Blog** - Latest posts from your personal blog  
 
 ## 🚀 Getting Started
 
@@ -76,11 +65,7 @@ A comprehensive web application to help you generate professional and customizab
 2. Add your GitHub username
 3. Select which GitHub profile enhancements you want
 4. Add your social media usernames
-5. Configure blog integration (optional)
-6. Generate and download your README
-
-### Dynamic Blog Integration
-For automatic blog updates, see the [GitHub Actions Setup Guide](./GITHUB_ACTIONS_SETUP.md).
+5. Generate and download your README
 
 ## 🛠️ Built With
 
@@ -88,11 +73,6 @@ For automatic blog updates, see the [GitHub Actions Setup Guide](./GITHUB_ACTION
 - [Vite](https://vitejs.dev/) - Build tool
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [ESLint](https://eslint.org/) - Code linting
-
-## 📚 Documentation
-
-- [GitHub Actions Setup Guide](./GITHUB_ACTIONS_SETUP.md) - Complete guide for setting up dynamic blog updates
-- [Sample Workflow](./.github/workflows/blog-update.yml) - Ready-to-use GitHub Actions workflow
 
 ## 🤝 Contributing
 
@@ -113,5 +93,4 @@ This project is licensed under the MIT License.
 
 - [GitHub Readme Stats](https://github.com/anuraghazra/github-readme-stats) - For GitHub statistics cards
 - [GitHub Profile Trophy](https://github.com/ryo-ma/github-profile-trophy) - For GitHub trophies
-- [Blog Post Workflow](https://github.com/gautamkrishnar/blog-post-workflow) - For dynamic blog updates
 - [Shields.io](https://shields.io/) - For social media badges

@@ -26,7 +26,6 @@ const App = () => {
       showLanguages: false,
       showContributions: false,
       showProfileViews: false,
-      showTrafficStats: false,
       showStreakStats: false,
       showTrophies: false
     }
@@ -274,39 +273,6 @@ const App = () => {
     if (tagline) markdown += `${tagline}\n\n`;
     if (description) markdown += `${description}\n\n`;
 
-    // Analytics Section
-    if (analytics && Object.values(analytics).some(value => value)) {
-      markdown += '## 📊 Analytics & Statistics\n\n';
-      
-      if (analytics.showStatsCard) {
-        markdown += `<img src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&theme=radical" alt="GitHub Stats" />\n\n`;
-      }
-
-      if (analytics.showLanguages) {
-        markdown += `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${githubUsername}&layout=compact&theme=radical" alt="Most Used Languages" />\n\n`;
-      }
-
-      if (analytics.showContributions) {
-        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=radical" alt="Contribution Graph" />\n\n`;
-      }
-
-      if (analytics.showProfileViews) {
-        markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
-      }
-
-      if (analytics.showStreakStats) {
-        markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=radical" alt="GitHub Streak Stats" />\n\n`;
-      }
-
-      if (analytics.showTrophies) {
-        markdown += `<img src="https://github-profile-trophy.vercel.app/?username=${githubUsername}&theme=radical&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies" />\n\n`;
-      }
-
-      if (analytics.showTrafficStats) {
-        markdown += '> Note: Repository traffic stats are only visible to repository owners and require GitHub authentication.\n\n';
-      }
-    }
-
     // Add "Work" section only if at least one project is present
     const hasWorkContent = work.some(item => item.projectName);
     if (hasWorkContent) {
@@ -332,6 +298,63 @@ const App = () => {
         markdown += `${skillIconsRow}\n\n`;
       }
     });
+
+    // Analytics Section
+    if (analytics && Object.values(analytics).some(value => value)) {
+      markdown += '## 📊 Analytics & Statistics\n\n';
+      
+      // Create a container for side-by-side stats
+      let hasSideBySideStats = false;
+      if (analytics.showStatsCard || analytics.showLanguages) {
+        markdown += '<div align="center">\n\n';
+        markdown += '<table>\n<tr>\n';
+        
+        if (analytics.showStatsCard) {
+          markdown += '<td>\n\n';
+          markdown += `<img src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&theme=radical&hide_border=true&card_width=400" alt="GitHub Stats" />\n\n`;
+          markdown += '</td>\n';
+          hasSideBySideStats = true;
+        }
+        
+        if (analytics.showLanguages) {
+          markdown += '<td>\n\n';
+          markdown += `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${githubUsername}&layout=compact&theme=radical&hide_border=true&card_width=400" alt="Most Used Languages" />\n\n`;
+          markdown += '</td>\n';
+          hasSideBySideStats = true;
+        }
+        
+        if (hasSideBySideStats) {
+          markdown += '</tr>\n</table>\n\n';
+          markdown += '</div>\n\n';
+        }
+      }
+
+      // Contribution graph at 100% width
+      if (analytics.showContributions) {
+        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=radical" alt="Contribution Graph" />\n\n`;
+      }
+
+      // Profile views centered
+      if (analytics.showProfileViews) {
+        markdown += '<div align="center">\n\n';
+        markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
+        markdown += '</div>\n\n';
+      }
+
+      // Streak stats centered
+      if (analytics.showStreakStats) {
+        markdown += '<div align="center">\n\n';
+        markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=radical" alt="GitHub Streak Stats" />\n\n`;
+        markdown += '</div>\n\n';
+      }
+
+      // Trophies centered
+      if (analytics.showTrophies) {
+        markdown += '<div align="center">\n\n';
+        markdown += `<img src="https://github-profile-trophy.vercel.app/?username=${githubUsername}&theme=radical&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies" />\n\n`;
+        markdown += '</div>\n\n';
+      }
+    }
 
     // Add Socials section
     if (socials && Object.values(socials).some(username => username)) {
