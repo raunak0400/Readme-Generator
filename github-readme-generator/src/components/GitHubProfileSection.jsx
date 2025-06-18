@@ -22,7 +22,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>GitHub Profile</h2>
+      <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>GitHub Profile Add-ons</h2>
       
       <div className="mb-4">
         <input
@@ -91,6 +91,34 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             Show Profile Views Counter
           </label>
         </div>
+
+        {/* GitHub Streak Stats */}
+        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <input
+            type="checkbox"
+            id="showStreakStats"
+            checked={analytics.showStreakStats || false}
+            onChange={(e) => handleAnalyticsChange('showStreakStats', e.target.checked)}
+            className="h-4 w-4 text-blue-600 rounded border-gray-300"
+          />
+          <label htmlFor="showStreakStats" className="text-gray-700 cursor-pointer flex-1">
+            Show GitHub Streak Stats
+          </label>
+        </div>
+
+        {/* GitHub Trophies */}
+        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <input
+            type="checkbox"
+            id="showTrophies"
+            checked={analytics.showTrophies || false}
+            onChange={(e) => handleAnalyticsChange('showTrophies', e.target.checked)}
+            className="h-4 w-4 text-blue-600 rounded border-gray-300"
+          />
+          <label htmlFor="showTrophies" className="text-gray-700 cursor-pointer flex-1">
+            Show GitHub Trophies
+          </label>
+        </div>
       </div>
 
       {/* Preview Section */}
@@ -131,6 +159,24 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
                   src={`https://komarev.com/ghpvc/?username=${formData.githubUsername}&color=brightgreen`}
                   alt="Profile Views"
                   className="rounded-lg"
+                />
+              </div>
+            )}
+            {analytics.showStreakStats && (
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <img
+                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=radical`}
+                  alt="GitHub Streak Stats"
+                  className="w-full rounded-lg"
+                />
+              </div>
+            )}
+            {analytics.showTrophies && (
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <img
+                  src={`https://github-profile-trophy.vercel.app/?username=${formData.githubUsername}&theme=radical&no-frame=false&no-bg=true&margin-w=4`}
+                  alt="GitHub Trophies"
+                  className="w-full rounded-lg"
                 />
               </div>
             )}

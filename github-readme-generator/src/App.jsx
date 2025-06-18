@@ -26,7 +26,9 @@ const App = () => {
       showLanguages: false,
       showContributions: false,
       showProfileViews: false,
-      showTrafficStats: false
+      showTrafficStats: false,
+      showStreakStats: false,
+      showTrophies: false
     }
   });
 
@@ -290,6 +292,14 @@ const App = () => {
 
       if (analytics.showProfileViews) {
         markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
+      }
+
+      if (analytics.showStreakStats) {
+        markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=radical" alt="GitHub Streak Stats" />\n\n`;
+      }
+
+      if (analytics.showTrophies) {
+        markdown += `<img src="https://github-profile-trophy.vercel.app/?username=${githubUsername}&theme=radical&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies" />\n\n`;
       }
 
       if (analytics.showTrafficStats) {
