@@ -32,6 +32,9 @@ const App = () => {
   });
 
   const [copySuccess, setCopySuccess] = useState(false);
+  const [showMarkdownCard, setShowMarkdownCard] = useState(false);
+  const [editableMarkdown, setEditableMarkdown] = useState('');
+  const [copyEditSuccess, setCopyEditSuccess] = useState(false);
 
   const socialBadges = {
     github: {
@@ -411,10 +414,44 @@ const App = () => {
     }
   };
 
+  const handleCopyEditableMarkdown = async () => {
+    try {
+      await navigator.clipboard.writeText(editableMarkdown);
+      setCopyEditSuccess(true);
+      setTimeout(() => setCopyEditSuccess(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  // Helper to check if at least one input or skill is filled
+  const isAnyInputFilled = () => {
+    const { name, projectName, tagline, description, githubUsername, work, skills, socials, analytics } = formData;
+    // Check text fields
+    const textFields = [name, projectName, tagline, description, githubUsername];
+    const hasText = textFields.some(val => val && val.trim());
+    // Check work
+    const hasWork = work && work.some(item => item.projectName || item.projectLink);
+    // Check skills
+    const hasSkills = skills && Object.values(skills).some(arr => Array.isArray(arr) && arr.length > 0);
+    // Check socials
+    const hasSocials = socials && Object.values(socials || {}).some(val => val && val.trim());
+    // Check analytics
+    const hasAnalytics = analytics && Object.values(analytics).some(val => val);
+    return hasText || hasWork || hasSkills || hasSocials || hasAnalytics;
+  };
+
+  const [showInputWarning, setShowInputWarning] = useState(false);
+
   const handleGenerate = () => {
+    if (!isAnyInputFilled()) {
+      setShowInputWarning(true);
+      setTimeout(() => setShowInputWarning(false), 2000);
+      return;
+    }
     const markdown = generateMarkdown();
-    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
-    saveAs(blob, 'README.md');
+    setEditableMarkdown(markdown);
+    setShowMarkdownCard(true);
   };
 
   return (
@@ -472,6 +509,44 @@ const App = () => {
           </button>
         </div>
       </div>
+      {showInputWarning && (
+        <div className="card container my-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4">
+          <div className="flex items-center">
+            <span className="font-bold mr-2">⚠️</span>
+            At least one skill or input is required to generate your README.
+          </div>
+        </div>
+      )}
+      {showMarkdownCard && isAnyInputFilled() && (
+        <div className="card container my-6">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-bold">README Preview (Editable)</h3>
+            <button
+              className={`cssbuttons-io-button ${copyEditSuccess ? 'success' : ''}`}
+              style={{ fontSize: '1rem', padding: '0.3em 1em', height: '2.2em' }}
+              onClick={handleCopyEditableMarkdown}
+              type="button"
+            >
+              {copyEditSuccess ? 'Copied!' : 'Copy'}
+              <div className="icon">
+                <svg height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </button>
+          </div>
+          <textarea
+            className="w-full p-2 border rounded font-mono text-sm bg-gray-50"
+            rows={Math.max(12, editableMarkdown.split('\n').length)}
+            value={editableMarkdown}
+            onChange={e => setEditableMarkdown(e.target.value)}
+            spellCheck={false}
+            style={{ resize: 'vertical', minHeight: 200, fontFamily: 'monospace', background: '#f9fafb', color: '#222' }}
+          />
+          <div className="text-xs text-gray-500 mt-2">You can edit and copy this markdown as needed.</div>
+        </div>
+      )}
     </div>
   );
 };
