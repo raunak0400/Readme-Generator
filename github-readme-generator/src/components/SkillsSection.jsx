@@ -58,7 +58,7 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'Middleman', icon: 'https://raw.githubusercontent.com/leungwensen/svg-icon/b84b3f3a3da329b7c1d02346865f8e98beb05413/dist/svg/logos/middleman.svg' },
       { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
       { name: 'Nuxt.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg' },
-      { name: 'Pug', icon: 'https://cdn.worldvectorlogo.com/logos/pug.svg' },
+      { name: 'Pug', icon: 'https://www.vectorlogo.zone/logos/pugjs/pugjs-icon.svg' },
       { name: 'React', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg' },
       { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
       { name: 'Redux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg' },
@@ -118,7 +118,7 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'R', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg' },
     ],
     'Database': [
-      { name: 'CockroachDB', icon: 'https://cdn.worldvectorlogo.com/logos/cockroachdb.svg' },
+      { name: 'CockroachDB', icon: 'https://www.vectorlogo.zone/logos/cockroachlabs/cockroachlabs-icon.svg' },
       { name: 'CouchDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/couchdb/couchdb-original.svg' },
       { name: 'MariaDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg' },
       { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
