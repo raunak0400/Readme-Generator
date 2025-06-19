@@ -24,7 +24,12 @@ body {
 /* Container for layout */
 .container {
   margin-right: 0px;
-  padding: 2rem ; /* Removes horizontal padding */
+  padding: 2rem ; 
+}
+#input-warning ,#markdown-card{
+  margin-right: 35px;
+  margin-left: 35px;
+  /* padding: 2rem; */
 }
 
 /* Navbar */
@@ -461,6 +466,46 @@ input:focus, textarea:focus {
   width: 20px;
   height: 20px;
   /* margin-right: 12px; */
+}
+#markdown-card textarea{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  resize: none;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1.1rem; 
+  background-color: #f9fafb;
+  color: #222;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  overflow: auto;
+}
+#markdown-card-footer,#input-warning-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+#copy-btn{
+  margin-top: 1rem;
+  width: 100px;
+  height: 100px;
+}
+
+#copy-btn-icon{
+  height: 25px;
 }
 
 #close-btn{
