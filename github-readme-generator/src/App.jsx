@@ -144,11 +144,27 @@ const App = () => {
     'Prolog': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prolog/prolog-original.svg',
     'OCaml': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ocaml/ocaml-original.svg',
     'PowerShell': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg',
+    'Rust': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg',
+    'Assembly': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/assembly/assembly-original.svg',
+    'COBOL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cobol/cobol-original.svg',
+    'Ada': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ada/ada-original.svg',
+    'Lisp': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lisp/lisp-original.svg',
+    'Scheme': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scheme/scheme-original.svg',
+    'Smalltalk': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/smalltalk/smalltalk-original.svg',
+    'Pascal': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pascal/pascal-original.svg',
+    'Delphi': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg',
+    'Visual Basic': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vb/vb-original.svg',
+    'VBA': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vba/vba-original.svg',
+    'ABAP': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/abap/abap-original.svg',
+    'PL/SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/plsql/plsql-original.svg',
+    'T-SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tsql/tsql-original.svg',
+    'Transact-SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tsql/tsql-original.svg',
 
     // Frontend Development
     'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
     'Vue.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
     'Angular': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+    'AngularJS': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg',
     'Svelte': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg',
     'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
     'Gatsby': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gatsby/gatsby-original.svg',
@@ -245,6 +261,15 @@ const App = () => {
     // Framework
     'Nuxt.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg',
     'Meteor': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/meteor/meteor-original.svg',
+
+    // Software
+    'Adobe Illustrator': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg',
+    'Adobe XD': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg',
+    'Figma': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+    'Framer': 'https://www.vectorlogo.zone/logos/framer/framer-icon.svg',
+    'InVision': 'https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg',
+    'Photoshop': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg',
+    'Sketch': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg',
 
     // Testing
     'Jest': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg',
