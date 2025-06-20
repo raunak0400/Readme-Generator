@@ -595,3 +595,11 @@ input:focus, textarea:focus {
   margin-bottom: 10px;
 
 }
+#github-profile-preview-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  gap: 10px;
+}

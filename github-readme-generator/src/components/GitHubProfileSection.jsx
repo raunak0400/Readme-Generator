@@ -64,17 +64,19 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
           </label>
         </div>
 
-        {/* Contribution Graph */}
+
+
+        {/* GitHub Streak Stats */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
             type="checkbox"
-            id="showContributions"
-            checked={analytics.showContributions || false}
-            onChange={(e) => handleAnalyticsChange('showContributions', e.target.checked)}
+            id="showStreakStats"
+            checked={analytics.showStreakStats || false}
+            onChange={(e) => handleAnalyticsChange('showStreakStats', e.target.checked)}
             className="h-4 w-4 text-blue-600 rounded border-gray-300"
           />
-          <label htmlFor="showContributions" className="text-gray-700 cursor-pointer flex-1">
-            Show Contribution Graph
+          <label htmlFor="showStreakStats" className="text-gray-700 cursor-pointer flex-1">
+            Show GitHub Streak Stats
           </label>
         </div>
 
@@ -92,20 +94,19 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
           </label>
         </div>
 
-        {/* GitHub Streak Stats */}
+        {/* Contribution Graph */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
             type="checkbox"
-            id="showStreakStats"
-            checked={analytics.showStreakStats || false}
-            onChange={(e) => handleAnalyticsChange('showStreakStats', e.target.checked)}
+            id="showContributions"
+            checked={analytics.showContributions || false}
+            onChange={(e) => handleAnalyticsChange('showContributions', e.target.checked)}
             className="h-4 w-4 text-blue-600 rounded border-gray-300"
           />
-          <label htmlFor="showStreakStats" className="text-gray-700 cursor-pointer flex-1">
-            Show GitHub Streak Stats
+          <label htmlFor="showContributions" className="text-gray-700 cursor-pointer flex-1">
+            Show Contribution Graph
           </label>
         </div>
-
         {/* GitHub Trophies */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
@@ -126,6 +127,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <h3 className="text-lg font-semibold mb-4 text-gray-800">Preview</h3>
           <div className="space-y-4" id='github-profile-preview'>
+            <div id='github-profile-preview-container'>
             {analytics.showStatsCard && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
@@ -144,6 +146,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
                 />
               </div>
             )}
+            </div>
             {analytics.showStreakStats && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
