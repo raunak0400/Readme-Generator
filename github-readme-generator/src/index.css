@@ -149,6 +149,7 @@ input:focus, textarea:focus {
   gap: 155px;
 }
 #skill-checkbox{
+  box-shadow: inset 0 0 1.6em -0.9em #0b0910;
   margin-right: -120px ;
 }
 /* From Uiverse.io by LightAndy1 */ 
