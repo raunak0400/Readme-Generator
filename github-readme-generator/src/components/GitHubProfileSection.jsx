@@ -3,6 +3,148 @@ import React from 'react';
 const GitHubProfileSection = ({ formData, setFormData }) => {
   const { analytics = {} } = formData;
 
+  // Available themes for GitHub stats
+  const themes = [
+    { value: 'default', label: 'Default' },
+    { value: 'dark', label: 'Dark' },
+    { value: 'radical', label: 'Radical' },
+    { value: 'merko', label: 'Merko' },
+    { value: 'tokyonight', label: 'Tokyo Night' },
+    { value: 'dracula', label: 'Dracula' },
+    { value: 'cobalt', label: 'Cobalt' },
+    { value: 'synthwave', label: 'Synthwave' },
+    { value: 'highcontrast', label: 'High Contrast' },
+    { value: 'github_dark', label: 'GitHub Dark' },
+    { value: 'github', label: 'GitHub Light' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'vue-dark', label: 'Vue Dark' },
+    { value: 'shades-of-purple', label: 'Shades of Purple' },
+    { value: 'nightowl', label: 'Night Owl' },
+    { value: 'buefy', label: 'Buefy' },
+    { value: 'blue-green', label: 'Blue Green' },
+    { value: 'algolia', label: 'Algolia' },
+    { value: 'great-gatsby', label: 'Great Gatsby' },
+    { value: 'darcula', label: 'Darcula' },
+    { value: 'bear', label: 'Bear' },
+    { value: 'solarized-dark', label: 'Solarized Dark' },
+    { value: 'solarized-light', label: 'Solarized Light' },
+    { value: 'chartreuse-dark', label: 'Chartreuse Dark' },
+    { value: 'nord', label: 'Nord' },
+    { value: 'gotham', label: 'Gotham' },
+    { value: 'material-palenight', label: 'Material Palenight' },
+    { value: 'graywhite', label: 'Gray White' },
+    { value: 'vision-friendly-dark', label: 'Vision Friendly Dark' },
+    { value: 'ayu-mirage', label: 'Ayu Mirage' },
+    { value: 'midnight-purple', label: 'Midnight Purple' },
+    { value: 'calm', label: 'Calm' },
+    { value: 'flag-india', label: 'Flag India' },
+    { value: 'omni', label: 'Omni' },
+    { value: 'react', label: 'React' },
+    { value: 'jolly', label: 'Jolly' },
+    { value: 'maroongold', label: 'Maroon Gold' },
+    { value: 'yeblu', label: 'Yeblu' },
+    { value: 'blueberry', label: 'Blueberry' },
+    { value: 'slateorange', label: 'Slate Orange' },
+    { value: 'kacho_ga', label: 'Kacho Ga' },
+    { value: 'outrun', label: 'Outrun' },
+    { value: 'ocean_dark', label: 'Ocean Dark' },
+    { value: 'city_lights', label: 'City Lights' },
+    { value: 'moonlight', label: 'Moonlight' },
+    { value: 'github_dark_dimmed', label: 'GitHub Dark Dimmed' },
+    { value: 'discord_old_blurple', label: 'Discord Old Blurple' },
+    { value: 'aura_dark', label: 'Aura Dark' },
+    { value: 'panda', label: 'Panda' },
+    { value: 'noctis_minimus', label: 'Noctis Minimus' },
+    { value: 'cobalt2', label: 'Cobalt2' },
+    { value: 'swift', label: 'Swift' },
+    { value: 'aura', label: 'Aura' },
+    { value: 'apprentice', label: 'Apprentice' },
+    { value: 'moltack', label: 'Moltack' },
+    { value: 'codeSTACKr', label: 'CodeSTACKr' },
+    { value: 'rose_pine', label: 'Rose Pine' },
+    { value: 'catppuccin_latte', label: 'Catppuccin Latte' },
+    { value: 'catppuccin_frappe', label: 'Catppuccin Frappe' },
+    { value: 'catppuccin_macchiato', label: 'Catppuccin Macchiato' },
+    { value: 'catppuccin_mocha', label: 'Catppuccin Mocha' },
+    { value: 'date_night', label: 'Date Night' },
+    { value: 'one_dark_pro', label: 'One Dark Pro' },
+    { value: 'rose', label: 'Rose' },
+    { value: 'holi', label: 'Holi' },
+    { value: 'neon', label: 'Neon' },
+    { value: 'blue_navy', label: 'Blue Navy' },
+    { value: 'calm_pink', label: 'Calm Pink' },
+    { value: 'ambient_gradient', label: 'Ambient Gradient' },
+    { value: 'buefy_dark', label: 'Buefy Dark' },
+    { value: 'procyon', label: 'Procyon' },
+    { value: 'elegant', label: 'Elegant' },
+    { value: 'blue_gradient', label: 'Blue Gradient' },
+    { value: 'xcode', label: 'Xcode' },
+    { value: 'orange_heart', label: 'Orange Heart' },
+    { value: 'purple_gradient', label: 'Purple Gradient' },
+    { value: 'sunset', label: 'Sunset' },
+    { value: 'green_blue', label: 'Green Blue' },
+    { value: 'watermelon', label: 'Watermelon' },
+    { value: 'cherry', label: 'Cherry' },
+    { value: 'berry', label: 'Berry' },
+    { value: 'midnight', label: 'Midnight' },
+    { value: 'yellow', label: 'Yellow' },
+    { value: 'mint', label: 'Mint' },
+    { value: 'leafy', label: 'Leafy' },
+    { value: 'solarized', label: 'Solarized' },
+    { value: 'arch', label: 'Arch' },
+    { value: 'pink', label: 'Pink' },
+    { value: 'gradient1', label: 'Gradient 1' },
+    { value: 'gradient2', label: 'Gradient 2' },
+    { value: 'gradient3', label: 'Gradient 3' },
+    { value: 'gradient4', label: 'Gradient 4' },
+    { value: 'gradient5', label: 'Gradient 5' },
+    { value: 'gradient6', label: 'Gradient 6' },
+    { value: 'gradient7', label: 'Gradient 7' },
+    { value: 'gradient8', label: 'Gradient 8' },
+    { value: 'gradient9', label: 'Gradient 9' },
+    { value: 'gradient10', label: 'Gradient 10' },
+    { value: 'gradient11', label: 'Gradient 11' },
+    { value: 'gradient12', label: 'Gradient 12' },
+    { value: 'gradient13', label: 'Gradient 13' },
+    { value: 'gradient14', label: 'Gradient 14' },
+    { value: 'gradient15', label: 'Gradient 15' },
+    { value: 'gradient16', label: 'Gradient 16' },
+    { value: 'gradient17', label: 'Gradient 17' },
+    { value: 'gradient18', label: 'Gradient 18' },
+    { value: 'gradient19', label: 'Gradient 19' },
+    { value: 'gradient20', label: 'Gradient 20' },
+    { value: 'gradient21', label: 'Gradient 21' },
+    { value: 'gradient22', label: 'Gradient 22' },
+    { value: 'gradient23', label: 'Gradient 23' },
+    { value: 'gradient24', label: 'Gradient 24' },
+    { value: 'gradient25', label: 'Gradient 25' },
+    { value: 'gradient26', label: 'Gradient 26' },
+    { value: 'gradient27', label: 'Gradient 27' },
+    { value: 'gradient28', label: 'Gradient 28' },
+    { value: 'gradient29', label: 'Gradient 29' },
+    { value: 'gradient30', label: 'Gradient 30' },
+    { value: 'gradient31', label: 'Gradient 31' },
+    { value: 'gradient32', label: 'Gradient 32' },
+    { value: 'gradient33', label: 'Gradient 33' },
+    { value: 'gradient34', label: 'Gradient 34' },
+    { value: 'gradient35', label: 'Gradient 35' },
+    { value: 'gradient36', label: 'Gradient 36' },
+    { value: 'gradient37', label: 'Gradient 37' },
+    { value: 'gradient38', label: 'Gradient 38' },
+    { value: 'gradient39', label: 'Gradient 39' },
+    { value: 'gradient40', label: 'Gradient 40' },
+    { value: 'gradient41', label: 'Gradient 41' },
+    { value: 'gradient42', label: 'Gradient 42' },
+    { value: 'gradient43', label: 'Gradient 43' },
+    { value: 'gradient44', label: 'Gradient 44' },
+    { value: 'gradient45', label: 'Gradient 45' },
+    { value: 'gradient46', label: 'Gradient 46' },
+    { value: 'gradient47', label: 'Gradient 47' },
+    { value: 'gradient48', label: 'Gradient 48' },
+    { value: 'gradient49', label: 'Gradient 49' },
+    { value: 'gradient50', label: 'Gradient 50' }
+  ];
+
   const handleChange = (e) => {
     setFormData(prevData => ({
       ...prevData,
@@ -20,6 +162,9 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
     }));
   };
 
+  // Get current theme (default to 'radical' if not set)
+  const currentTheme = formData.githubTheme || 'radical';
+
   return (
     <div className="card">
       <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>GitHub Profile Add-ons</h2>
@@ -33,6 +178,26 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
           placeholder="Enter your GitHub username"
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
         />
+      </div>
+
+      {/* Theme Selector */}
+      <div className="mb-4">
+        <label htmlFor="githubTheme" className="block text-sm font-medium text-gray-700 mb-2">
+          Choose Theme for Stats Cards
+        </label>
+        <select
+          id="githubTheme"
+          name="githubTheme"
+          value={currentTheme}
+          onChange={handleChange}
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 bg-white"
+        >
+          {themes.map((theme) => (
+            <option key={theme.value} value={theme.value}>
+              {theme.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id='github-profile-section'>
@@ -63,8 +228,6 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             Show Most Used Languages
           </label>
         </div>
-
-
 
         {/* GitHub Streak Stats */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
@@ -131,7 +294,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             {analytics.showStatsCard && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-stats.vercel.app/api?username=${formData.githubUsername}&show_icons=true&theme=radical`}
+                  src={`https://github-readme-stats.vercel.app/api?username=${formData.githubUsername}&show_icons=true&theme=${currentTheme}`}
                   alt="GitHub Stats"
                   className="w-full rounded-lg"
                 />
@@ -140,7 +303,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             {analytics.showLanguages && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${formData.githubUsername}&layout=compact&theme=radical`}
+                  src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${formData.githubUsername}&layout=compact&theme=${currentTheme}`}
                   alt="Most Used Languages"
                   className="w-full rounded-lg"
                 />
@@ -150,7 +313,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             {analytics.showStreakStats && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=radical`}
+                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=${currentTheme}`}
                   alt="GitHub Streak Stats"
                   className="w-full rounded-lg"
                 />
@@ -168,7 +331,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             {analytics.showContributions && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-readme-activity-graph.vercel.app/graph?username=${formData.githubUsername}&theme=radical`}
+                  src={`https://github-readme-activity-graph.vercel.app/graph?username=${formData.githubUsername}&theme=${currentTheme}`}
                   alt="Contribution Graph"
                   className="w-full rounded-lg"
                 />
@@ -177,7 +340,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             {analytics.showTrophies && (
               <div className="bg-white p-4 rounded-lg shadow-sm">
                 <img
-                  src={`https://github-profile-trophy.vercel.app/?username=${formData.githubUsername}&theme=radical&no-frame=false&no-bg=true&margin-w=4`}
+                  src={`https://github-profile-trophy.vercel.app/?username=${formData.githubUsername}&theme=${currentTheme}&no-frame=false&no-bg=true&margin-w=4`}
                   alt="GitHub Trophies"
                   className="w-full rounded-lg"
                 />

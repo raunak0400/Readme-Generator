@@ -607,3 +607,16 @@ input:focus, textarea:focus {
   text-align: center;
   gap: 10px;
 }
+
+#githubTheme{
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  color: black;
+  font-size: 15px;
+  /* font-weight: 600; */
+  margin-top: 10px;
+  margin-left: 10px;
+  /* width: 100%; */
+}
