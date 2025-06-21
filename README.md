@@ -1,5 +1,7 @@
 # GitHub Readme Generator
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A comprehensive web application to help you generate professional and customizable README files for your GitHub projects with advanced profile enhancements.
 
 ## ✨ Features
