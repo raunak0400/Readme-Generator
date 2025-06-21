@@ -330,7 +330,6 @@ input:focus, textarea:focus {
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  
 }
 #git-btns span{
   display: flex;
@@ -341,6 +340,7 @@ input:focus, textarea:focus {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 #git-btns a{
+  /* border-radius: 50%; */
   background: linear-gradient(
     45deg,
     #6366f1,
@@ -349,9 +349,12 @@ input:focus, textarea:focus {
   );
   background-size: 200% 200%;
   height: 40px;
-  width: 120px;
+  width: 40px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 50%;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
