@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import Navbar from './components/Navbar';
 import TitleSection from './components/TitleSection';
@@ -37,6 +37,37 @@ const App = () => {
   const [showMarkdownCard, setShowMarkdownCard] = useState(false);
   const [editableMarkdown, setEditableMarkdown] = useState('');
   const [copyEditSuccess, setCopyEditSuccess] = useState(false);
+  const [showcaseProjects, setShowcaseProjects] = useState([]);
+
+  useEffect(() => {
+    const initialShowcaseProjects = [
+      {
+        username: 'abhijeetBhale',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/175427355?v=4',
+        repoUrl: 'https://github.com/abhijeetBhale/',
+        repoName: 'abhijeetBhale'
+      },
+      {
+        username: 'Anshukavi',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/135499399?v=4',
+        repoUrl: 'https://github.com/Anshukavi/Anshulkavi',
+        repoName: 'Anshulkavi'
+      }
+    ];
+
+    try {
+      const storedProjects = localStorage.getItem('showcaseProjects');
+      if (storedProjects) {
+        setShowcaseProjects(JSON.parse(storedProjects));
+      } else {
+        setShowcaseProjects(initialShowcaseProjects);
+        localStorage.setItem('showcaseProjects', JSON.stringify(initialShowcaseProjects));
+      }
+    } catch (error) {
+      console.error("Failed to load or set showcase projects in local storage:", error);
+      setShowcaseProjects(initialShowcaseProjects);
+    }
+  }, []);
 
   const socialBadges = {
     github: {
@@ -314,7 +345,7 @@ const App = () => {
 
     // Project name as main heading if not already included in the name
     if (projectName && (!name || projectName !== name)) {
-      markdown += `## ${projectName}\n\n`;
+      markdown += `## **${projectName}**\n\n`;
     }
 
     if (tagline) markdown += `${tagline}\n\n`;
@@ -323,7 +354,7 @@ const App = () => {
     // Add "Work" section only if at least one project is present
     const hasWorkContent = work.some(item => item.projectName);
     if (hasWorkContent) {
-      markdown += '## 💻 Work\n';
+      markdown += '## **💻 Work**\n';
       work.forEach(({ projectName, projectLink }) => {
         if (projectName) {
           markdown += `- ${projectLink ? `I'm currently working on [${projectName}](${projectLink})` : `I'm currently working on ${projectName}`}\n`;
@@ -333,13 +364,13 @@ const App = () => {
     }
 
     // Skills Section
-    markdown += '## ⚒️ Skills\n';
+    markdown += '## **⚒️ Skills**\n';
     Object.entries(skills).forEach(([category, skillList]) => {
       if (skillList.length > 0) {
-        markdown += `### ${category}\n`;
+        markdown += `### **${category}**\n`;
         const skillIconsRow = skillList.map((skill) => {
           return skillIcons[skill]
-            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="32" height="32" style="vertical-align:middle; margin-right:8px;"/>`
+            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="48" height="48" style="vertical-align:middle; margin-right:12px;"/>`
             : '';
         }).join(' ');
         markdown += `${skillIconsRow}\n\n`;
@@ -348,7 +379,7 @@ const App = () => {
 
     // Analytics Section
     if (analytics && Object.values(analytics).some(value => value)) {
-      markdown += '## 📊 Analytics & Statistics\n\n';
+      markdown += '## **📊 Analytics & Statistics**\n\n';
       
       // Create a container for side-by-side stats
       let hasSideBySideStats = false;
@@ -405,7 +436,7 @@ const App = () => {
 
     // Add Socials section
     if (socials && Object.values(socials).some(username => username)) {
-      markdown += '\n## 📱 Socials\n\n';
+      markdown += '\n## **📱 Socials**\n\n';
       markdown += `<p align="left">\n`;
 
       Object.entries(socials).forEach(([platform, username]) => {
@@ -421,7 +452,7 @@ const App = () => {
 
     // Add trademark/footer
     markdown += `\n---\n`;
-    markdown += `<p align="center">This README was generated with ❤️ by <a href="https://github.com/abhijeetBhale/Readme-Generator" target="_blank">GitHub README Generator</a></p>\n`;
+    markdown += `<p align="center">This README was generated with ❤️ by <a href="https://github.com/abhijeetBhale/Readme-Generator" target="_blank"><img src="https://img.shields.io/badge/GitHub%20Readme%20Generator-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Readme Generator" /></a></p>\n`;
     markdown += `<p align="center">Developed by <b>Abhijeet Bhale</b></p>\n`;
 
     return markdown;
@@ -476,6 +507,22 @@ const App = () => {
     const markdown = generateMarkdown();
     setEditableMarkdown(markdown);
     setShowMarkdownCard(true);
+
+    const { githubUsername } = formData;
+    if (githubUsername) {
+      const userExists = showcaseProjects.some(p => p.username === githubUsername);
+      if (!userExists) {
+        const newUser = {
+          username: githubUsername,
+          avatarUrl: `https://avatars.githubusercontent.com/${githubUsername}`,
+          repoUrl: `https://github.com/${githubUsername}`,
+          repoName: githubUsername
+        };
+        const updatedProjects = [...showcaseProjects, newUser];
+        setShowcaseProjects(updatedProjects);
+        localStorage.setItem('showcaseProjects', JSON.stringify(updatedProjects));
+      }
+    }
   };
 
   return (
@@ -485,9 +532,10 @@ const App = () => {
         <NotificationModel />
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
-        <SkillsSection formData={formData} setFormData={setFormData} />
-        <SocialsSection formData={formData} setFormData={setFormData} />
+        <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
+        <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
+        
         <div className="flex justify-center gap-4" id='generate-btn'>
           <button 
             className="cssbuttons-io-button"
@@ -542,6 +590,7 @@ const App = () => {
         </div>
       )}
       {showMarkdownCard && isAnyInputFilled() && (
+        <>
         <div className="card container my-6" id="markdown-card">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-lg font-bold">README Preview (Editable)</h3>
@@ -571,8 +620,14 @@ const App = () => {
           />
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
+        <ShowcaseSection showcaseProjects={showcaseProjects} />
+        </>
       )}
-      <ShowcaseSection formData={formData} />
+      <footer className="text-center py-4" id='footer'>
+        <p className="text-gray-600">
+          Made with ❤️ by <a href="https://github.com/abhijeetBhale" target="_blank" className="text-blue-500 hover:underline">Abhijeet Bhale</a>
+        </p>
+      </footer>
     </div>
   );
 };

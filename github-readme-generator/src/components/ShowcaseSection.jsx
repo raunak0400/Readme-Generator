@@ -1,26 +1,6 @@
 import React from 'react';
 
-const ShowcaseSection = ({ formData }) => {
-  const currentUserAvatar = formData.githubUsername 
-    ? `https://avatars.githubusercontent.com/${formData.githubUsername}`
-    : 'https://avatars.githubusercontent.com/u/175427355?v=4';
-
-  const showcaseProjects = [
-    {
-      username: formData.githubUsername || 'abhijeetBhale',
-      avatarUrl: currentUserAvatar,
-      repoUrl: `https://github.com/${formData.githubUsername || 'abhijeetBhale'}/Portfolio`,
-      repoName: 'Portfolio'
-    },
-    {
-      username: 'Anshukavi',
-      avatarUrl: 'https://avatars.githubusercontent.com/u/135499399?v=4',
-      repoUrl: 'https://github.com/Anshulkavi/Anshulkavi',
-      repoName: 'Anshulkavi'
-    },
-    // Add here more users later 
-  ];
-
+const ShowcaseSection = ({ showcaseProjects }) => {
   return (
     <div className="my-6" id="showcase-section">
       <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">✨ Readme Made With Our Generator ✨</h2>
