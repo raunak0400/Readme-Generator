@@ -7,6 +7,7 @@ import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
 import NotificationModel from './components/NotificationModel';
 import GitHubProfileSection from './components/GitHubProfileSection';
+import ShowcaseSection from './components/ShowcaseSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -418,6 +419,11 @@ const App = () => {
       markdown += `</p>\n`;
     }
 
+    // Add trademark/footer
+    markdown += `\n---\n`;
+    markdown += `<p align="center">This README was generated with ❤️ by <a href="https://github.com/abhijeetBhale/Readme-Generator" target="_blank">GitHub README Generator</a></p>\n`;
+    markdown += `<p align="center">Developed by <b>Abhijeet Bhale</b></p>\n`;
+
     return markdown;
   };
 
@@ -566,6 +572,7 @@ const App = () => {
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
       )}
+      <ShowcaseSection formData={formData} />
     </div>
   );
 };

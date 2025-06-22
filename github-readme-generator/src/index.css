@@ -620,3 +620,188 @@ input:focus, textarea:focus {
   margin-left: 10px;
   /* width: 100%; */
 }
+
+#showcase-section{
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+}
+#showcase-grid{
+  /* margin-right: 10px; */
+  /* margin-left: 10px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* margin-top: 10px; */
+  /* margin-bottom: 10px; */
+}
+#showcase-card{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  object-fit: cover;
+}
+
+#showcase-card h3{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
+}
+#showcase-card p{
+  font-size: 1rem;
+  color: black;
+}
+#showcase-card img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+#showcase-card a{
+  text-decoration: none;
+  color: black;
+}
+
+.repo-star:hover:before {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+}
+
+/* Showcase Section Card Styles */
+#showcase-section .card-client {
+  background: #f0f5ff; /* Light blue-gray background */
+  width: auto;
+  padding: 25px 20px;
+  border: 1px solid #e2e8f0; /* Softer border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 16px; /* More rounded corners */
+  text-align: center;
+  color: #1e293b; /* Dark slate text */
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#showcase-section .card-client:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(30, 64, 175, 0.1);
+  border-color: #a0bbf2;
+}
+
+#showcase-section .user-picture {
+  overflow: hidden;
+  object-fit: cover;
+  width: 6rem;
+  height: 6rem;
+  border: 4px solid #fff;
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#showcase-section .user-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#showcase-section .name-client {
+  margin: 0;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #3b82f6; /* Blue for username */
+}
+
+#showcase-section .name-client span {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  color: #64748b; /* Lighter slate color for repo name */
+}
+
+#showcase-section .social-media {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+#showcase-section .social-media a {
+  position: relative;
+  margin: 0 8px;
+  text-decoration: none;
+  color: #475569; /* Icon color */
+  transition: color 0.3s ease;
+}
+
+#showcase-section .social-media a:hover {
+  color: #3b82f6; /* Blue on hover */
+}
+
+#showcase-section .social-media a svg {
+  width: 1.5rem; /* Larger icon */
+  height: 1.5rem;
+  fill: currentColor;
+}
+
+#showcase-section .tooltip-social {
+  background: #1e293b; /* Dark background for tooltip */
+  display: block;
+  position: absolute;
+  /* top: 20px; */
+  bottom: 100%; /* Position above the icon */
+  left: 50%;
+  margin-bottom: 13px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: #fff;
+  white-space: nowrap;
+}
+
+#showcase-section .tooltip-social:after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1e293b transparent transparent transparent;
+}
+
+#showcase-section .social-media a:hover .tooltip-social {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px); /* Animate upwards */
+}
+
+#showcase-grid{
+  margin-left: auto;
+  flex-wrap: wrap;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: start;
+  justify-content: flex-start;
+  text-align: center;
+  gap: auto;
+}
