@@ -794,7 +794,7 @@ input:focus, textarea:focus {
 }
 
 #showcase-grid{
-  margin-left: auto;
+  margin-left: 30px;
   flex-wrap: wrap;
   padding: 20px;
   display: flex;
