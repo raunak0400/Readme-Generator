@@ -7,7 +7,6 @@ import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
 import NotificationModel from './components/NotificationModel';
 import GitHubProfileSection from './components/GitHubProfileSection';
-import ShowcaseSection from './components/ShowcaseSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -37,37 +36,6 @@ const App = () => {
   const [showMarkdownCard, setShowMarkdownCard] = useState(false);
   const [editableMarkdown, setEditableMarkdown] = useState('');
   const [copyEditSuccess, setCopyEditSuccess] = useState(false);
-  const [showcaseProjects, setShowcaseProjects] = useState([]);
-
-  useEffect(() => {
-    const initialShowcaseProjects = [
-      {
-        username: 'abhijeetBhale',
-        avatarUrl: 'https://avatars.githubusercontent.com/u/175427355?v=4',
-        repoUrl: 'https://github.com/abhijeetBhale/',
-        repoName: 'abhijeetBhale'
-      },
-      {
-        username: 'Anshukavi',
-        avatarUrl: 'https://avatars.githubusercontent.com/u/135499399?v=4',
-        repoUrl: 'https://github.com/Anshukavi/Anshulkavi',
-        repoName: 'Anshulkavi'
-      }
-    ];
-
-    try {
-      const storedProjects = localStorage.getItem('showcaseProjects');
-      if (storedProjects) {
-        setShowcaseProjects(JSON.parse(storedProjects));
-      } else {
-        setShowcaseProjects(initialShowcaseProjects);
-        localStorage.setItem('showcaseProjects', JSON.stringify(initialShowcaseProjects));
-      }
-    } catch (error) {
-      console.error("Failed to load or set showcase projects in local storage:", error);
-      setShowcaseProjects(initialShowcaseProjects);
-    }
-  }, []);
 
   const socialBadges = {
     github: {
@@ -507,22 +475,6 @@ const App = () => {
     const markdown = generateMarkdown();
     setEditableMarkdown(markdown);
     setShowMarkdownCard(true);
-
-    const { githubUsername } = formData;
-    if (githubUsername) {
-      const userExists = showcaseProjects.some(p => p.username === githubUsername);
-      if (!userExists) {
-        const newUser = {
-          username: githubUsername,
-          avatarUrl: `https://avatars.githubusercontent.com/${githubUsername}`,
-          repoUrl: `https://github.com/${githubUsername}`,
-          repoName: githubUsername
-        };
-        const updatedProjects = [...showcaseProjects, newUser];
-        setShowcaseProjects(updatedProjects);
-        localStorage.setItem('showcaseProjects', JSON.stringify(updatedProjects));
-      }
-    }
   };
 
   return (
@@ -620,7 +572,6 @@ const App = () => {
           />
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
-        <ShowcaseSection showcaseProjects={showcaseProjects} />
         </>
       )}
       <footer className="text-center py-4" id='footer'>
