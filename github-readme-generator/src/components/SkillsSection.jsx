@@ -186,6 +186,21 @@ const SkillsSection = ({ formData, setFormData }) => {
     setFormData({ ...formData, skills: updatedSkills });
   };
 
+  const searchInputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (searchInputRef.current) {
+          searchInputRef.current.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const [search, setSearch] = React.useState('');
 
   // Flatten all skills for search
@@ -226,11 +241,12 @@ const SkillsSection = ({ formData, setFormData }) => {
                 id="skill-search"
                 className="input"
                 type="search"
-                placeholder="Search..."
+                placeholder="Ctrl + K"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 name="searchbar"
                 style={{ maxWidth: 250, marginTop: 12 }}
+                ref={searchInputRef}
               />
               </div>
 
