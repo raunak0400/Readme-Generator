@@ -828,3 +828,47 @@ input:focus, textarea:focus {
 #footer a:active{
   color: #1d4ed8;
 }
+
+#about-me-section{
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 60px;
+  margin-bottom: 1.5rem;
+  /* height: 120%; */
+  transition: box-shadow 0.2s;
+}
+
+#about-me-section-1{
+ /* margin-left: 40px; */
+ text-align: justify;
+ color: #3c3e42a0;
+}
+#about-me-section-1 li{
+  margin-left: 60px;
+}
+#about-me-section-1 strong{
+  color: #222;
+}
+#about-me-section-1 a{
+  color: #3b82f6;
+  text-decoration: none;
+}
+#about-me-section-1 a:hover{
+  color: #2563eb;
+}
+#frame-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#frame{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  width: 50%;
+  height: 300px;
+}

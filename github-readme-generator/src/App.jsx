@@ -7,6 +7,7 @@ import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
 import NotificationModel from './components/NotificationModel';
 import GitHubProfileSection from './components/GitHubProfileSection';
+import AboutMeSection from './components/AboutMeSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -488,6 +489,7 @@ const App = () => {
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
         
+        
         <div className="flex justify-center gap-4" id='generate-btn'>
           <button 
             className="cssbuttons-io-button"
@@ -572,6 +574,7 @@ const App = () => {
           />
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
+        <AboutMeSection />
         </>
       )}
       <footer className="text-center py-4" id='footer'>
