@@ -190,6 +190,7 @@ input:focus, textarea:focus {
 }
 
 .input:focus {
+  color: black;
   box-shadow: 0 0 0 2.5px #2f303d;
 }
 
@@ -202,6 +203,9 @@ input:focus, textarea:focus {
   height: 1rem;
   pointer-events: none;
   z-index: 1;
+}
+.search-icon:focus{
+  color: black;
 }
 
 /* Generate Button */
