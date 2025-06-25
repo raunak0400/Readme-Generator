@@ -12,6 +12,7 @@ A comprehensive web application to help you generate professional and customizab
 - Supports badges, images, and markdown formatting
 - Download or copy the generated README instantly
 - Beautiful and modern UI with responsive design
+- **Animated Typing SVG Section**: Add animated typing text to your README with multi-line support, customizable font (with Google Fonts tooltip), color, and size. Add or remove lines, and preview the animation live. Copy the Markdown with a single click (with success animation).
 
 ### 🚀 GitHub Profile Enhancements
 
@@ -31,6 +32,11 @@ A comprehensive web application to help you generate professional and customizab
 - **Technology Icons** - 100+ programming languages and frameworks
 - **Categorized Skills** - Organize skills by category
 - **Visual Skill Display** - Beautiful icon-based skill representation
+
+## 🆕 New UI Features
+- Modern animated buttons for all actions (add line, copy, generate)
+- Tooltips for helpful guidance (e.g., font selection)
+- Improved color picker and preview window for animated SVG
 
 ## 🎯 Features Included
 
@@ -71,6 +77,15 @@ A comprehensive web application to help you generate professional and customizab
 3. Select which GitHub profile enhancements you want
 4. Add your social media usernames
 5. Generate and download your README
+
+### Using the Animated Typing SVG
+1. Go to the Animated Typing SVG section
+2. Add multiple lines of text (each line will animate in order)
+3. Customize the font (hover the info icon for Google Fonts link), color, and size
+4. Use the color picker to select your preferred color
+5. Click the trash icon to remove a line
+6. Preview the animation in the wider preview window
+7. Click "Copy Markdown" to copy the centered Markdown code (with success animation)
 
 ## 🛠️ Built With
 

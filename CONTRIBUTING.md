@@ -2,6 +2,11 @@
 
 Thank you for your interest in contributing to GitHub README Generator! This document provides guidelines and information for contributors.
 
+## 🆕 New UI/UX Features
+- The project now includes advanced UI components such as the Animated Typing SVG section, animated buttons, tooltips (e.g., for font selection), and improved color picker.
+- When contributing, please ensure new UI/UX features are well-documented and tested.
+- Use Tailwind CSS and follow the established design patterns for consistency.
+
 ## 📋 Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
@@ -58,9 +63,10 @@ We love pull requests! Here's a quick guide:
 2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
 3. **Make your changes**
 4. **Test your changes** thoroughly
-5. **Commit your changes** (`git commit -m 'Add some amazing feature'`)
-6. **Push to the branch** (`git push origin feature/amazing-feature`)
-7. **Open a Pull Request**
+5. **Document new UI/UX features and update README if needed**
+6. **Commit your changes** (`git commit -m 'Add some amazing feature'`)
+7. **Push to the branch** (`git push origin feature/amazing-feature`)
+8. **Open a Pull Request**
 
 ## 🚀 Getting Started
 
@@ -104,7 +110,7 @@ github-readme-generator/
 │   └── main.jsx            # Entry point
 ├── public/                 # Public assets
 ├── package.json            # Dependencies and scripts
-└── README.md              # Project documentation
+└── README.md               # Project documentation
 ```
 
 ### Code Style Guidelines
@@ -121,6 +127,7 @@ github-readme-generator/
 - Follow **mobile-first** responsive design
 - Use **semantic class names**
 - Keep styles **modular and reusable**
+- For tooltips and custom UI, use inline styles or Tailwind as appropriate
 
 #### Git Commit Messages
 - Use **conventional commit format**:
@@ -138,11 +145,9 @@ github-readme-generator/
 
 ### Example Commit Messages
 ```
-feat(components): add new social media platform support
-fix(preview): resolve markdown rendering issue
-docs(readme): update installation instructions
-style(ui): improve button hover effects
-refactor(utils): optimize markdown generation logic
+feat(components): add animated typing SVG section
+feat(ui): add tooltip for font selection
+fix(typing-svg): fix copy markdown animation
 ```
 
 ## 🧪 Testing
@@ -198,15 +203,6 @@ Brief description of the changes made.
 - [ ] My changes generate no new warnings
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
-
-## Screenshots (if applicable)
-Add screenshots to help explain your changes.
-
-## Checklist
-- [ ] I have read the [CONTRIBUTING.md](CONTRIBUTING.md) file
-- [ ] My code follows the project's style guidelines
-- [ ] I have tested my changes
-- [ ] I have updated the documentation
 ```
 
 ## 🐛 Bug Reports
