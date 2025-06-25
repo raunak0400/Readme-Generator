@@ -8,6 +8,7 @@ import SocialsSection from './components/SocialSection';
 import NotificationModel from './components/NotificationModel';
 import GitHubProfileSection from './components/GitHubProfileSection';
 import AboutMeSection from './components/AboutMeSection';
+import TypingSVGSection from './components/TypingSVGSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -485,6 +486,7 @@ const App = () => {
         <NotificationModel />
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
+        <TypingSVGSection />
         <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
