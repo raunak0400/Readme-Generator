@@ -1,12 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 
-const TypingSVGSection = () => {
-  const [lines, setLines] = useState([""]);
-  const [font, setFont] = useState("Fira Code");
-  const [color, setColor] = useState("#000000");
-  const [size, setSize] = useState(24);
-  const [repeat, setRepeat] = useState(true);
-  const [copySuccess, setCopySuccess] = useState(false);
+const TypingSVGSection = ({ formData, setFormData }) => {
+  const { typingSvg } = formData;
+  const { lines, font, color, size, repeat } = typingSvg;
   const colorInputRef = useRef(null);
 
   // Only use non-empty lines for the SVG
@@ -23,17 +19,26 @@ const TypingSVGSection = () => {
   const handleLineChange = (idx, value) => {
     const newLines = [...lines];
     newLines[idx] = value;
-    setLines(newLines);
+    setFormData({
+      ...formData,
+      typingSvg: { ...typingSvg, lines: newLines }
+    });
   };
 
   const addLine = () => {
-    setLines([...lines, ""]);
+    setFormData({
+      ...formData,
+      typingSvg: { ...typingSvg, lines: [...lines, ""] }
+    });
   };
 
   const removeLine = (idx) => {
     if (lines.length > 1) {
       const newLines = lines.filter((_, index) => index !== idx);
-      setLines(newLines);
+      setFormData({
+        ...formData,
+        typingSvg: { ...typingSvg, lines: newLines }
+      });
     }
   };
 
@@ -49,8 +54,7 @@ const TypingSVGSection = () => {
     const markdownText = `<div align=\"center\">\n\n![Typing SVG](${svgUrl})\n\n</div>`;
     try {
       await navigator.clipboard.writeText(markdownText);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 1500);
+      // Note: We'll handle success state in the parent component if needed
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -119,7 +123,10 @@ const TypingSVGSection = () => {
         <div>
           <label className="mr-1">Font:</label>
           <div style={{ display: 'inline-flex', alignItems: 'center', position: 'relative' }}>
-            <input value={font} onChange={e => setFont(e.target.value)} className="border p-1 rounded w-32" style={{ width: '150px', textAlign: 'start', background: 'transparent', border: '1px solid black', borderRadius: '10px', color: 'black', padding: '4px 10px', marginTop: '12px', overflow: 'hidden' }} />
+            <input value={font} onChange={e => setFormData({
+              ...formData,
+              typingSvg: { ...typingSvg, font: e.target.value }
+            })} className="border p-1 rounded w-32" style={{ width: '150px', textAlign: 'start', background: 'transparent', border: '1px solid black', borderRadius: '10px', color: 'black', padding: '4px 10px', marginTop: '12px', overflow: 'hidden' }} />
           </div>
           <span style={{ marginLeft: '8px', cursor: 'pointer', position: 'relative' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-circle" viewBox="0 0 16 16">
@@ -194,18 +201,27 @@ const TypingSVGSection = () => {
               ref={colorInputRef}
               type="color"
               value={color}
-              onChange={e => setColor(e.target.value)}
-              style={{ display: 'block', position: 'absolute', left: '44px', top: '0', zIndex: 10, width: '36px', height: '36px', padding: 0, border: 'none', background: 'none', cursor: 'pointer' }}
+              onChange={e => setFormData({
+                ...formData,
+                typingSvg: { ...typingSvg, color: e.target.value }
+              })}
+              style={{ display: 'block', position: 'absolute', left: '44px', top: '0',  width: '36px', height: '36px', padding: 0, border: 'none', background: 'none', cursor: 'pointer' }}
             />
           </div>
         </div>
         <div>
           <label className="mr-1">Size:</label>
-          <input type="number" value={size} min={10} max={60} onChange={e => setSize(Number(e.target.value))} className="border p-1 rounded w-16" style={{ width: '60px', textAlign: 'end', background: 'transparent', border: '1px solid black', borderRadius: '10px', color: 'black', padding: '4px 10px', marginTop: '12px' }} />
+          <input type="number" value={size} min={10} max={60} onChange={e => setFormData({
+            ...formData,
+            typingSvg: { ...typingSvg, size: Number(e.target.value) }
+          })} className="border p-1 rounded w-16" style={{ width: '60px', textAlign: 'end', background: 'transparent', border: '1px solid black', borderRadius: '10px', color: 'black', padding: '4px 10px', marginTop: '12px' }} />
         </div>
         <div id="repeat-checkbox">
           <label className="mr-1">Repeat:</label>
-          <input type="checkbox" checked={repeat} onChange={e => setRepeat(e.target.checked)} style={{ width: '16px', height: '16px' }} />
+          <input type="checkbox" checked={repeat} onChange={e => setFormData({
+            ...formData,
+            typingSvg: { ...typingSvg, repeat: e.target.checked }
+          })} style={{ width: '16px', height: '16px' }} />
         </div>
       </div>
       <div className="mb-4 flex flex-col items-center">
@@ -251,15 +267,15 @@ const TypingSVGSection = () => {
             userSelect: 'text'
           }}
         >
-          {`<div align="center">\n\n![Typing SVG](${svgUrl})\n\n</div>`}
+          {`<div align="center">\n![Typing SVG](${svgUrl})\n</div>`}
         </div>
         <button
           onClick={copyToClipboard}
-          className={`cssbuttons-io-button mt-2${copySuccess ? ' success' : ''}`}
+          className={`cssbuttons-io-button mt-2`}
           type="button"
           style={{ marginTop: '10px' }}
         >
-          {copySuccess ? 'Copied!' : 'Copy Markdown'}
+          Copy Markdown
           <div className="icon">
             <svg
               height="24"

@@ -27,6 +27,8 @@ const AboutMeSection = () => {
       <div className="mb-6">
         <h3 className="text-xl font-semibold mb-2">How to use?</h3>
         <p className="mb-2 text-gray-700" id="about-me-section-1">Tired of editing your profile README to add new features like visitors-count badge, github-stats, etc? Just fill the form and let the tool do the work for you!</p>
+        
+        <p style={{textAlign: 'center', fontSize: '1.2rem',marginTop: '20px', marginBottom: '20px',color: 'red', backgroundColor: 'transparent', padding: '10px', borderRadius: '10px', border: '1px solid black', boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)'}}>⚠️The Demo video is not available at the moment. Please check back later.⚠️</p>
         <div className="w-full max-w-xl mx-auto rounded overflow-hidden border border-gray-200 bg-black" id="frame-box">
           {/* Replace the src below with your actual demo video link */}
           <iframe
@@ -36,7 +38,9 @@ const AboutMeSection = () => {
             allowFullScreen
             className="w-full h-64"
             id='frame'
-          ></iframe>
+            style={{display: 'none'}}
+          >
+          </iframe>
         </div>
       </div>
       {/* 3. Why visitors count keeps on increasing? */}

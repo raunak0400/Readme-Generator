@@ -31,7 +31,14 @@ const App = () => {
       showStreakStats: false,
       showTrophies: false
     },
-    githubTheme: 'radical'
+    githubTheme: 'radical',
+    typingSvg: {
+      lines: [''],
+      font: 'Fira Code',
+      color: '#000000',
+      size: 24,
+      repeat: true
+    }
   });
 
   const [copySuccess, setCopySuccess] = useState(false);
@@ -302,7 +309,7 @@ const App = () => {
   };
 
   const generateMarkdown = () => {
-    const { name, projectName, tagline, description, work, skills, socials, analytics, githubUsername, githubTheme } = formData;
+    const { name, projectName, tagline, description, work, skills, socials, analytics, githubUsername, githubTheme, typingSvg } = formData;
     let markdown = '';
 
     // Get current theme (default to 'radical' if not set)
@@ -318,8 +325,20 @@ const App = () => {
       markdown += `## **${projectName}**\n\n`;
     }
 
-    if (tagline) markdown += `${tagline}\n\n`;
-    if (description) markdown += `${description}\n\n`;
+    if (tagline) markdown += `<div align="center">\n\n${tagline}\n\n</div>\n\n`;
+    if (description) markdown += `<div align="center">\n\n${description}\n\n</div>\n\n`;
+
+    // Add animated typing SVG after subtitle section
+    if (typingSvg && typingSvg.lines && typingSvg.lines.length > 0) {
+      const nonEmptyLines = typingSvg.lines.filter(line => line.trim() !== '');
+      if (nonEmptyLines.length > 0) {
+        const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["My Name is Abhijeet"];
+        const linesParam = `&lines=${displayLines.map(encodeURIComponent).join(";")}`;
+        const svgUrl = `https://readme-typing-svg.herokuapp.com?font=${encodeURIComponent(typingSvg.font)}&size=${typingSvg.size}&pause=1000&color=${typingSvg.color.replace("#", "")}&width=435${linesParam}&center=true&vCenter=true&repeat=${typingSvg.repeat}`;
+        
+        markdown += `<div align="center">\n\n![Typing SVG](${svgUrl})\n\n</div>\n\n`;
+      }
+    }
 
     // Add "Work" section only if at least one project is present
     const hasWorkContent = work.some(item => item.projectName);
@@ -340,7 +359,7 @@ const App = () => {
         markdown += `### **${category}**\n`;
         const skillIconsRow = skillList.map((skill) => {
           return skillIcons[skill]
-            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="48" height="48" style="vertical-align:middle; margin-right:12px;"/>`
+            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="48" height="48" style="vertical-align:middle; margin-right:100px;"/>`
             : '';
         }).join(' ');
         markdown += `${skillIconsRow}\n\n`;
@@ -451,7 +470,7 @@ const App = () => {
 
   // Helper to check if at least one input or skill is filled
   const isAnyInputFilled = () => {
-    const { name, projectName, tagline, description, githubUsername, work, skills, socials, analytics } = formData;
+    const { name, projectName, tagline, description, githubUsername, work, skills, socials, analytics, typingSvg } = formData;
     // Check text fields
     const textFields = [name, projectName, tagline, description, githubUsername];
     const hasText = textFields.some(val => val && val.trim());
@@ -463,7 +482,9 @@ const App = () => {
     const hasSocials = socials && Object.values(socials || {}).some(val => val && val.trim());
     // Check analytics
     const hasAnalytics = analytics && Object.values(analytics).some(val => val);
-    return hasText || hasWork || hasSkills || hasSocials || hasAnalytics;
+    // Check typing SVG
+    const hasTypingSvg = typingSvg && typingSvg.lines && typingSvg.lines.some(line => line && line.trim() !== '');
+    return hasText || hasWork || hasSkills || hasSocials || hasAnalytics || hasTypingSvg;
   };
 
   const [showInputWarning, setShowInputWarning] = useState(false);
@@ -486,7 +507,7 @@ const App = () => {
         <NotificationModel />
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
-        <TypingSVGSection />
+        <TypingSVGSection formData={formData} setFormData={setFormData} />
         <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
