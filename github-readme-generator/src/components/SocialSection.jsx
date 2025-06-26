@@ -1,5 +1,6 @@
 import React from "react";
 import { SiBuymeacoffee } from "react-icons/si";
+import NotificationBell from "./NotificationBell";
 
 // Importing icons from react-icons
 import {
@@ -9,24 +10,24 @@ import {
 } from "react-icons/fa";
 
 const SOCIALS = [
-  { name: 'GitHub', key: 'github', placeholder: 'GitHub username or link', icon: <img src="https://img.icons8.com/ios-filled/100/github.png" alt="GitHub" style={{height: 32}} /> },
-  { name: 'Twitter', key: 'twitter', placeholder: 'Twitter link', icon: <img src="https://img.icons8.com/ios/100/twitterx--v1.png" alt="Twitter" style={{height: 32}} /> },
-  { name: 'Dev.to', key: 'devto', placeholder: 'Dev.to username', icon: <img src="https://img.icons8.com/external-tal-revivo-fresh-tal-revivo/112/external-dev-community-where-programmers-share-ideas-and-help-each-other-grow-logo-fresh-tal-revivo.png" alt="Dev.to" style={{height: 32}} /> },
-  { name: 'CodePen', key: 'codepen', placeholder: 'CodePen username', icon: <img src="https://img.icons8.com/ios/100/codepen.png" alt="CodePen" style={{height: 32}} /> },
-  { name: 'Stack Overflow', key: 'stackoverflow', placeholder: 'Stack Overflow user ID', icon: <img src="https://img.icons8.com/fluency/96/stackoverflow.png" alt="Stack Overflow" style={{height: 32}} /> },
-  { name: 'LinkedIn', key: 'linkedin', placeholder: 'LinkedIn username', icon: <img src="https://img.icons8.com/color/96/linkedin-circled--v1.png" alt="LinkedIn" style={{height: 32}} /> },
-  { name: 'Facebook', key: 'facebook', placeholder: 'Facebook username', icon: <img src="https://img.icons8.com/color/96/facebook-new.png" alt="Facebook" style={{height: 32}} /> },
-  { name: 'Instagram', key: 'instagram', placeholder: 'Instagram username', icon: <img src="https://img.icons8.com/fluency/96/instagram-new.png" alt="Instagram" style={{height: 32}} /> },
-  { name: 'Medium', key: 'medium', placeholder: 'Medium username (with @)', icon: <img src="https://img.icons8.com/sf-regular/96/medium-logo.png" alt="Medium" style={{height: 32}} /> },
-  { name: 'YouTube', key: 'youtube', placeholder: 'YouTube channel name', icon: <img src="https://img.icons8.com/color/96/youtube-play.png" alt="YouTube" style={{height: 32}} /> },
-  { name: 'Reddit', key: 'reddit', placeholder: 'Reddit username', icon: <img src="https://img.icons8.com/fluency/96/reddit.png" alt="Reddit" style={{height: 32}} /> },
-  { name: 'Twitch', key: 'twitch', placeholder: 'Twitch username', icon: <img src="https://img.icons8.com/color/96/twitch--v1.png" alt="Twitch" style={{height: 32}} /> },
-  { name: 'Discord', key: 'discord', placeholder: 'Discord username', icon: <img src="https://img.icons8.com/color/96/discord--v2.png" alt="Discord" style={{height: 32}} /> },
-  { name: 'Dribbble', key: 'dribbble', placeholder: 'Dribbble username', icon: <img src="https://img.icons8.com/fluency/96/dribbble.png" alt="Dribbble" style={{height: 32}} /> },
-  { name: 'Behance', key: 'behance', placeholder: 'Behance username', icon: <img src="https://img.icons8.com/color/96/behance.png" alt="Behance" style={{height: 32}} /> },
-  { name: 'Pinterest', key: 'pinterest', placeholder: 'Pinterest username', icon: <img src="https://img.icons8.com/color/96/pinterest--v1.png" alt="Pinterest" style={{height: 32}} /> },
-  { name: 'Telegram', key: 'telegram', placeholder: 'Telegram username', icon: <img src="https://img.icons8.com/color/96/telegram-app--v1.png" alt="Telegram" style={{height: 32}} /> },
-  { name: 'WhatsApp', key: 'whatsapp', placeholder: 'WhatsApp number or link', icon: <img src="https://img.icons8.com/color/96/whatsapp--v1.png" alt="WhatsApp" style={{height: 32}} /> },
+  { name: 'GitHub', key: 'github', placeholder: 'GitHub username or link', icon: <img src="https://img.icons8.com/ios-filled/100/github.png" alt="GitHub" style={{ height: 32 }} /> },
+  { name: 'Twitter', key: 'twitter', placeholder: 'Twitter link', icon: <img src="https://img.icons8.com/ios/100/twitterx--v1.png" alt="Twitter" style={{ height: 32 }} /> },
+  { name: 'Dev.to', key: 'devto', placeholder: 'Dev.to username', icon: <img src="https://img.icons8.com/external-tal-revivo-fresh-tal-revivo/112/external-dev-community-where-programmers-share-ideas-and-help-each-other-grow-logo-fresh-tal-revivo.png" alt="Dev.to" style={{ height: 32 }} /> },
+  { name: 'CodePen', key: 'codepen', placeholder: 'CodePen username', icon: <img src="https://img.icons8.com/ios/100/codepen.png" alt="CodePen" style={{ height: 32 }} /> },
+  { name: 'Stack Overflow', key: 'stackoverflow', placeholder: 'Stack Overflow user ID', icon: <img src="https://img.icons8.com/fluency/96/stackoverflow.png" alt="Stack Overflow" style={{ height: 32 }} /> },
+  { name: 'LinkedIn', key: 'linkedin', placeholder: 'LinkedIn username', icon: <img src="https://img.icons8.com/color/96/linkedin-circled--v1.png" alt="LinkedIn" style={{ height: 32 }} /> },
+  { name: 'Facebook', key: 'facebook', placeholder: 'Facebook username', icon: <img src="https://img.icons8.com/color/96/facebook-new.png" alt="Facebook" style={{ height: 32 }} /> },
+  { name: 'Instagram', key: 'instagram', placeholder: 'Instagram username', icon: <img src="https://img.icons8.com/fluency/96/instagram-new.png" alt="Instagram" style={{ height: 32 }} /> },
+  { name: 'Medium', key: 'medium', placeholder: 'Medium username (with @)', icon: <img src="https://img.icons8.com/sf-regular/96/medium-logo.png" alt="Medium" style={{ height: 32 }} /> },
+  { name: 'YouTube', key: 'youtube', placeholder: 'YouTube channel name', icon: <img src="https://img.icons8.com/color/96/youtube-play.png" alt="YouTube" style={{ height: 32 }} /> },
+  { name: 'Reddit', key: 'reddit', placeholder: 'Reddit username', icon: <img src="https://img.icons8.com/fluency/96/reddit.png" alt="Reddit" style={{ height: 32 }} /> },
+  { name: 'Twitch', key: 'twitch', placeholder: 'Twitch username', icon: <img src="https://img.icons8.com/color/96/twitch--v1.png" alt="Twitch" style={{ height: 32 }} /> },
+  { name: 'Discord', key: 'discord', placeholder: 'Discord username', icon: <img src="https://img.icons8.com/color/96/discord--v2.png" alt="Discord" style={{ height: 32 }} /> },
+  { name: 'Dribbble', key: 'dribbble', placeholder: 'Dribbble username', icon: <img src="https://img.icons8.com/fluency/96/dribbble.png" alt="Dribbble" style={{ height: 32 }} /> },
+  { name: 'Behance', key: 'behance', placeholder: 'Behance username', icon: <img src="https://img.icons8.com/color/96/behance.png" alt="Behance" style={{ height: 32 }} /> },
+  { name: 'Pinterest', key: 'pinterest', placeholder: 'Pinterest username', icon: <img src="https://img.icons8.com/color/96/pinterest--v1.png" alt="Pinterest" style={{ height: 32 }} /> },
+  { name: 'Telegram', key: 'telegram', placeholder: 'Telegram username', icon: <img src="https://img.icons8.com/color/96/telegram-app--v1.png" alt="Telegram" style={{ height: 32 }} /> },
+  { name: 'WhatsApp', key: 'whatsapp', placeholder: 'WhatsApp number or link', icon: <img src="https://img.icons8.com/color/96/whatsapp--v1.png" alt="WhatsApp" style={{ height: 32 }} /> },
 ];
 
 const SocialsSection = ({ formData, setFormData }) => {
@@ -80,14 +81,20 @@ const SocialsSection = ({ formData, setFormData }) => {
         </div>
       </div>
 
+
       <div
         style={{
           position: "fixed",
           bottom: "24px",
           right: "24px",
           zIndex: 1000,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "16px", // space between bell and button
         }}
       >
+        {!showModal && <NotificationBell />}
         {!showModal && (
           <button
             type="button"
@@ -124,7 +131,6 @@ const SocialsSection = ({ formData, setFormData }) => {
             </span>
           </button>
         )}
-
         {/* Modal just above the button */}
         {showModal && (
           <>
@@ -143,7 +149,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                 zIndex: 1050,
                 minWidth: "320px",
                 maxWidth: "360px",
-                
+
               }}
             >
               <div

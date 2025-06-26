@@ -9,7 +9,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
   const nonEmptyLines = lines.filter(line => line.trim() !== "");
 
   // Ensure there's always at least one line to prevent API errors
-  const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["My Name is Abhijeet"];
+  const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["abhijeetBhale/Readme-Generator"];
 
   // Construct the lines parameter correctly for the API - use semicolons to separate lines
   const linesParam = `&lines=${displayLines.map(encodeURIComponent).join(";")}`;

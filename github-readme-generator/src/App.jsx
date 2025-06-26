@@ -6,10 +6,10 @@ import TitleSection from './components/TitleSection';
 import WorkSection from './components/WorkSection';
 import SkillsSection from './components/SkillsSection';
 import SocialsSection from './components/SocialSection';
-import NotificationModel from './components/NotificationModel';
 import GitHubProfileSection from './components/GitHubProfileSection';
 import AboutMeSection from './components/AboutMeSection';
 import TypingSVGSection from './components/TypingSVGSection';
+import NotificationBell from './components/NotificationBell';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -394,7 +394,7 @@ const App = () => {
     if (typingSvg && typingSvg.lines && typingSvg.lines.length > 0) {
       const nonEmptyLines = typingSvg.lines.filter(line => line.trim() !== '');
       if (nonEmptyLines.length > 0) {
-        const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["My Name is Abhijeet"];
+        const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["abhijeetBhale/Readme-Generator"];
         const linesParam = `&lines=${displayLines.map(encodeURIComponent).join(";")}`;
         const svgUrl = `https://readme-typing-svg.herokuapp.com?font=${encodeURIComponent(typingSvg.font)}&size=${typingSvg.size}&pause=1000&color=${typingSvg.color.replace("#", "")}&width=435${linesParam}&center=true&vCenter=true&repeat=${typingSvg.repeat}`;
         
@@ -568,7 +568,6 @@ const App = () => {
     <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
       <div className="container mx-auto p-4 max-w-4xl">
-        <NotificationModel />
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <TypingSVGSection formData={formData} setFormData={setFormData} />
