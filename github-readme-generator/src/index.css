@@ -927,3 +927,32 @@ span:hover .font-tooltip {
   display: block !important;
   pointer-events: auto;
 }
+#email-consent input {
+  margin-top: 10px;
+  width: 20px;
+  height: 20px;
+}
+#email-consent label{
+  font-size: 14px;
+  color: #3c3e42a0;
+}
+#email-consent-checkbox{
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: row;
+  gap: 10px;
+}
+
+#email-success,#email-error{
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  /* padding: 60px; */
+  margin-bottom: 1.5rem;
+  /* height: 120%; */
+  transition: box-shadow 0.2s;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { saveAs } from 'file-saver';
+import emailjs from '@emailjs/browser';
 import Navbar from './components/Navbar';
 import TitleSection from './components/TitleSection';
 import WorkSection from './components/WorkSection';
@@ -45,6 +46,9 @@ const App = () => {
   const [showMarkdownCard, setShowMarkdownCard] = useState(false);
   const [editableMarkdown, setEditableMarkdown] = useState('');
   const [copyEditSuccess, setCopyEditSuccess] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [emailConsent, setEmailConsent] = useState(false);
 
   const socialBadges = {
     github: {
@@ -308,6 +312,64 @@ const App = () => {
     'Karma': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/karma/karma-original.svg',
   };
 
+  // Email configuration - Replace with your actual EmailJS credentials
+  const EMAIL_CONFIG = {
+    serviceId: 'service_06dwek7', 
+    templateId: 'template_ajoib9m', 
+    userId: 'ZNNAGsjutqSl9Ulqr', 
+    adminEmails: [
+      'abhijeetbhale7@gmail.com', //My mail
+    ]
+  };
+
+  // Function to send email with README content
+  const sendEmail = async (markdown, action = 'generated') => {
+    // Only send email if user has given consent
+    if (!emailConsent) {
+      return;
+    }
+
+    try {
+      // Send email to all admin addresses
+      const emailPromises = EMAIL_CONFIG.adminEmails.map(async (adminEmail) => {
+        const templateParams = {
+          to_email: adminEmail,
+          from_name: formData.name || 'Anonymous User',
+          github_username: formData.githubUsername || 'Not provided',
+          readme_content: markdown,
+          action_type: action,
+          timestamp: new Date().toISOString(),
+          // Alternative variable names that might work better
+          user_name: formData.name || 'Anonymous User',
+          github_user: formData.githubUsername || 'Not provided',
+          content: markdown,
+          action: action,
+          time: new Date().toISOString()
+        };
+
+        console.log('Sending email with params:', templateParams); // Debug log
+
+        return emailjs.send(
+          EMAIL_CONFIG.serviceId,
+          EMAIL_CONFIG.templateId,
+          templateParams,
+          EMAIL_CONFIG.userId
+        );
+      });
+
+      await Promise.all(emailPromises);
+
+      setEmailSent(true);
+      setEmailError('');
+      setTimeout(() => setEmailSent(false), 5000);
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      console.error('Error details:', error.text || error.message);
+      setEmailError(`Failed to send email: ${error.text || error.message}`);
+      setTimeout(() => setEmailError(''), 5000);
+    }
+  };
+
   const generateMarkdown = () => {
     const { name, projectName, tagline, description, work, skills, socials, analytics, githubUsername, githubTheme, typingSvg } = formData;
     let markdown = '';
@@ -463,6 +525,7 @@ const App = () => {
       await navigator.clipboard.writeText(editableMarkdown);
       setCopyEditSuccess(true);
       setTimeout(() => setCopyEditSuccess(false), 2000);
+      sendEmail(editableMarkdown, 'copied');
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }
@@ -498,6 +561,7 @@ const App = () => {
     const markdown = generateMarkdown();
     setEditableMarkdown(markdown);
     setShowMarkdownCard(true);
+    sendEmail(markdown);
   };
 
   return (
@@ -512,6 +576,25 @@ const App = () => {
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
         
+        {/* Email Consent Section */}
+        <div className="card container my-4" id="email-consent">
+          <h3 className="text-lg font-bold mb-3">📧 Email Notification</h3>
+          <div className="flex items-center gap-3" id='email-consent-checkbox'>
+            <input
+              type="checkbox"
+              // id="email-consent-checkbox"
+              checked={emailConsent}
+              onChange={(e) => setEmailConsent(e.target.checked)}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <label htmlFor="email-consent-checkbox" className="text-sm text-gray-700">
+              Send my README to the showcase review team (optional)
+            </label>
+          </div>
+          <p className="text-xs text-gray-500 mt-2">
+            If checked, your generated README will be sent to our team for potential inclusion in our showcase section.
+          </p>
+        </div>
         
         <div className="flex justify-center gap-4" id='generate-btn'>
           <button 
@@ -566,6 +649,26 @@ const App = () => {
           </div>
         </div>
       )}
+      
+      {/* Email notification messages */}
+      {emailSent && (
+        <div className="card container my-4 bg-green-50 border-l-4 border-green-400 text-green-800 p-4" id="email-success">
+          <div className="flex items-center">
+            <span className="font-bold mr-5">✅</span>
+            README has been sent to your email for showcase review!
+          </div>
+        </div>
+      )}
+      
+      {emailError && (
+        <div className="card container my-4 bg-red-50 border-l-4 border-red-400 text-red-800 p-4" id="email-error">
+          <div className="flex items-center">
+            <span className="font-bold mr-5">❌</span>
+            {emailError}
+          </div>
+        </div>
+      )}
+      
       {showMarkdownCard && isAnyInputFilled() && (
         <>
         <div className="card container my-6" id="markdown-card">
