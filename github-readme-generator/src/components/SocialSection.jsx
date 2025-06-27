@@ -43,6 +43,8 @@ const SocialsSection = ({ formData, setFormData }) => {
 
   // State for modal visibility
   const [showModal, setShowModal] = React.useState(false);
+  // Add loading state for modal
+  const [loading, setLoading] = React.useState(false);
 
   // Example payment methods (add your own as needed)
   const paymentMethods = [
@@ -115,7 +117,11 @@ const SocialsSection = ({ formData, setFormData }) => {
               justifyContent: "center",
               padding: 0,
             }}
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setLoading(true);
+              setShowModal(true);
+              setTimeout(() => setLoading(false), 1000); // Show loading for 1s
+            }}
             title="Buy me a coffee"
           >
             <span
@@ -149,7 +155,6 @@ const SocialsSection = ({ formData, setFormData }) => {
                 zIndex: 1050,
                 minWidth: "320px",
                 maxWidth: "360px",
-
               }}
             >
               <div
@@ -164,44 +169,51 @@ const SocialsSection = ({ formData, setFormData }) => {
                   borderRadius: "12px",
                 }}
               >
-                {/* Close Button at Top Right */}
-                <button
-                  id="close-btn"
-                  className="absolute top-2 right-2 p-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition"
-                  onClick={() => setShowModal(false)}
-                  aria-label="Close"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-                  }}
-                >
-                  {/* <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> */}
-                  <span>&#x2715;</span>
-                </button>
-
-                <div className="flex flex-col items-center justify-center w-full h-full text-center" id="support">
-                  <h2 className="text-xl font-bold mb-4 mt-2 w-full">Support Me</h2>
-                  <div className="grid gap-4 w-full justify-items-center">
-                    {paymentMethods.map((method) => (
-                      <div key={method.name} className="flex flex-col items-center border rounded px-4 py-4 bg-gray-50 w-full">
-                        <div className="flex items-center gap-2 mb-2 justify-center">
-                          {method.icon}
-                          <span className="font-semibold">{method.name}</span>
-                        </div>
-                        <div className="mb-2 text-sm text-gray-700 text-center">{method.description}</div>
-                        {method.qr && (
-                          <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32 rounded shadow mx-auto" />
-                        )}
-                        <div className="text-xs text-gray-600 break-all text-center">{method.details}</div>
-                      </div>
-                    ))}
+                {/* Show loading animation if loading is true */}
+                {loading ? (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '300px', width: '100%' }}>
+                    <div className="pulsar"></div>
                   </div>
-                </div>
+                ) : (
+                  <>
+                    {/* Close Button at Top Right */}
+                    <button
+                      id="close-btn"
+                      className="absolute top-2 right-2 p-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition"
+                      onClick={() => setShowModal(false)}
+                      aria-label="Close"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                      }}
+                    >
+                      <span>&#x2715;</span>
+                    </button>
+                    <div className="flex flex-col items-center justify-center w-full h-full text-center" id="support">
+                      <h2 className="text-xl font-bold mb-4 mt-2 w-full">Support Me</h2>
+                      <div className="grid gap-4 w-full justify-items-center">
+                        {paymentMethods.map((method) => (
+                          <div key={method.name} className="flex flex-col items-center border rounded px-4 py-4 bg-gray-50 w-full">
+                            <div className="flex items-center gap-2 mb-2 justify-center">
+                              {method.icon}
+                              <span className="font-semibold">{method.name}</span>
+                            </div>
+                            <div className="mb-2 text-sm text-gray-700 text-center">{method.description}</div>
+                            {method.qr && (
+                              <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32 rounded shadow mx-auto" />
+                            )}
+                            <div className="text-xs text-gray-600 break-all text-center">{method.details}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>

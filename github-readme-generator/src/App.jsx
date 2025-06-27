@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { saveAs } from 'file-saver';
 import emailjs from '@emailjs/browser';
 import Navbar from './components/Navbar';
@@ -10,6 +10,7 @@ import GitHubProfileSection from './components/GitHubProfileSection';
 import AboutMeSection from './components/AboutMeSection';
 import TypingSVGSection from './components/TypingSVGSection';
 import NotificationBell from './components/NotificationBell';
+import Loader from './components/Loader';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +50,8 @@ const App = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [emailConsent, setEmailConsent] = useState(false);
+  const [loadingPreview, setLoadingPreview] = useState(false);
+  const loaderRef = useRef(null); // Ref for loader
 
   const socialBadges = {
     github: {
@@ -553,14 +556,26 @@ const App = () => {
   const [showInputWarning, setShowInputWarning] = useState(false);
 
   const handleGenerate = () => {
-    if (!isAnyInputFilled()) {
-      setShowInputWarning(true);
-      setTimeout(() => setShowInputWarning(false), 2000);
-      return;
-    }
+    setLoadingPreview(true);
+    setShowMarkdownCard(false);
+    setShowInputWarning(false); // Hide warning initially
+    setTimeout(() => {
+      setLoadingPreview(false);
+      if (!isAnyInputFilled()) {
+        setShowInputWarning(true); // Show warning after loader
+        return;
+      }
+      setShowMarkdownCard(true);
+    }, 3000); // Show loader for ~3s
+    // Scroll to loader after state update
+    setTimeout(() => {
+      if (loaderRef.current) {
+        loaderRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50); // Small delay to ensure loader is rendered
+    // Remove early return for empty input
     const markdown = generateMarkdown();
     setEditableMarkdown(markdown);
-    setShowMarkdownCard(true);
     sendEmail(markdown);
   };
 
@@ -668,7 +683,12 @@ const App = () => {
         </div>
       )}
       
-      {showMarkdownCard && isAnyInputFilled() && (
+      {loadingPreview && (
+        <div ref={loaderRef} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
+          <Loader />
+        </div>
+      )}
+      {showMarkdownCard && isAnyInputFilled() && !loadingPreview && (
         <>
         <div className="card container my-6" id="markdown-card">
           <div className="flex justify-between items-center mb-2">
