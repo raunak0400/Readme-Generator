@@ -996,3 +996,7 @@ span:hover .font-tooltip {
     opacity: 0.25;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}

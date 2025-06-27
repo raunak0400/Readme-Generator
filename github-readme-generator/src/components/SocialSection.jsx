@@ -150,28 +150,42 @@ const SocialsSection = ({ formData, setFormData }) => {
             <div
               className="absolute"
               style={{
-                bottom: "80px", // 64px button + 16px gap
+                bottom: "80px",
                 right: "0px",
                 zIndex: 1050,
-                minWidth: "320px",
-                maxWidth: "360px",
+                minWidth: "260px",
+                maxWidth: "320px",
+                borderRadius: "18px",
+                overflow: "hidden",
+                // boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22)",
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                background: "rgba(255, 255, 255, 0.18)",
+                border: "1.5px solid rgba(255, 255, 255, 0.22)",
+                // borderBottom: "2.5px solid #fbbf24",
+                // borderRight: "2.5px solid #fbbf24",
+                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22), 0 0 16px 0 #fbbf2440",
+                transition: "all 0.3s cubic-bezier(.4,2,.3,1)",
               }}
             >
               <div
-                className="relative bg-white rounded-lg shadow-lg flex flex-col items-center border"
+                className="relative flex flex-col items-center border-none"
                 style={{
-                  borderColor: "#e5e7eb",
-                  background: "#fff",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-                  minHeight: "350px",
+                  minHeight: "320px",
                   justifyContent: "center",
-                  padding: "2rem 2rem 2rem 2rem",
-                  borderRadius: "12px",
+                  padding: "2.5rem 1.2rem 2.5rem 1.2rem",
+                  borderRadius: "18px",
+                  background: "rgba(255,255,255,0.65)",
+                  boxShadow: "0 2px 16px 0 rgba(31, 38, 135, 0.10)",
+                  border: "none",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  transition: "all 0.3s cubic-bezier(.4,2,.3,1)",
                 }}
               >
                 {/* Show loading animation if loading is true */}
                 {loading ? (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '300px', width: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '220px', width: '100%' }}>
                     <div className="pulsar"></div>
                   </div>
                 ) : (
@@ -179,7 +193,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                     {/* Close Button at Top Right */}
                     <button
                       id="close-btn"
-                      className="absolute top-2 right-2 p-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition"
+                      className="absolute top-2 right-2 p-1 rounded-full bg-white/70 hover:bg-white/90 text-gray-700 hover:text-gray-900 shadow transition border border-white/40"
                       onClick={() => setShowModal(false)}
                       aria-label="Close"
                       style={{
@@ -189,25 +203,33 @@ const SocialsSection = ({ formData, setFormData }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         cursor: "pointer",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                        fontWeight: 600,
+                        fontSize: "1.1rem",
+                        boxShadow: "0 1px 6px rgba(31,38,135,0.10)",
+                        border: "1px solid rgba(255,255,255,0.4)",
+                        backdropFilter: "blur(3px)",
+                        WebkitBackdropFilter: "blur(3px)",
+                        transition: "all 0.2s cubic-bezier(.4,2,.3,1)",
                       }}
                     >
                       <span>&#x2715;</span>
                     </button>
-                    <div className="flex flex-col items-center justify-center w-full h-full text-center" id="support">
-                      <h2 className="text-xl font-bold mb-4 mt-2 w-full">Support Me</h2>
-                      <div className="grid gap-4 w-full justify-items-center">
+                    <div className="flex flex-col items-center justify-center w-full h-full text-center gap-2" id="support">
+                      <h2 className="text-xl font-bold mb-3 mt-2 w-full tracking-tight text-gray-800 drop-shadow-sm">Support Me</h2>
+                      <div className="grid gap-3 w-full justify-items-center">
                         {paymentMethods.map((method) => (
                           <div key={method.name} className="flex flex-col items-center border rounded px-4 py-4 bg-gray-50 w-full">
                             <div className="flex items-center gap-2 mb-2 justify-center">
                               {method.icon}
-                              <span className="font-semibold">{method.name}</span>
+                              <span className="font-semibold text-gray-700 text-base">{method.name}</span>
                             </div>
-                            <div className="mb-2 text-sm text-gray-700 text-center">{method.description}</div>
+                            <div className="mb-1 text-xs text-gray-700 text-center opacity-80">{method.description}</div>
                             {method.qr && (
-                              <img src={method.qr} alt={`${method.name} QR`} className="mb-2 w-32 h-32 rounded shadow mx-auto" />
+                              <div className="mb-1 w-24 h-24 flex items-center justify-center rounded-md shadow mx-auto border border-white/30 bg-white">
+                                <img src={method.qr} alt={`${method.name} QR`} className="w-20 h-20 object-contain" style={{ background: "transparent" }} />
+                              </div>
                             )}
-                            <div className="text-xs text-gray-600 break-all text-center">{method.details}</div>
+                            <div className="text-xs text-gray-600 break-all text-center opacity-80">{method.details}</div>
                           </div>
                         ))}
                       </div>
