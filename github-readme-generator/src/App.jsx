@@ -11,6 +11,7 @@ import AboutMeSection from './components/AboutMeSection';
 import TypingSVGSection from './components/TypingSVGSection';
 import NotificationBell from './components/NotificationBell';
 import Loader from './components/Loader';
+import UserShowcaseSection from './components/UserShowcaseSection';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -591,7 +592,7 @@ const App = () => {
         
         {/* Email Consent Section */}
         <div className="card container my-4" id="email-consent">
-          <h3 className="text-lg font-bold mb-3">📧 Email Notification</h3>
+          <h3 className="text-lg font-bold mb-3">🌟 Get Featured in Our Showcase!</h3>
           <div className="flex items-center gap-3" id='email-consent-checkbox'>
             <input
               type="checkbox"
@@ -601,11 +602,12 @@ const App = () => {
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
             />
             <label htmlFor="email-consent-checkbox" className="text-sm text-gray-700">
-              Send my README to the showcase review team (optional)
+              I'd love to be featured in the user showcase! (optional)
             </label>
           </div>
           <p className="text-xs text-gray-500 mt-2">
-            If checked, your generated README will be sent to our team for potential inclusion in our showcase section.
+            By checking this, you agree to share your name and GitHub username for potential inclusion in our showcase section. 
+            This helps inspire other developers and gives you recognition for using our tool!
           </p>
         </div>
         
@@ -668,7 +670,7 @@ const App = () => {
         <div className="card container my-4 bg-green-50 border-l-4 border-green-400 text-green-800 p-4" id="email-success">
           <div className="flex items-center">
             <span className="font-bold mr-5">✅</span>
-            README has been sent to your email for showcase review!
+            Awesome! Your README has been sent and you might be featured in our showcase soon! 🌟
           </div>
         </div>
       )}
@@ -719,6 +721,7 @@ const App = () => {
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
         <AboutMeSection />
+        <UserShowcaseSection />
         </>
       )}
       <footer className="text-center py-4" id='footer'>

@@ -1000,3 +1000,46 @@ span:hover .font-tooltip {
 html {
   scroll-behavior: smooth;
 }
+#user-showcase{
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 60px;
+  margin-bottom: 1.5rem;
+}
+#user-showcase-card{
+  /* width: 100%; */
+  /* height: 100%; */
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  object-fit: cover;
+}
+#user-showcase-card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#user-showcase-card-content h4{
+  font-size: 18px;
+  font-weight: 600;
+  color: #3b82f6;
+  height: 30px;
+}
+#user-showcase-card-content a{
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+}
+.card_date{
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+}
