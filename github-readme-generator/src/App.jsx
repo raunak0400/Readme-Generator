@@ -150,7 +150,6 @@ const App = () => {
     'R': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg',
     'Lua': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg',
     'Bash': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg',
-    'Shell': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg',
     'Elixir': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elixir/elixir-original.svg',
     'Clojure': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/clojure/clojure-original.svg',
     'F#': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fsharp/fsharp-original.svg',
@@ -424,7 +423,7 @@ const App = () => {
         markdown += `### **${category}**\n`;
         const skillIconsRow = skillList.map((skill) => {
           return skillIcons[skill]
-            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="48" height="48" style="vertical-align:middle; margin-right:100px;"/>`
+            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="60" height="60" style="vertical-align:middle; margin-right:520px; margin-left:10px;"/>`
             : '';
         }).join(' ');
         markdown += `${skillIconsRow}\n\n`;
