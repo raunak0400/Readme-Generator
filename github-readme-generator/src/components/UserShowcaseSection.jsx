@@ -16,7 +16,27 @@ const UserShowcaseSection = () => {
     },
     {
       name: "Abhijeet Bhale",
-      githubUsername: "abhijeetbhale",
+      githubUsername: "abhijeetBhale",
+      date: "2024-01-15"
+    },
+    {
+      name: "Taniya Khasdeo",
+      githubUsername: "Taniya-Khasdeo",
+      date: "2024-01-15"
+    },
+    {
+      name: "Tanish Vyas",
+      githubUsername: "TanishV2",
+      date: "2024-01-15"
+    },
+    {
+      name: "Amritha",
+      githubUsername: "amritha1611",
+      date: "2024-01-15"
+    },
+    {
+      name: "Dhaval Shah",
+      githubUsername: "dhavalshahh",
       date: "2024-01-15"
     },
     
@@ -104,34 +124,52 @@ const UserShowcaseSection = () => {
         maxWidth: '2000px', 
         margin: '0 auto', 
         padding: '20px 0',
-        overflowX: 'auto',
+        overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'row',
       }}>
         {loading ? (
           // Show loading cards while fetching data
-          <div style={{ 
+          <div className="scrolling-container" style={{ 
             display: 'flex', 
             flexDirection: 'row', 
-            flexWrap: 'wrap', 
+            flexWrap: 'nowrap', 
             gap: '20px', 
-            justifyContent: 'center',
-            alignItems: 'flex-start'
-          }}>
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            animation: 'scroll-left 50s linear infinite',
+            cursor: 'pointer'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.animationPlayState = 'paused';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.animationPlayState = 'running';
+          }}
+          >
             {showcaseUsers.map((user, index) => (
               <UserCard key={index} user={user} loading={true} />
             ))}
           </div>
         ) : (
           // Show actual user cards with GitHub data
-          <div style={{ 
+          <div className="scrolling-container" style={{ 
             display: 'flex', 
             flexDirection: 'row', 
-            flexWrap: 'wrap', 
+            flexWrap: 'nowrap', 
             gap: '20px', 
-            justifyContent: 'center',
-            alignItems: 'flex-start'
-          }}>
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            animation: 'scroll-left 50s linear infinite',
+            cursor: 'pointer'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.animationPlayState = 'paused';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.animationPlayState = 'running';
+          }}
+          >
             {users.map((user, index) => (
               <UserCard 
                 key={index} 
@@ -375,6 +413,24 @@ const StyledWrapper = styled.div`
   .social-media a:hover .tooltip-social {
     opacity: 1;
     transform: translate(-50%, -130%);
+  }
+
+  /* Horizontal scrolling animation */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .scrolling-container {
+    animation: scroll-left 50s linear infinite;
+  }
+
+  .scrolling-container:hover {
+    animation-play-state: paused;
   }
 `;
 
