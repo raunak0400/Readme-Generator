@@ -720,8 +720,8 @@ const App = () => {
           />
           <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
         </div>
-        <AboutMeSection />
         <UserShowcaseSection />
+        <AboutMeSection />
         </>
       )}
       <footer className="text-center py-4" id='footer'>

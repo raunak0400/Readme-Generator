@@ -104,7 +104,9 @@ const UserShowcaseSection = () => {
         maxWidth: '2000px', 
         margin: '0 auto', 
         padding: '20px 0',
-        overflowX: 'auto'
+        overflowX: 'auto',
+        display: 'flex',
+        flexDirection: 'row',
       }}>
         {loading ? (
           // Show loading cards while fetching data
