@@ -32,7 +32,9 @@ const App = () => {
       showContributions: false,
       showProfileViews: false,
       showStreakStats: false,
-      showTrophies: false
+      showTrophies: false,
+      showSummaryCards: false,
+      showTechQuote: false
     },
     githubTheme: 'radical',
     typingSvg: {
@@ -465,26 +467,41 @@ const App = () => {
       if (analytics.showStreakStats) {
         markdown += '<div align="center">\n\n';
         markdown += `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=${currentTheme}" alt="GitHub Streak Stats" />\n\n`;
-        markdown += '</div>\n\n';
+        markdown += '</div>\n\n\n';
       }
 
       // Contribution graph at 100% width
       if (analytics.showContributions) {
-        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=${currentTheme}" alt="Contribution Graph" />\n\n`;
+        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=${currentTheme}" alt="Contribution Graph" />\n\n\n`;
       }
 
       // Profile views centered
       if (analytics.showProfileViews) {
         markdown += '<div align="center">\n\n';
         markdown += `<img src="https://komarev.com/ghpvc/?username=${githubUsername}&color=brightgreen" alt="Profile Views" />\n\n`;
-        markdown += '</div>\n\n';
+        markdown += '</div>\n\n\n';
       }
 
       // Trophies centered
       if (analytics.showTrophies) {
         markdown += '<div align="center">\n\n';
         markdown += `<img src="https://github-profile-trophy.vercel.app/?username=${githubUsername}&theme=${currentTheme}&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies" />\n\n`;
-        markdown += '</div>\n\n';
+        markdown += '</div>\n\n\n';
+      }
+
+      // GitHub Profile Summary Cards centered
+      if (analytics.showSummaryCards) {
+        markdown += '<div align="center">\n\n';
+        markdown += `<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${githubUsername}&theme=${currentTheme}" alt="GitHub Profile Summary" />\n\n`;
+        markdown += '</div>\n\n\n';
+      }
+
+      // Random Tech Quote
+      if (analytics.showTechQuote) {
+        markdown += '### ✍️ Dev Quote\n';
+        markdown += '<p align="center">\n';
+        markdown += `  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${currentTheme}" />\n`;
+        markdown += '</p>\n\n\n';
       }
     }
 

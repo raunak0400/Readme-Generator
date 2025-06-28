@@ -323,6 +323,34 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             Show GitHub Trophies
           </label>
         </div>
+
+        {/* GitHub Profile Summary Cards */}
+        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <input
+            type="checkbox"
+            id="showSummaryCards"
+            checked={analytics.showSummaryCards || false}
+            onChange={(e) => handleAnalyticsChange('showSummaryCards', e.target.checked)}
+            className="h-4 w-4 text-blue-600 rounded border-gray-300"
+          />
+          <label htmlFor="showSummaryCards" className="text-gray-700 cursor-pointer flex-1">
+            Show GitHub Profile Summary Cards
+          </label>
+        </div>
+
+        {/* Random Tech Quote */}
+        <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+          <input
+            type="checkbox"
+            id="showTechQuote"
+            checked={analytics.showTechQuote || false}
+            onChange={(e) => handleAnalyticsChange('showTechQuote', e.target.checked)}
+            className="h-4 w-4 text-blue-600 rounded border-gray-300"
+          />
+          <label htmlFor="showTechQuote" className="text-gray-700 cursor-pointer flex-1">
+            Show Random Tech Quote
+          </label>
+        </div>
       </div>
 
       {/* Preview Section */}
@@ -332,7 +360,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
           <div className="space-y-4" id='github-profile-preview'>
             <div id='github-profile-preview-container'>
             {analytics.showStatsCard && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://github-readme-stats.vercel.app/api?username=${formData.githubUsername}&show_icons=true&theme=${currentTheme}`}
                   alt="GitHub Stats"
@@ -341,7 +369,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
               </div>
             )}
             {analytics.showLanguages && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${formData.githubUsername}&layout=compact&theme=${currentTheme}`}
                   alt="Most Used Languages"
@@ -351,7 +379,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
             )}
             </div>
             {analytics.showStreakStats && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://github-readme-streak-stats.herokuapp.com/?user=${formData.githubUsername}&theme=${currentTheme}`}
                   alt="GitHub Streak Stats"
@@ -360,7 +388,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
               </div>
             )}
             {analytics.showProfileViews && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://komarev.com/ghpvc/?username=${formData.githubUsername}&color=brightgreen`}
                   alt="Profile Views"
@@ -369,7 +397,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
               </div>
             )}
             {analytics.showContributions && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://github-readme-activity-graph.vercel.app/graph?username=${formData.githubUsername}&theme=${currentTheme}`}
                   alt="Contribution Graph"
@@ -378,12 +406,32 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
               </div>
             )}
             {analytics.showTrophies && (
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
                 <img
                   src={`https://github-profile-trophy.vercel.app/?username=${formData.githubUsername}&theme=${currentTheme}&no-frame=false&no-bg=true&margin-w=4`}
                   alt="GitHub Trophies"
                   className="w-full rounded-lg"
                 />
+              </div>
+            )}
+            {analytics.showSummaryCards && (
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
+                <img
+                  src={`https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${formData.githubUsername}&theme=${currentTheme}`}
+                  alt="GitHub Profile Summary"
+                  className="w-full rounded-lg"
+                />
+              </div>
+            )}
+            {analytics.showTechQuote && (
+              <div className="bg-white p-4 rounded-lg shadow-sm" style={{marginTop: '10px', marginBottom: '10px'}}>
+                <div className="text-center">
+                  <img 
+                    src={`https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${currentTheme}`}
+                    alt="Random Dev Quote"
+                    className="w-full rounded-lg shadow-md"
+                  />
+                </div>
               </div>
             )}
           </div>

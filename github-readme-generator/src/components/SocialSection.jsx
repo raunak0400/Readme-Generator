@@ -1,5 +1,4 @@
 import React from "react";
-import { SiBuymeacoffee } from "react-icons/si";
 import NotificationBell from "./NotificationBell";
 
 // Importing icons from react-icons
@@ -51,7 +50,6 @@ const SocialsSection = ({ formData, setFormData }) => {
     {
       // name: "UPI",
       details: "abhijeetbhale7-2@okaxis",
-      // icon: <SiBuymeacoffee size={32} />,
       description: "Scan the QR or use the UPI ID to pay.",
       qr: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=abhijeetbhale7-2@okaxis",
     },
@@ -133,7 +131,7 @@ const SocialsSection = ({ formData, setFormData }) => {
                 height: "100%",
               }}
             >
-              <SiBuymeacoffee size={40} style={{ display: "block", margin: "auto" }} />
+              <img src="https://cdn.buymeacoffee.com/widget/assets/coffee%20cup.svg" alt="Coffee Cup" style={{ width: "40px", height: "40px" }} />
             </span>
           </button>
         )}

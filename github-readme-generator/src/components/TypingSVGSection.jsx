@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import DeleteButton from "./DeleteButton";
 
 const TypingSVGSection = ({ formData, setFormData }) => {
   const { typingSvg } = formData;
@@ -65,7 +66,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
       <h2 className="text-xl font-bold mb-3 text-center">Animated Typing SVG</h2>
       <div className="mb-2">
         {lines.map((line, idx) => (
-          <div key={idx} className="flex items-center gap-2 mb-2">
+          <div key={idx} className="flex items-center gap-2 mb-2" style={{ position: 'relative' }}>
             <input
               type="text"
               value={line}
@@ -73,30 +74,29 @@ const TypingSVGSection = ({ formData, setFormData }) => {
               placeholder={`Line ${idx + 1}`}
               className="flex-1 p-2 border rounded"
               maxLength={60}
-              style={{ width: '25%', fontSize: '18px', borderRadius: '10px', border: '1px solid black', padding: '10px', marginLeft: '-1px' }}
+              style={{ 
+                width: '25%', 
+                fontSize: '18px', 
+                borderRadius: '10px', 
+                border: '1px solid black', 
+                padding: '10px', 
+                marginLeft: '-1px',
+                paddingRight: lines.length > 1 ? '60px' : '10px'
+              }}
             />
             {lines.length > 1 && (
-              <button
-                onClick={() => removeLine(idx)}
-                className="text-red-500 hover:text-red-700 p-2"
-                title="Remove line"
-                style={{
-                  background: 'linear-gradient(135deg, #f87171 0%, #3b82f6 100%)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '10px 12px',
-                  fontSize: '18px',
-                  borderRadius: '12px',
-                  boxShadow: '0 2px 8px rgba(59, 130, 246, 0.15)',
-                  transition: 'background 0.2s, transform 0.1s',
-                  color: '#fff'
-                }}
-                id='remove-line-button'
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                </svg>
-              </button>
+              <div style={{ 
+                position: 'absolute', 
+                right: '70%', 
+                top: '50%',
+                transform: 'translateY(-60%)',
+                // zIndex: 10
+              }}>
+                <DeleteButton
+                  onClick={() => removeLine(idx)}
+                  title="Remove line"
+                />
+              </div>
             )}
           </div>
         ))}
