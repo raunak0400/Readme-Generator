@@ -384,6 +384,12 @@ input:focus, textarea:focus {
 
 .star-icon {
   color: #facc15;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.custom-button:hover .star-icon {
+  animation: spin 0.9s ease-in-out;
 }
 
 .star-count {
@@ -391,15 +397,131 @@ input:focus, textarea:focus {
   margin-left: 0.5rem;
 }
 
+/* Spin animation keyframe */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-#fork{
-  width: 20px;
-  height: 20px;
+/* Modern animations for support modal */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-#star{
-  width: 20px;
-  height: 20px;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(251, 146, 60, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 35px rgba(251, 146, 60, 0.6), 0 0 20px rgba(251, 146, 60, 0.3);
+  }
+}
+
+/* Support modal animations */
+.animate-in {
+  animation: slideInFromBottom 0.4s ease-out;
+}
+
+.slide-in-from-bottom-4 {
+  animation: slideInFromBottom 0.4s ease-out;
+}
+
+.duration-300 {
+  animation-duration: 0.3s;
+}
+
+/* Enhanced button animations */
+.support-btn-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.support-btn-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Input focus animations */
+.input-focus-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.input-focus-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.input-focus-effect:focus-within::before {
+  left: 100%;
+}
+
+/* Gradient text animation */
+.gradient-text {
+  background: linear-gradient(45deg, #ff6b6b, #ffa726, #ffcc02, #ff6b6b);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 #markdown-card textarea{
   display: flex;
   align-items: center;
@@ -448,7 +570,7 @@ input:focus, textarea:focus {
   color: white;
   position: absolute;
   right: 15px;
-  top: 20px;
+  top: 15px;
 }
 #support{
   display: flex;
@@ -456,6 +578,9 @@ input:focus, textarea:focus {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
 }
 /* Responsive adjustments */
 @media (max-width: 640px) {

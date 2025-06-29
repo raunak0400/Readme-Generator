@@ -16,7 +16,7 @@ const SOCIALS = [
   { name: 'Stack Overflow', key: 'stackoverflow', placeholder: 'Stack Overflow user ID', icon: <img src="https://img.icons8.com/fluency/96/stackoverflow.png" alt="Stack Overflow" style={{ height: 32 }} /> },
   { name: 'LinkedIn', key: 'linkedin', placeholder: 'LinkedIn username', icon: <img src="https://img.icons8.com/color/96/linkedin-circled--v1.png" alt="LinkedIn" style={{ height: 32 }} /> },
   { name: 'Facebook', key: 'facebook', placeholder: 'Facebook username', icon: <img src="https://img.icons8.com/color/96/facebook-new.png" alt="Facebook" style={{ height: 32 }} /> },
-  { name: 'Instagram', key: 'instagram', placeholder: 'Instagram username', icon: <img src="https://img.icons8.com/fluency/96/instagram-new.png" alt="Instagram" style={{ height: 32 }} /> },
+  { name: 'Instagram', key: 'instagram', placeholder: 'Instagram username', icon: <img src="https://img.icons8.com/ios/100/instagram-new.png" alt="Instagram" style={{ height: 32 }} /> },
   { name: 'Medium', key: 'medium', placeholder: 'Medium username (with @)', icon: <img src="https://img.icons8.com/sf-regular/96/medium-logo.png" alt="Medium" style={{ height: 32 }} /> },
   { name: 'YouTube', key: 'youtube', placeholder: 'YouTube channel name', icon: <img src="https://img.icons8.com/color/96/youtube-play.png" alt="YouTube" style={{ height: 32 }} /> },
   { name: 'Reddit', key: 'reddit', placeholder: 'Reddit username', icon: <img src="https://img.icons8.com/fluency/96/reddit.png" alt="Reddit" style={{ height: 32 }} /> },
@@ -48,13 +48,10 @@ const SocialsSection = ({ formData, setFormData }) => {
   // Example payment methods (add your own as needed)
   const paymentMethods = [
     {
-      // name: "UPI",
       details: "abhijeetbhale7-2@okaxis",
       description: "Scan the QR or use the UPI ID to pay.",
       qr: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=abhijeetbhale7-2@okaxis",
     },
-    // Add more payment methods here if needed
-    // { name: "PayPal", details: "your-paypal-link", icon: <FaPaypal />, ... }
   ];
 
   return (
@@ -80,7 +77,6 @@ const SocialsSection = ({ formData, setFormData }) => {
           ))}
         </div>
       </div>
-
 
       <div
         style={{
@@ -155,13 +151,10 @@ const SocialsSection = ({ formData, setFormData }) => {
                 maxWidth: "320px",
                 borderRadius: "18px",
                 overflow: "hidden",
-                // boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22)",
                 backdropFilter: "blur(5px)",
                 WebkitBackdropFilter: "blur(5px)",
                 background: "rgba(255, 255, 255, 0.18)",
                 border: "1.5px solid rgba(255, 255, 255, 0.22)",
-                // borderBottom: "2.5px solid #fbbf24",
-                // borderRight: "2.5px solid #fbbf24",
                 boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22), 0 0 16px 0 #fbbf2440",
                 transition: "all 0.3s cubic-bezier(.4,2,.3,1)",
               }}
