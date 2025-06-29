@@ -5,9 +5,7 @@ const UserShowcaseSection = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Sample user data - in a real implementation, this would come from your email database
-  // You can manually add users here based on the emails you receive
-  // To add a new user, simply duplicate the format below:
+  // Sample showcase users data
   const showcaseUsers = [
     {
       name: "Anshul Kavishwar",
@@ -19,53 +17,27 @@ const UserShowcaseSection = () => {
       githubUsername: "abhijeetBhale",
       date: "2024-01-15"
     },
-    {
-      name: "Taniya Khasdeo",
-      githubUsername: "Taniya-Khasdeo",
-      date: "2024-01-15"
-    },
-    {
-      name: "Tanish Vyas",
-      githubUsername: "TanishV2",
-      date: "2024-01-15"
-    },
-    {
-      name: "Amritha",
-      githubUsername: "amritha1611",
-      date: "2024-01-15"
-    },
-    {
-      name: "Dhaval Shah",
-      githubUsername: "dhavalshahh",
-      date: "2024-01-15"
-    },
-    
-    // To add more users, duplicate the format above:
-    // {
-    //   name: "New User Name",
-    //   githubUsername: "githubusername",
-    //   date: "2024-XX-XX"
-    // },
   ];
 
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
+        setLoading(true);
         const userPromises = showcaseUsers.map(async (user) => {
           try {
             const response = await fetch(`https://api.github.com/users/${user.githubUsername}`);
             if (response.ok) {
-              const githubData = await response.json();
+              const data = await response.json();
               return {
                 ...user,
-                avatarUrl: githubData.avatar_url,
-                githubUrl: githubData.html_url,
-                bio: githubData.bio || '',
-                publicRepos: githubData.public_repos,
-                followers: githubData.followers
+                avatarUrl: data.avatar_url,
+                githubUrl: data.html_url,
+                bio: data.bio || '',
+                publicRepos: data.public_repos,
+                followers: data.followers
               };
             } else {
-              // Fallback if GitHub API fails
+              // Fallback if API call fails
               return {
                 ...user,
                 avatarUrl: `https://github.com/${user.githubUsername}.png`,
@@ -77,7 +49,7 @@ const UserShowcaseSection = () => {
             }
           } catch (error) {
             console.error(`Error fetching data for ${user.githubUsername}:`, error);
-            // Fallback if GitHub API fails
+            // Fallback for individual user errors
             return {
               ...user,
               avatarUrl: `https://github.com/${user.githubUsername}.png`,
@@ -119,57 +91,41 @@ const UserShowcaseSection = () => {
         Amazing developers who have used our README Generator to create stunning profiles!
       </p>
       
-      {/* User Cards in Horizontal Row Layout */}
+      {/* User Cards in Static Grid Layout */}
       <div className="mb-6" style={{ 
         maxWidth: '2000px', 
         margin: '0 auto', 
         padding: '20px 0',
-        overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        gap: '20px'
       }}>
         {loading ? (
           // Show loading cards while fetching data
-          <div className="scrolling-container" style={{ 
+          <div style={{ 
             display: 'flex', 
             flexDirection: 'row', 
-            flexWrap: 'nowrap', 
+            flexWrap: 'wrap', 
             gap: '20px', 
             justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            animation: 'scroll-left 50s linear infinite',
-            cursor: 'pointer'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.animationPlayState = 'paused';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.animationPlayState = 'running';
-          }}
-          >
+            alignItems: 'flex-start'
+          }}>
             {showcaseUsers.map((user, index) => (
               <UserCard key={index} user={user} loading={true} />
             ))}
           </div>
         ) : (
           // Show actual user cards with GitHub data
-          <div className="scrolling-container" style={{ 
+          <div style={{ 
             display: 'flex', 
             flexDirection: 'row', 
-            flexWrap: 'nowrap', 
+            flexWrap: 'wrap', 
             gap: '20px', 
             justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            animation: 'scroll-left 50s linear infinite',
-            cursor: 'pointer'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.animationPlayState = 'paused';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.animationPlayState = 'running';
-          }}
-          >
+            alignItems: 'flex-start'
+          }}>
             {users.map((user, index) => (
               <UserCard 
                 key={index} 
@@ -275,22 +231,6 @@ const UserCard = ({ user, loading }) => {
             </svg>
             <span className="tooltip-social">GitHub</span>
           </a>
-          {/* <a href={`https://github.com/${user.githubUsername}`} target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span className="tooltip-social">Profile</span>
-          </a> */}
-          <a href="#" title={`Used on ${new Date(user.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          })}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-            <span className="tooltip-social">Verified</span>
-          </a>
         </div>
       </div>
     </StyledWrapper>
@@ -314,11 +254,12 @@ const StyledWrapper = styled.div`
     font-family: "Poppins", sans-serif;
     transition: all 0.3s ease;
     margin-bottom: 20px;
+    margin-left: 35px;
   }
 
-  .card-client:hover {
-    transform: translateY(-10px);
-  }
+  // .card-client:hover {
+  //   transform: translateY(-10px);
+  // }
 
   .user-picture {
     overflow: hidden;
@@ -372,8 +313,8 @@ const StyledWrapper = styled.div`
   }
 
   .social-media a svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.7rem;
+    height: 1.7rem;
     fill: currentColor;
   }
 
@@ -413,24 +354,6 @@ const StyledWrapper = styled.div`
   .social-media a:hover .tooltip-social {
     opacity: 1;
     transform: translate(-50%, -130%);
-  }
-
-  /* Horizontal scrolling animation */
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  .scrolling-container {
-    animation: scroll-left 50s linear infinite;
-  }
-
-  .scrolling-container:hover {
-    animation-play-state: paused;
   }
 `;
 

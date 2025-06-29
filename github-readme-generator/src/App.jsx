@@ -40,7 +40,7 @@ const App = () => {
     typingSvg: {
       lines: [''],
       font: 'Fira Code',
-      color: '#000000',
+      color: '#07EEF2',
       size: 24,
       repeat: true
     }
