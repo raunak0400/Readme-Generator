@@ -27,6 +27,11 @@ const UserShowcaseSection = () => {
       githubUsername: "ShantanuV2709",
       date: "2025-06-30"
     },
+    {
+      name: "Taniya Khasdeo",
+      githubUsername: "Taniya-Khasdeo",
+      date: "2025-06-30"
+    },
   ];
 
   useEffect(() => {
