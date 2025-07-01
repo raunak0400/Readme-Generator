@@ -82,7 +82,7 @@ const SocialsSection = ({ formData, setFormData }) => {
         style={{
           position: "fixed",
           bottom: "24px",
-          right: "24px",
+          right: "14px",
           zIndex: 1000,
           display: "flex",
           flexDirection: "row",
