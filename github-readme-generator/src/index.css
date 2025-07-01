@@ -21,13 +21,15 @@ body {
   overflow-x: hidden; 
 }
 
-/* Hide scrollbar for all browsers */
+/* Hide scrollbar for all browsers and devices */
 html, body {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE and Edge (legacy) */
+  overscroll-behavior: none;      /* Prevents scroll chaining on mobile */
 }
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Opera, Edge Chromium, iOS, Android */
 }
 
 /* Container for layout */
