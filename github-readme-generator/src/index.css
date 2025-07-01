@@ -21,6 +21,15 @@ body {
   overflow-x: hidden; 
 }
 
+/* Hide scrollbar for all browsers */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Container for layout */
 .container {
   margin-right: 0px;
