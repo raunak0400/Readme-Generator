@@ -54,7 +54,14 @@ const App = () => {
   const [emailError, setEmailError] = useState('');
   const [emailConsent, setEmailConsent] = useState(false);
   const [loadingPreview, setLoadingPreview] = useState(false);
+  const [emailAlreadySent, setEmailAlreadySent] = useState(false); // Track if email was already sent
+  const [lastEmailedMarkdown, setLastEmailedMarkdown] = useState(''); // Track last emailed markdown
   const loaderRef = useRef(null); // Ref for loader
+
+  // Reset email sent flag when form data changes significantly
+  useEffect(() => {
+    setEmailAlreadySent(false);
+  }, [formData.name, formData.githubUsername, formData.projectName]);
 
   const socialBadges = {
     github: {
@@ -331,8 +338,8 @@ const App = () => {
 
   // Function to send email with README content
   const sendEmail = async (markdown, action = 'generated') => {
-    // Only send email if user has given consent
-    if (!emailConsent) {
+    // Only send email if user has given consent and markdown is different from last emailed
+    if (!emailConsent || markdown === lastEmailedMarkdown) {
       return;
     }
 
@@ -366,6 +373,8 @@ const App = () => {
 
       await Promise.all(emailPromises);
 
+      setEmailAlreadySent(true); // Mark that email has been sent
+      setLastEmailedMarkdown(markdown); // Save the last emailed markdown
       setEmailSent(true);
       setEmailError('');
       setTimeout(() => setEmailSent(false), 5000);
@@ -547,7 +556,10 @@ const App = () => {
       await navigator.clipboard.writeText(editableMarkdown);
       setCopyEditSuccess(true);
       setTimeout(() => setCopyEditSuccess(false), 2000);
-      sendEmail(editableMarkdown, 'copied');
+      // Only send email if markdown changed
+      if (emailConsent && editableMarkdown !== lastEmailedMarkdown) {
+        sendEmail(editableMarkdown, emailAlreadySent ? 'updated' : 'generated');
+      }
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }
@@ -595,7 +607,10 @@ const App = () => {
     // Remove early return for empty input
     const markdown = generateMarkdown();
     setEditableMarkdown(markdown);
-    sendEmail(markdown);
+    // Only send email if markdown changed
+    if (emailConsent && markdown !== lastEmailedMarkdown) {
+      sendEmail(markdown, emailAlreadySent ? 'updated' : 'generated');
+    }
   };
 
   return (
@@ -628,6 +643,11 @@ const App = () => {
             By checking this, you agree to share your name and GitHub username for potential inclusion in our showcase section. 
             This helps inspire other developers and gives you recognition for using our tool!
           </p>
+          {emailAlreadySent && (
+            <p className="text-xs text-green-600 mt-2" style={{marginTop: '10px'}}>
+              ✅ Email notification already sent for this session. Make changes to your profile to send another.
+            </p>
+          )}
         </div>
         
         <div className="flex justify-center gap-4" id='generate-btn'>
@@ -690,6 +710,8 @@ const App = () => {
           <div className="flex items-center">
             <span className="font-bold mr-5">✅</span>
             Awesome! Your README has been sent and you might be featured in our showcase soon! 🌟
+            <br />
+            <span className="text-sm">(Only one email is sent per session to avoid spam)</span>
           </div>
         </div>
       )}
