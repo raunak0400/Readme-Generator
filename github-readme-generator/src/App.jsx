@@ -12,6 +12,9 @@ import TypingSVGSection from './components/TypingSVGSection';
 import NotificationBell from './components/NotificationBell';
 import Loader from './components/Loader';
 import UserShowcaseSection from './components/UserShowcaseSection';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import 'github-markdown-css/github-markdown.css';
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +60,8 @@ const App = () => {
   const [emailAlreadySent, setEmailAlreadySent] = useState(false); // Track if email was already sent
   const [lastEmailedMarkdown, setLastEmailedMarkdown] = useState(''); // Track last emailed markdown
   const loaderRef = useRef(null); // Ref for loader
+  const [showPreview, setShowPreview] = useState(false);
+  const [loadingPreviewCard, setLoadingPreviewCard] = useState(false);
 
   // Reset email sent flag when form data changes significantly
   useEffect(() => {
@@ -305,7 +310,7 @@ const App = () => {
     'AdonisJS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/adonisjs/adonisjs-original.svg',
     'Phoenix': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/phoenix/phoenix-original.svg',
     'CakePHP': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cakephp/cakephp-original.svg',
-    
+
 
     // Software
     'Adobe Illustrator': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg',
@@ -328,9 +333,9 @@ const App = () => {
 
   // Email configuration - Replace with your actual EmailJS credentials
   const EMAIL_CONFIG = {
-    serviceId: 'service_06dwek7', 
-    templateId: 'template_ajoib9m', 
-    userId: 'ZNNAGsjutqSl9Ulqr', 
+    serviceId: 'service_06dwek7',
+    templateId: 'template_ajoib9m',
+    userId: 'ZNNAGsjutqSl9Ulqr',
     adminEmails: [
       'abhijeetbhale7@gmail.com', //My mail
     ]
@@ -413,7 +418,7 @@ const App = () => {
         const displayLines = nonEmptyLines.length > 0 ? nonEmptyLines : ["abhijeetBhale/Readme-Generator"];
         const linesParam = `&lines=${displayLines.map(encodeURIComponent).join(";")}`;
         const svgUrl = `https://readme-typing-svg.herokuapp.com?font=${encodeURIComponent(typingSvg.font)}&size=${typingSvg.size}&pause=1000&color=${typingSvg.color.replace("#", "")}&width=435${linesParam}&center=true&vCenter=true&repeat=${typingSvg.repeat}`;
-        
+
         markdown += `<div align="center">\n\n![Typing SVG](${svgUrl})\n\n</div>\n\n`;
       }
     }
@@ -435,39 +440,41 @@ const App = () => {
     Object.entries(skills).forEach(([category, skillList]) => {
       if (skillList.length > 0) {
         markdown += `### **${category}**\n`;
-        const skillIconsRow = skillList.map((skill) => {
-          return skillIcons[skill]
-            ? `<img src="${skillIcons[skill]}" alt="${skill}" width="60" height="60" style="vertical-align:middle; margin-right:520px; margin-left:10px;"/>`
-            : '';
-        }).join(' ');
-        markdown += `${skillIconsRow}\n\n`;
+        const skillIconsRow = `<div style="display: flex; flex-wrap: nowrap; gap: 16px; overflow-x: auto; align-items: center;">` +
+          skillList.map((skill) => {
+            return skillIcons[skill]
+              ? `<img src="${skillIcons[skill]}" alt="${skill}" width="60" height="60" style="vertical-align:middle; margin-right:0; margin-left:0;"/>`
+              : '';
+          }).join('') +
+          `</div>\n\n`;
+        markdown += `${skillIconsRow}`;
       }
     });
 
     // Analytics Section
     if (analytics && Object.values(analytics).some(value => value)) {
       markdown += '## **📊 Analytics & Statistics**\n\n';
-      
+
       // Create a container for side-by-side stats
       let hasSideBySideStats = false;
       if (analytics.showStatsCard || analytics.showLanguages) {
         markdown += '<div align="center">\n\n';
         markdown += '<table>\n<tr>\n';
-        
+
         if (analytics.showStatsCard) {
           markdown += '<td>\n\n';
           markdown += `<img src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&theme=${currentTheme}&hide_border=true&card_width=400" alt="GitHub Stats" />\n\n`;
           markdown += '</td>\n';
           hasSideBySideStats = true;
         }
-        
+
         if (analytics.showLanguages) {
           markdown += '<td>\n\n';
           markdown += `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${githubUsername}&layout=compact&theme=${currentTheme}&hide_border=true&card_width=400" alt="Most Used Languages" />\n\n`;
           markdown += '</td>\n';
           hasSideBySideStats = true;
         }
-        
+
         if (hasSideBySideStats) {
           markdown += '</tr>\n</table>\n\n';
           markdown += '</div>\n\n';
@@ -623,7 +630,7 @@ const App = () => {
         <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
-        
+
         {/* Email Consent Section */}
         <div className="card container my-4" id="email-consent">
           <h3 className="text-lg font-bold mb-3">🌟 Get Featured in Our Showcase!</h3>
@@ -640,18 +647,18 @@ const App = () => {
             </label>
           </div>
           <p className="text-xs text-gray-500 mt-2">
-            By checking this, you agree to share your name and GitHub username for potential inclusion in our showcase section. 
+            By checking this, you agree to share your name and GitHub username for potential inclusion in our showcase section.
             This helps inspire other developers and gives you recognition for using our tool!
           </p>
           {emailAlreadySent && (
-            <p className="text-xs text-green-600 mt-2" style={{marginTop: '10px'}}>
+            <p className="text-xs text-green-600 mt-2" style={{ marginTop: '10px' }}>
               ✅ Email notification already sent for this session. Make changes to your profile to send another.
             </p>
           )}
         </div>
-        
+
         <div className="flex justify-center gap-4" id='generate-btn'>
-          <button 
+          <button
             className="cssbuttons-io-button"
             onClick={handleGenerate}
             type="button"
@@ -672,7 +679,7 @@ const App = () => {
               </svg>
             </div>
           </button>
-          <button 
+          <button
             className={`cssbuttons-io-button ${copySuccess ? 'success' : ''}`}
             onClick={handleCopyToClipboard}
             type="button"
@@ -703,7 +710,7 @@ const App = () => {
           </div>
         </div>
       )}
-      
+
       {/* Email notification messages */}
       {emailSent && (
         <div className="card container my-4 bg-green-50 border-l-4 border-green-400 text-green-800 p-4" id="email-success">
@@ -715,7 +722,7 @@ const App = () => {
           </div>
         </div>
       )}
-      
+
       {emailError && (
         <div className="card container my-4 bg-red-50 border-l-4 border-red-400 text-red-800 p-4" id="email-error">
           <div className="flex items-center">
@@ -724,7 +731,7 @@ const App = () => {
           </div>
         </div>
       )}
-      
+
       {loadingPreview && (
         <div ref={loaderRef} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
           <Loader />
@@ -732,37 +739,89 @@ const App = () => {
       )}
       {showMarkdownCard && isAnyInputFilled() && !loadingPreview && (
         <>
-        <div className="card container my-6" id="markdown-card">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-lg font-bold">README Preview (Editable)</h3>
-            <button
-            id='copy-btn'
-              className={`cssbuttons-io-button ${copyEditSuccess ? 'success' : ''}`}
-              style={{ fontSize: '1rem', padding: '0.3em 1em', height: '2.2em' }}
-              onClick={handleCopyEditableMarkdown}
-              type="button"
-            >
-              {copyEditSuccess ? 'Copied!' : 'Copy'}
-              <div className="icon" id='copy-btn-icon'>
-                <svg height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
-                </svg>
+          <div className="card container my-6" id="markdown-card">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-bold">README Preview (Editable)</h3>
+              <div className="flex gap-2" id='preview-btn-container'>
+                {!showPreview && (
+                  <>
+                    <button
+                      id='copy-btn'
+                      className={`cssbuttons-io-button ${copyEditSuccess ? 'success' : ''}`}
+                      style={{ fontSize: '1rem', padding: '0.3em 1em', height: '2.2em' }}
+                      onClick={handleCopyEditableMarkdown}
+                      type="button"
+                    >
+                      {copyEditSuccess ? 'Copied!' : 'Copy'}
+                      <div className="icon" id='copy-btn-icon'>
+                        <svg height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+                        </svg>
+                      </div>
+                    </button>
+                    <button
+                      className="cssbuttons-io-button"
+                      style={{ fontSize: '1rem', padding: '0.3em 1em', height: '2.2em', width: '130px' }}
+                      onClick={() => {
+                        setLoadingPreviewCard(true);
+                        setTimeout(() => {
+                          setShowPreview(true);
+                          setLoadingPreviewCard(false);
+                        }, 1200);
+                      }}
+                      type="button"
+                    >
+                      Preview
+                      <div className="icon" id='preview-btn-icon'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                        </svg>
+                      </div>
+                    </button>
+                  </>
+                )}
+                {showPreview && (
+                  <button
+                    className="cssbuttons-io-button"
+                    style={{ fontSize: '1rem', padding: '0.3em 1em', height: '2.2em', width: '100px' }}
+                    onClick={() => setShowPreview(false)}
+                    type="button"
+                  >
+                    Back
+                    <div className="icon" id='back-btn-icon'>
+                      <svg height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </button>
+                )}
               </div>
-            </button>
+            </div>
+            {loadingPreviewCard ? (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 200 }}>
+                <Loader />
+              </div>
+            ) : showPreview ? (
+              <div className="markdown-preview markdown-body" style={{ minHeight: 200, maxHeight: 1900, overflow: 'auto', fontFamily: 'inherit', color: '#222', background: '#fff', border: '1px solid #e5e7eb', borderRadius: '0.75rem', boxShadow: '0 6px 18px rgba(0,0,0,0.08)', padding: '2rem', marginBottom: '1rem', marginTop: '0.5rem' }}>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{editableMarkdown}</ReactMarkdown>
+              </div>
+            ) : (
+              <textarea
+                className="w-full p-2 border rounded font-mono text-sm bg-gray-50"
+                rows={Math.max(12, editableMarkdown.split('\n').length)}
+                value={editableMarkdown}
+                onChange={e => setEditableMarkdown(e.target.value)}
+                spellCheck={false}
+                style={{ resize: 'vertical', minHeight: 200, fontFamily: 'monospace', background: '#f9fafb', color: '#222' }}
+              />
+            )}
+            <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
           </div>
-          <textarea
-            className="w-full p-2 border rounded font-mono text-sm bg-gray-50"
-            rows={Math.max(12, editableMarkdown.split('\n').length)}
-            value={editableMarkdown}
-            onChange={e => setEditableMarkdown(e.target.value)}
-            spellCheck={false}
-            style={{ resize: 'vertical', minHeight: 200, fontFamily: 'monospace', background: '#f9fafb', color: '#222' }}
-          />
-          <div className="text-xs text-gray-500 mt-2" id='markdown-card-footer'>You can edit and copy this markdown as needed.</div>
-        </div>
-        <UserShowcaseSection />
-        <AboutMeSection />
+          <UserShowcaseSection />
+          <AboutMeSection />
         </>
       )}
       <footer className="text-center py-4" id='footer'>
