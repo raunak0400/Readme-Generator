@@ -222,6 +222,8 @@ const App = () => {
     'Vue.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
     'Vuetify': 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.svg',
     'Webpack': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg',
+    'WebAssembly': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wasm/wasm-original.svg',
+    'Lisp': 'https://img.icons8.com/color/240/lisp.png',
 
     // Backend Development
     'CodeIgniter': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg',
