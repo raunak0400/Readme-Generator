@@ -288,31 +288,25 @@ const SkillsSection = ({ formData, setFormData }) => {
                             style={{ minWidth: 0 }}
                           >
                             <input
-                              id='skill-checkbox'
+                              id="skill-checkbox"
                               type="checkbox"
                               checked={!!formData.skills[category]?.includes(skill.name)}
                               onChange={() => toggleSkill(category, skill.name)}
-                              className="form-check-input me-2"
+                              className="form-check-input mb-1"
                               title={`Toggle ${skill.name}`}
-                              style={{ accentColor: '#0d6efd', width: '24px', height: '24px' }}
+                              style={{ accentColor: '#0d6efd', width: '24px', height: '24px', cursor: 'pointer' }}
                             />
-                            <div className="skill-icon-tooltip-wrapper" style={{ position: 'relative', display: 'inline-block' }}>
+                            <div className="skill-icon-tooltip-wrapper relative inline-block">
                               <img
                                 src={skill.icon}
                                 alt={`${skill.name} icon`}
-                                className="img-fluid me-2"
+                                className="img-fluid"
                                 style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
                                 onError={e => (e.target.src = 'https://via.placeholder.com/28?text=?')}
-                                onMouseEnter={e => {
-                                  const tooltip = e.target.nextSibling;
-                                  tooltip.style.visibility = 'visible';
-                                  tooltip.style.opacity = 1;
-                                }}
-                                onMouseLeave={e => {
-                                  const tooltip = e.target.nextSibling;
-                                  tooltip.style.visibility = 'hidden';
-                                  tooltip.style.opacity = 0;
-                                }}
+                                onClick={() => toggleSkill(category, skill.name)}
+                                aria-label={`Toggle ${skill.name}`}
+                                tabIndex={0}
+                                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') toggleSkill(category, skill.name); }}
                               />
                               <span
                                 className="skill-tooltip"
