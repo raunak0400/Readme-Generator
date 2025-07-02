@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaSearch } from 'react-icons/fa';
 
 const SkillsSection = ({ formData, setFormData }) => {
   const skillSets = {
@@ -294,14 +293,14 @@ const SkillsSection = ({ formData, setFormData }) => {
                               onChange={() => toggleSkill(category, skill.name)}
                               className="form-check-input me-2"
                               title={`Toggle ${skill.name}`}
-                              style={{ accentColor: '#0d6efd', width: '24px', height: '24px' }}
+                              style={{ accentColor: '#0d6efd', width: '24px', height: '24px', cursor:'pointer', padding: 30 }}
                             />
                             <div className="skill-icon-tooltip-wrapper" style={{ position: 'relative', display: 'inline-block' }}>
                               <img
                                 src={skill.icon}
                                 alt={`${skill.name} icon`}
                                 className="img-fluid me-2"
-                                style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0, cursor: 'pointer' }}
+                                style={{ width: '40px', height: '40px', objectFit: 'contain', flexShrink: 0 }}
                                 onError={e => (e.target.src = 'https://via.placeholder.com/28?text=?')}
                                 onMouseEnter={e => {
                                   const tooltip = e.target.nextSibling;

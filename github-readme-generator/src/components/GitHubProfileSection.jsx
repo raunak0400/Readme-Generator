@@ -244,6 +244,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* GitHub Stats Card */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showStatsCard"
             checked={analytics.showStatsCard || false}
@@ -258,6 +259,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* Most Used Languages */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showLanguages"
             checked={analytics.showLanguages || false}
@@ -272,6 +274,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* GitHub Streak Stats */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showStreakStats"
             checked={analytics.showStreakStats || false}
@@ -286,6 +289,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* Profile Views Counter */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showProfileViews"
             checked={analytics.showProfileViews || false}
@@ -300,6 +304,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* Contribution Graph */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showContributions"
             checked={analytics.showContributions || false}
@@ -313,6 +318,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* GitHub Trophies */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showTrophies"
             checked={analytics.showTrophies || false}
@@ -327,6 +333,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* GitHub Profile Summary Cards */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showSummaryCards"
             checked={analytics.showSummaryCards || false}
@@ -341,6 +348,7 @@ const GitHubProfileSection = ({ formData, setFormData }) => {
         {/* Random Tech Quote */}
         <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
           <input
+          style={{cursor:'pointer'}}
             type="checkbox"
             id="showTechQuote"
             checked={analytics.showTechQuote || false}
