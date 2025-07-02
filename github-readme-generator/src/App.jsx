@@ -490,7 +490,7 @@ const App = () => {
 
       // Contribution graph at 100% width
       if (analytics.showContributions) {
-        markdown += `<img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=${currentTheme}" alt="Contribution Graph" />\n\n\n`;
+        markdown += `<div align="center"><img src="https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&theme=${currentTheme}" alt="Contribution Graph" /></div>\n\n\n`;
       }
 
       // Profile views centered
