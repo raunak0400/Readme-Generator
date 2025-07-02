@@ -114,3 +114,8 @@ This project is licensed under the MIT License.
 - [GitHub Readme Stats](https://github.com/anuraghazra/github-readme-stats) - For GitHub statistics cards
 - [GitHub Profile Trophy](https://github.com/ryo-ma/github-profile-trophy) - For GitHub trophies
 - [Shields.io](https://shields.io/) - For social media badges
+
+## **Live GitHub-style Markdown Preview:** Instantly see your README as it will appear on GitHub, with all HTML, icons, badges, and analytics perfectly rendered and styled.
+## **Clickable Skill Icons:** Select or deselect skills by clicking on their icons, not just the checkboxes.
+## **Perfectly Centered Analytics:** All analytics cards, including the contribution graph, are centered for a polished look.
+## **Preview/Back-to-Edit Toggle:** Switch between editing and previewing your README with a single click and smooth loader animation.
