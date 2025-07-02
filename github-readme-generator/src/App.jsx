@@ -597,7 +597,7 @@ const App = () => {
         return;
       }
       setShowMarkdownCard(true);
-    }, 3000); // Show loader for ~3s
+    }, 2000); // Show loader for ~2s
     // Scroll to loader after state update
     setTimeout(() => {
       if (loaderRef.current) {
