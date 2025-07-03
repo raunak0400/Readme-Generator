@@ -36,9 +36,15 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'WebAssembly', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wasm/wasm-original.svg' },
       { name: 'Lisp', icon: 'https://img.icons8.com/color/240/lisp.png' },
       { name: 'Pascal', icon: 'https://img.icons8.com/fluency/240/pascal.png' },
+      { name: 'Delphi', icon: 'https://raw.githubusercontent.com/get-icon/geticon/fc0f660daee147afb4a56c64e12bde6486b73e39/icons/delphi.svg' },
+      { name: 'Visual Basic', icon: 'https://www.vectorlogo.zone/logos/microsoft_vb/microsoft_vb-icon.svg' },
+      { name: 'PL/SQL', icon: 'https://img.icons8.com/plasticine/400/oracle-pl-sql--v3.png' },
+      { name: 'T-SQL', icon: 'https://img.icons8.com/color/240/microsoft-sql-server.png' },
+      
     ],
     'Frontend Development': [
       { name: '11ty', icon: 'https://gist.githubusercontent.com/vivek32ta/c7f7bf583c1fb1c58d89301ea40f37fd/raw/f4c85cce5790758286b8f155ef9a177710b995df/11ty.svg' },
+      { name: 'Preact', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/92bb74e98bca1ea1ad794442676ebc4e75038adc/logos/preact.svg' },
       { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
       { name: 'AngularJS', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg' },
       { name: 'Backbone.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/backbonejs/backbonejs-original.svg' },
