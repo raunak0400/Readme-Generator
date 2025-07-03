@@ -22,7 +22,7 @@ const WorkSection = ({ formData, setFormData }) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>Work</h2>
+      <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem' }}>About Me</h2>
       <div className="space-y-4">
         {workFields.map((field, index) => (
           <div key={field.name} className="flex items-center gap-4" id='work-section-field'>

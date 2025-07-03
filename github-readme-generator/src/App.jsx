@@ -27,6 +27,10 @@ const App = () => {
       { projectName: '', projectLink: '' },
       { projectName: '', projectLink: '' },
       { projectName: '', projectLink: '' },
+      { info: '' },
+      { info: '' },
+      { info: '' },
+      { info: '' },
     ],
     skills: {},
     analytics: {
@@ -426,12 +430,24 @@ const App = () => {
     }
 
     // Add "Work" section only if at least one project is present
-    const hasWorkContent = work.some(item => item.projectName);
+    const workFields = [
+      { label: "🔭 I'm currently working on", name: "current" },
+      { label: "👯 I'm looking to collaborate", name: "collaborate" },
+      { label: "🤝 I'm looking for help with", name: "help" },
+      { label: "🌱 I'm currently learning", name: "learning" },
+      { label: "💬 Ask me about", name: "ask" },
+      { label: "📫 How to reach me", name: "contact" },
+      { label: "⚡ Fun fact", name: "funfact" },
+    ];
+    const hasWorkContent = work.some((item, idx) => idx < 3 ? item.projectName : item.info);
     if (hasWorkContent) {
-      markdown += '## **💻 Work**\n';
-      work.forEach(({ projectName, projectLink }) => {
-        if (projectName) {
-          markdown += `- ${projectLink ? `I'm currently working on [${projectName}](${projectLink})` : `I'm currently working on ${projectName}`}\n`;
+      markdown += '## **💻 About Me**\n';
+      work.forEach((item, idx) => {
+        const field = workFields[idx];
+        if (idx < 3 && item.projectName) {
+          markdown += `- ${field.label} ${item.projectLink ? `[${item.projectName}](${item.projectLink})` : item.projectName}\n`;
+        } else if (idx >= 3 && item.info) {
+          markdown += `- ${field.label} ${item.info}\n`;
         }
       });
       markdown += '\n';
