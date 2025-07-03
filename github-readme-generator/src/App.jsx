@@ -549,7 +549,10 @@ const App = () => {
       Object.entries(socials).forEach(([platform, username]) => {
         const data = socialBadges[platform];
         if (data && username) {
-          const fullLink = `${data.urlPrefix}${username}`;
+          let fullLink = username;
+          if (!/^https?:\/\//i.test(username)) {
+            fullLink = `${data.urlPrefix}${username}`;
+          }
           markdown += `  <a href="${fullLink}" target="_blank"><img src="${data.badge}" /></a>\n`;
         }
       });
