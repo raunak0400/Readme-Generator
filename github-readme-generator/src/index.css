@@ -327,7 +327,12 @@ input:focus, textarea:focus {
 .cssbuttons-io-button.success {
   animation: successPulse 0.5s ease-in-out;
 }
-
+#git-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+}
 #support-btn{
   cursor: pointer;
   border: 4px solid #fb923c;
