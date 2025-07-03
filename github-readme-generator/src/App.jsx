@@ -183,7 +183,7 @@ const App = () => {
     'Lisp': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lisp/lisp-original.svg',
     'Scheme': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scheme/scheme-original.svg',
     'Smalltalk': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/smalltalk/smalltalk-original.svg',
-    'Pascal': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pascal/pascal-original.svg',
+    'Pascal': 'https://img.icons8.com/fluency/240/pascal.png',
     'Delphi': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg',
     'Visual Basic': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vb/vb-original.svg',
     'VBA': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vba/vba-original.svg',

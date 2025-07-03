@@ -35,6 +35,7 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'PowerShell', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg' },
       { name: 'WebAssembly', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wasm/wasm-original.svg' },
       { name: 'Lisp', icon: 'https://img.icons8.com/color/240/lisp.png' },
+      { name: 'Pascal', icon: 'https://img.icons8.com/fluency/240/pascal.png' },
     ],
     'Frontend Development': [
       { name: '11ty', icon: 'https://gist.githubusercontent.com/vivek32ta/c7f7bf583c1fb1c58d89301ea40f37fd/raw/f4c85cce5790758286b8f155ef9a177710b995df/11ty.svg' },
