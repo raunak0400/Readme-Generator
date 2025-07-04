@@ -72,10 +72,16 @@ const SkillsSection = ({ formData, setFormData }) => {
       { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
       { name: 'Vue.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
       { name: 'Vuetify', icon: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-light.svg' },
-      { name: 'Webpack', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg' }
+      { name: 'Webpack', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg' },
+      { name: 'Polymer', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/92bb74e98bca1ea1ad794442676ebc4e75038adc/logos/polymer.svg' },
+      { name: 'Material-UI', icon: 'https://img.icons8.com/color/240/material-ui.png' },
+      { name: 'Storybook', icon: 'https://raw.githubusercontent.com/gilbarbara/logos/92bb74e98bca1ea1ad794442676ebc4e75038adc/logos/storybook-icon.svg' },
     ],
     'Backend Development': [
       { name: 'CodeIgniter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg' },
+      { name: 'Fastify', icon: 'https://raw.githubusercontent.com/fastify/graphics/96648545bcad9d1984dd96363a39e2775b59afef/fastify-1000px-square-02.svg' },
+      { name: 'Laravel', icon: 'https://raw.githubusercontent.com/laravel/art/d5f5e725c27f877ed032225fe0b00afee9337d0f/laravel-logo.svg' },
+      { name: 'Spring Boot', icon: 'https://img.icons8.com/color/240/spring-logo.png' },
       { name: 'CoffeeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg' },
       { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
       { name: 'Flask', icon: 'https://img.icons8.com/nolan/256/flask.png' },
