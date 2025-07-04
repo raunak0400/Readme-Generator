@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import demoVideo from '../assets/DemoVideo.mp4';
 
 const DemoVideo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,13 +31,16 @@ const DemoVideo = () => {
           <ModalContent onClick={e => e.stopPropagation()}>
             <CloseButton onClick={handleCloseModal}>&times;</CloseButton>
             <VideoWrapper>
-              <ResponsiveIframe
-               
-                src="https://www.youtube.com/embed/onVhbeY7nLM?autoplay=1;start=10"
+              <ResponsiveVideo
+                src={demoVideo}
                 title="Demo Video"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-              />
+                controls
+                autoPlay
+                muted
+                loop
+              >
+                Your browser does not support the video tag.
+              </ResponsiveVideo>
             </VideoWrapper>
           </ModalContent>
         </ModalOverlay>,
@@ -132,7 +136,7 @@ const ModalContent = styled.div`
   box-shadow: 0 4px 32px rgba(0,0,0,0.2);
   position: relative;
   width: 90vw;
-  max-width: 600px;
+  max-width: 1000px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -167,8 +171,8 @@ const VideoWrapper = styled.div`
   background: #000;
 `;
 
-// Responsive iframe
-const ResponsiveIframe = styled.iframe`
+// Responsive video element
+const ResponsiveVideo = styled.video`
   position: absolute;
   top: 0;
   left: 0;
@@ -176,6 +180,7 @@ const ResponsiveIframe = styled.iframe`
   height: 100%;
   border: none;
   border-radius: 16px;
+  object-fit: cover;
 `;
 
 export default DemoVideo;
