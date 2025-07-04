@@ -1,5 +1,16 @@
 import React from 'react';
 import '../index.css'; // Make sure this file exists in the same folder
+import styled, { keyframes } from 'styled-components';
+
+const rotate = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const AnimatedStar = styled.svg`
+  animation: ${rotate} 6s linear infinite;
+  display: inline-block;
+`;
 
 const Button = () => {
   return (
@@ -21,7 +32,7 @@ const Button = () => {
       </svg>
       <span className="button-text" style={{marginRight: "-5px"}}>Star on GitHub</span>
       <span className="button-stars">
-        <svg
+        <AnimatedStar
           className="star-icon"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -34,7 +45,7 @@ const Button = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-        </svg>
+        </AnimatedStar>
         <span className="star-count">8</span>
       </span>
     </button>
