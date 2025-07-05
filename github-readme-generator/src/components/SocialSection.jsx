@@ -7,6 +7,7 @@ import {
   FaMedium, FaYoutube, FaReddit, FaTwitch, FaDiscord, FaDribbble, FaBehance, FaPinterest,
   FaTelegram, FaSlack, FaWhatsapp
 } from "react-icons/fa";
+import Back2Top from "./Back2Top";
 
 const SOCIALS = [
   { name: 'GitHub', key: 'github', placeholder: 'GitHub username or link', icon: <img src="https://img.icons8.com/ios-filled/100/github.png" alt="GitHub" style={{ height: 32 }} /> },
@@ -126,52 +127,63 @@ const SocialsSection = ({ formData, setFormData }) => {
           right: "14px",
           zIndex: 1000,
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
-          gap: "16px", // space between bell and button
+          gap: "16px", // space between buttons
         }}
       >
-        {!showModal && <NotificationBell />}
-        {!showModal && (
-          <button
-            type="button"
-            id="support-btn"
-            className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
-            style={{
-              borderWidth: "4px",
-              borderColor: "#fb923c",
-              borderRadius: "50%",
-              width: "64px",
-              marginRight: "36px",
-              height: "64px",
-              aspectRatio: "1/1",
-              backgroundColor: "#fb923c",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 0,
-            }}
-            onClick={() => {
-              setLoading(true);
-              setShowModal(true);
-              setTimeout(() => setLoading(false), 1000); // Show loading for 1s
-            }}
-            title="Buy me a coffee"
-          >
-            <span
+        {!showModal && <Back2Top />}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "16px", // space between bell and support button
+            marginLeft: "-16px",
+          }}
+        >
+          {!showModal && <NotificationBell />}
+          {!showModal && (
+            <button
+              type="button"
+              id="support-btn"
+              className="bg-orange-500 text-white font-semibold w-16 h-16 flex items-center justify-center shadow-lg text-3xl border"
               style={{
+                borderWidth: "4px",
+                borderColor: "#fb923c",
+                borderRadius: "50%",
+                width: "64px",
+                marginRight: "36px",
+                height: "64px",
+                aspectRatio: "1/1",
+                backgroundColor: "#fb923c",
+                color: "#fff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: "100%",
-                height: "100%",
+                padding: 0,
               }}
+              onClick={() => {
+                setLoading(true);
+                setShowModal(true);
+                setTimeout(() => setLoading(false), 1000); // Show loading for 1s
+              }}
+              title="Buy me a coffee"
             >
-              <img src="https://cdn.buymeacoffee.com/widget/assets/coffee%20cup.svg" alt="Coffee Cup" style={{ width: "40px", height: "40px" }} />
-            </span>
-          </button>
-        )}
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <img src="https://cdn.buymeacoffee.com/widget/assets/coffee%20cup.svg" alt="Coffee Cup" style={{ width: "40px", height: "40px" }} />
+              </span>
+            </button>
+          )}
+        </div>
         {/* Modal just above the button */}
         {showModal && (
           <>

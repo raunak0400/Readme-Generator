@@ -73,7 +73,6 @@ const TitleSection = ({ formData, setFormData }) => {
         id='description'
         className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 mb-3"
       />
-      
     </div>
   );
 };
