@@ -78,11 +78,11 @@ const StyledWrapper = styled.div`
     border-color: transparent transparent transparent #222;
   }
 
-  .button:hover {
+  .noti:hover {
     background-color: rgb(56, 56, 56);
   }
 
-  .button:hover .bell {
+  .noti:hover svg {
     animation: bellRing 0.9s both;
   }
 
@@ -114,7 +114,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  .button:active {
+  .noti:active {
     transform: scale(0.8);
   }`;
 

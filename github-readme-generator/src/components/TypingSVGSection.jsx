@@ -161,7 +161,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
       </div>
       <div className="flex flex-wrap gap-4 mb-4 items-center justify-center">
         <div>
-          <label className="mr-1">Font:</label>
+          <label className="mr-1" style={{marginTop: '10px'}}>Font:</label>
           <div style={{ display: 'inline-flex', alignItems: 'center', position: 'relative' }}>
             <input value={font} onChange={e => setFormData({
               ...formData,
@@ -208,7 +208,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
             </span>
         </div>
         <div className="flex items-center gap-2" id="color-circle">
-          <label className="mr-1">Color:</label>
+          <label className="mr-1" style={{marginTop: '10px'}}>Color:</label>
           <div
             className="cursor-pointer"
             style={{
@@ -250,14 +250,14 @@ const TypingSVGSection = ({ formData, setFormData }) => {
           </div>
         </div>
         <div>
-          <label className="mr-1">Size:</label>
+          <label className="mr-1" style={{marginTop: '10px'}}>Size:</label>
           <input type="number" value={size} min={10} max={60} onChange={e => setFormData({
             ...formData,
             typingSvg: { ...typingSvg, size: Number(e.target.value) }
           })} className="border p-1 rounded w-16" style={{ width: '60px', textAlign: 'end', background: 'transparent', border: '1px solid black', borderRadius: '10px', color: 'black', padding: '4px 10px', marginTop: '12px' }} />
         </div>
         <div id="repeat-checkbox">
-          <label className="mr-1">Repeat:</label>
+          <label className="mr-1" style={{marginTop: '10px'}}>Repeat:</label>
           <input type="checkbox" checked={repeat} onChange={e => setFormData({
             ...formData,
             typingSvg: { ...typingSvg, repeat: e.target.checked }
@@ -265,7 +265,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
         </div>
       </div>
       <div className="mb-4 flex flex-col items-center">
-        <h3 className="font-semibold mb-2">Preview:</h3>
+        <h3 className="font-semibold mb-2" style={{marginTop: '20px'}}>Preview:</h3>
         <div className="w-full flex justify-center" id="typing-svg-preview">
           <div
             className="bg-gray-100 rounded p-2 overflow-x-auto"
@@ -294,7 +294,7 @@ const TypingSVGSection = ({ formData, setFormData }) => {
         </div>
       </div>
       <div className="mb-2">
-        <h3 className="font-semibold mb-2">Markdown:</h3>
+        <h3 className="font-semibold mb-2" style={{marginTop: '20px'}}>Markdown:</h3>
         <div
           className="bg-gray-100 p-2 rounded text-sm overflow-x-auto"
           style={{
