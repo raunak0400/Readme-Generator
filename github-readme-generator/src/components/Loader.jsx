@@ -4,220 +4,99 @@ import styled from 'styled-components';
 const Loader = () => {
   return (
     <StyledWrapper>
-      <div className="boxes">
-        <div className="box">
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
-        <div className="box">
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
-        <div className="box">
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
-        <div className="box">
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
+      <div className="loader-3">
+        <div className="circle" />
+        <div className="circle" />
+        <div className="circle" />
+        <div className="circle" />
+        <div className="circle" />
       </div>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  .boxes {
-    --size: 32px;
-    --duration: 800ms;
-    height: calc(var(--size) * 2);
-    width: calc(var(--size) * 3);
+  .loader-3 {
+    width: 10em;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .circle {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
     position: relative;
-    transform-style: preserve-3d;
-    transform-origin: 50% 50%;
-    margin-top: calc(var(--size) * 1.5 * -1);
-    transform: rotateX(60deg) rotateZ(45deg) rotateY(0deg) translateZ(0px);
   }
 
-  .boxes .box {
-    width: var(--size);
-    height: var(--size);
-    top: 0;
-    left: 0;
-    position: absolute;
-    transform-style: preserve-3d;
+  .circle:nth-child(1) {
+    background-color: #90be6d;
   }
 
-  .boxes .box:nth-child(1) {
-    transform: translate(100%, 0);
-    -webkit-animation: box1 var(--duration) linear infinite;
-    animation: box1 var(--duration) linear infinite;
+  .circle:nth-child(2) {
+    background-color: #f9c74f;
   }
 
-  .boxes .box:nth-child(2) {
-    transform: translate(0, 100%);
-    -webkit-animation: box2 var(--duration) linear infinite;
-    animation: box2 var(--duration) linear infinite;
+  .circle:nth-child(3) {
+    background-color: #f8961e;
   }
 
-  .boxes .box:nth-child(3) {
-    transform: translate(100%, 100%);
-    -webkit-animation: box3 var(--duration) linear infinite;
-    animation: box3 var(--duration) linear infinite;
+  .circle:nth-child(4) {
+    background-color: #f3722c;
   }
 
-  .boxes .box:nth-child(4) {
-    transform: translate(200%, 0);
-    -webkit-animation: box4 var(--duration) linear infinite;
-    animation: box4 var(--duration) linear infinite;
+  .circle:nth-child(5) {
+    background-color: #f94346;
   }
 
-  .boxes .box > div {
-    --background: #5C8DF6;
-    --top: auto;
-    --right: auto;
-    --bottom: auto;
-    --left: auto;
-    --translateZ: calc(var(--size) / 2);
-    --rotateY: 0deg;
-    --rotateX: 0deg;
-    position: absolute;
+  .circle::before {
+    content: "";
     width: 100%;
     height: 100%;
-    background: var(--background);
-    top: var(--top);
-    right: var(--right);
-    bottom: var(--bottom);
-    left: var(--left);
-    transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(var(--translateZ));
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: animateLoader38 2s ease-out infinite;
   }
 
-  .boxes .box > div:nth-child(1) {
-    --top: 0;
-    --left: 0;
+  .circle:nth-child(1)::before {
+    background-color: #90be6d;
   }
 
-  .boxes .box > div:nth-child(2) {
-    --background: #145af2;
-    --right: 0;
-    --rotateY: 90deg;
+  .circle:nth-child(2)::before {
+    background-color: #f9c74f;
+    animation-delay: 0.2s;
   }
 
-  .boxes .box > div:nth-child(3) {
-    --background: #447cf5;
-    --rotateX: -90deg;
+  .circle:nth-child(3)::before {
+    background-color: #f8961e;
+    animation-delay: 0.4s;
   }
 
-  .boxes .box > div:nth-child(4) {
-    --background: #DBE3F4;
-    --top: 0;
-    --left: 0;
-    --translateZ: calc(var(--size) * 3 * -1);
+  .circle:nth-child(4)::before {
+    background-color: #f3722c;
+    animation-delay: 0.6s;
   }
 
-  @-webkit-keyframes box1 {
-    0%, 50% {
-      transform: translate(100%, 0);
-    }
-
-    100% {
-      transform: translate(200%, 0);
-    }
+  .circle:nth-child(5)::before {
+    background-color: #f94346;
+    animation-delay: 0.8s;
   }
 
-  @keyframes box1 {
-    0%, 50% {
-      transform: translate(100%, 0);
-    }
-
-    100% {
-      transform: translate(200%, 0);
-    }
-  }
-
-  @-webkit-keyframes box2 {
+  @keyframes animateLoader38 {
     0% {
-      transform: translate(0, 100%);
+      transform: scale(1);
     }
 
-    50% {
-      transform: translate(0, 0);
+    50%,
+    75% {
+      transform: scale(2.5);
     }
 
+    80%,
     100% {
-      transform: translate(100%, 0);
+      opacity: 0;
     }
-  }
+  }`;
 
-  @keyframes box2 {
-    0% {
-      transform: translate(0, 100%);
-    }
-
-    50% {
-      transform: translate(0, 0);
-    }
-
-    100% {
-      transform: translate(100%, 0);
-    }
-  }
-
-  @-webkit-keyframes box3 {
-    0%, 50% {
-      transform: translate(100%, 100%);
-    }
-
-    100% {
-      transform: translate(0, 100%);
-    }
-  }
-
-  @keyframes box3 {
-    0%, 50% {
-      transform: translate(100%, 100%);
-    }
-
-    100% {
-      transform: translate(0, 100%);
-    }
-  }
-
-  @-webkit-keyframes box4 {
-    0% {
-      transform: translate(200%, 0);
-    }
-
-    50% {
-      transform: translate(200%, 100%);
-    }
-
-    100% {
-      transform: translate(100%, 100%);
-    }
-  }
-
-  @keyframes box4 {
-    0% {
-      transform: translate(200%, 0);
-    }
-
-    50% {
-      transform: translate(200%, 100%);
-    }
-
-    100% {
-      transform: translate(100%, 100%);
-    }
-  }
-`;
-
-export default Loader; 
+export default Loader;

@@ -166,7 +166,7 @@ const SocialsSection = ({ formData, setFormData }) => {
               onClick={() => {
                 setLoading(true);
                 setShowModal(true);
-                setTimeout(() => setLoading(false), 1000); // Show loading for 1s
+                setTimeout(() => setLoading(false), 1500); // Show loading for 1s
               }}
               title="Buy me a coffee"
             >
