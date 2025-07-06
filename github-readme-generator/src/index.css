@@ -951,6 +951,13 @@ input:focus, textarea:focus {
   justify-content: center;
   align-items: center;
 }
+#frame-box video{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 1px solid grey;
+  box-shadow: #16171d;
+}
 #frame{
   margin-top: 20px;
   margin-bottom: 20px;

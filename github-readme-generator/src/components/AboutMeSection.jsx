@@ -1,4 +1,6 @@
 import React from 'react';
+// import DemoVideo from './DemoVideo';
+import demoVideo from '../assets/DemoVideo.mp4';
 
 const AboutMeSection = () => {
   return (
@@ -8,7 +10,7 @@ const AboutMeSection = () => {
       <div className="mb-6" >
         <h3 className="text-xl font-semibold mb-2">How do I create a profile README?</h3>
         <ol className="list-decimal list-inside space-y-1 text-gray-700" id="about-me-section-1">
-           <p className="font-mono bg-gray-100 px-1 rounded">The profile README is created by creating a new repository that’s the same name as your username. For example, my GitHub username is <strong>abhijeetBhale</strong> so I created a new repository with the name <strong>abhijeetBhale</strong>. Note: at the time of this writing, in order to access the profile README feature, the letter-casing must match your GitHub username.</p> 
+           <p className="font-mono bg-gray-100 px-1 rounded">The profile README is created by creating a new repository that's the same name as your username. For example, my GitHub username is <strong>abhijeetBhale</strong> so I created a new repository with the name <strong>abhijeetBhale</strong>. Note: at the time of this writing, in order to access the profile README feature, the letter-casing must match your GitHub username.</p> 
           <li>
           Create a new repository with the same name (including casing) as your GitHub <span className="font-mono bg-gray-100 px-1 rounded"> <a href="https://github.com/new" target="_blank" rel="noopener noreferrer">https://github.com/new</a></span>.
           </li>
@@ -28,19 +30,18 @@ const AboutMeSection = () => {
         <h3 className="text-xl font-semibold mb-2">How to use?</h3>
         <p className="mb-2 text-gray-700" id="about-me-section-1">Tired of editing your profile README to add new features like visitors-count badge, github-stats, etc? Just fill the form and let the tool do the work for you!</p>
         
-        <p style={{textAlign: 'center', fontSize: '1.2rem',marginTop: '20px', marginBottom: '20px',color: 'red', backgroundColor: 'transparent', padding: '10px', borderRadius: '10px', border: '1px solid black', boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)'}}>⚠️The Demo video is not available at the moment. Please check back later.⚠️</p>
         <div className="w-full max-w-xl mx-auto rounded overflow-hidden border border-gray-200 bg-black" id="frame-box">
-          {/* Replace the src below with your actual demo video link */}
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          <video
+            src={demoVideo}
+            autoPlay
+            loop
+            muted
+            controls={true}
+            className="w-full h-64 object-cover rounded"
             title="Demo Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-64"
-            id='frame'
-            style={{display: 'none'}}
           >
-          </iframe>
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
       {/* 3. Why visitors count keeps on increasing? */}
