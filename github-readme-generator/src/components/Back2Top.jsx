@@ -47,8 +47,8 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
   border: none;
@@ -63,7 +63,7 @@ const StyledButton = styled.button`
   position: relative;
 
   &:hover {
-    width: 140px;
+    width: 120px;
     border-radius: 50px;
     background-color: rgb(181, 160, 255);
   }
