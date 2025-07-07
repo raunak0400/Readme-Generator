@@ -1116,3 +1116,9 @@ html {
   font-weight: 400;
   height: 30px;
 }
+
+.markdown-body a {
+  color: #111 !important;
+  font-weight: bold;
+  font-size: 1.15em;
+}
