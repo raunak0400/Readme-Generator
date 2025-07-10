@@ -67,10 +67,23 @@ const App = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [loadingPreviewCard, setLoadingPreviewCard] = useState(false);
 
+  // Add state for AI popup
+  const [showAIPopup, setShowAIPopup] = useState(false);
+  const [aiScoreData, setAiScoreData] = useState({ score: 0, suggestions: [] });
+
   // Reset email sent flag when form data changes significantly
   useEffect(() => {
     setEmailAlreadySent(false);
   }, [formData.name, formData.githubUsername, formData.projectName]);
+
+  // Show popup and update AI score when README is generated or edited
+  useEffect(() => {
+    if (showMarkdownCard && isAnyInputFilled() && !loadingPreview) {
+      const data = getAIScoreAndSuggestions(editableMarkdown, formData);
+      setAiScoreData(data);
+      setShowAIPopup(true);
+    }
+  }, [showMarkdownCard, editableMarkdown, formData, loadingPreview]);
 
   const socialBadges = {
     github: {
@@ -660,6 +673,50 @@ const App = () => {
     }
   };
 
+  // AI suggestion and scoring logic (mocked for now)
+  const getAIScoreAndSuggestions = (markdown, formData) => {
+    // Simple scoring based on presence of sections
+    let score = 0;
+    let suggestions = [];
+    const { name, projectName, tagline, description, work, skills, socials, analytics, githubUsername } = formData;
+
+    // Title/Subtitle
+    if (name && name.trim() !== '') score += 20;
+    else suggestions.push('Add your name for a personal touch.');
+    if (projectName && projectName.trim() !== '') score += 10;
+    else suggestions.push('Include a project name for clarity.');
+    if (tagline && tagline.trim() !== '') score += 5;
+    else suggestions.push('A catchy tagline can make your README stand out.');
+
+    // About Me
+    const hasWork = work && work.some((item, idx) => idx < 3 ? item.projectName : item.info);
+    if (hasWork) score += 15;
+    else suggestions.push('Add an About Me section to introduce yourself.');
+
+    // Skills
+    const hasSkills = skills && Object.values(skills).some(arr => Array.isArray(arr) && arr.length > 0);
+    if (hasSkills) score += 20;
+    else suggestions.push('Showcase your skills with icons.');
+
+    // Socials
+    const hasSocials = socials && Object.values(socials || {}).some(val => val && val.trim());
+    if (hasSocials) score += 10;
+    else suggestions.push('Add your social links to connect with others.');
+
+    // GitHub Stats
+    const hasStats = analytics && Object.values(analytics).some(val => val);
+    if (hasStats && githubUsername && githubUsername.trim() !== '') score += 20;
+    else suggestions.push('Show off your GitHub stats for credibility.');
+
+    // Clamp score to 100
+    if (score > 100) score = 100;
+
+    // If perfect, give a positive suggestion
+    if (score === 100) suggestions = ['Great job! Your README covers all key sections.'];
+
+    return { score, suggestions };
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       <Navbar />
@@ -840,6 +897,103 @@ const App = () => {
                 )}
               </div>
             </div>
+            {/* AI Score & Suggestions Popup */}
+            {showAIPopup && (
+              <div
+                style={{
+                  position: 'fixed',
+                  top: '70px', // below navbar
+                  right: 10,
+                  zIndex: 1000,
+                  transition: 'transform 0.4s cubic-bezier(0.4,0,0.2,1)',
+                  transform: showAIPopup ? 'translateX(0)' : 'translateX(100%)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                  background: 'rgba(227, 243, 254, 0.55)', // glassy semi-transparent
+                  borderRadius: '12px',
+                  maxWidth: '400px',
+                  minWidth: '320px',
+                  padding: '32px 28px 24px 28px',
+                  border: '1.5px solid rgba(183, 222, 255, 0.45)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  backdropFilter: 'blur(10px)', // glassmorphism
+                  WebkitBackdropFilter: 'blur(12px)', // Safari support
+                  // Remove filter: blur(2px)
+                }}
+                className="ai-score-popup animate-slide-in-right"
+              >
+                <button
+                  onClick={() => setShowAIPopup(false)}
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 16,
+                    background: 'transparent',
+                    border: 'none',
+                    fontSize: 22,
+                    color: '#2563eb',
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                  }}
+                  aria-label="Close AI Suggestions"
+                >
+                  ×
+                </button>
+                <div className="flex items-center mb-2">
+                  <span className="font-bold text-blue-700 mr-2" style={{fontSize: '30px', fontWeight: 600, marginRight: '13px'}}>AI Score:</span>
+                  {(() => {
+                    const score = aiScoreData.score;
+                    let leftColor = '#2563eb';
+                    let midColor = '#2563eb';
+                    let rightColor = '#2563eb';
+                    if (score < 30) leftColor = midColor = '#ef4444'; // red
+                    else if (score >= 30 && score <= 60) leftColor = midColor = '#eab308'; // yellow
+                    if (score > 60) rightColor = '#22c55e'; // green (strictly greater than 60)
+                    if (score === 100) {
+                      leftColor = midColor = '#2563eb';
+                      rightColor = '#22c55e';
+                    }
+                    const scoreStr = score.toString().padStart(2, '0');
+                    if (score === 100) {
+                      return (
+                        <span className="text-lg font-mono" style={{ fontSize: '30px', fontWeight: 700 }}>
+                          <span style={{ color: leftColor }}>{'1'}</span>
+                          <span style={{ color: midColor }}>{'0'}</span>
+                          <span style={{ color: rightColor }}>{'0'} / 100</span>
+                        </span>
+                      );
+                    } else if (score >= 10) {
+                      return (
+                        <span className="text-lg font-mono" style={{ fontSize: '30px', fontWeight: 700 }}>
+                          <span style={{ color: leftColor }}>{scoreStr[0]}</span>
+                          <span style={{ color: midColor }}>{scoreStr[1]}</span>
+                          <span style={{ color: rightColor }}>{scoreStr.length > 2 ? scoreStr.slice(2) : ''} / 100</span>
+                        </span>
+                      );
+                    } else {
+                      // Single digit
+                      return (
+                        <span className="text-lg font-mono" style={{ fontSize: '30px', fontWeight: 700 }}>
+                          <span style={{ color: leftColor }}>0</span>
+                          <span style={{ color: midColor }}>{scoreStr[1]}</span>
+                          <span style={{ color: rightColor }}> / 100</span>
+                        </span>
+                      );
+                    }
+                  })()}
+                </div>
+                <div className="text-sm text-blue-800">
+                  <span className="font-semibold">Suggestions:</span>
+                  <ul className="list-disc ml-6 mt-1">
+                    {aiScoreData.suggestions.map((s, i) => (
+                      <li key={i}>{s}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
             {loadingPreviewCard ? (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 200 }}>
                 <Loader />

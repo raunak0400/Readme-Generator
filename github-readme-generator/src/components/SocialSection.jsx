@@ -46,15 +46,6 @@ const SocialsSection = ({ formData, setFormData }) => {
   // Add loading state for modal
   const [loading, setLoading] = React.useState(false);
 
-  // Example payment methods (add your own as needed)
-  const paymentMethods = [
-    {
-      details: "abhijeetbhale7-2@okaxis",
-      description: "Scan the QR or use the UPI ID to pay.",
-      qr: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=abhijeetbhale7-2@okaxis",
-    },
-  ];
-
   return (
     <>
       {/* Socials Card */}
@@ -200,13 +191,14 @@ const SocialsSection = ({ formData, setFormData }) => {
                 bottom: "80px",
                 right: "0px",
                 zIndex: 1050,
-                minWidth: "260px",
-                maxWidth: "320px",
+                minWidth: "500px",
+                maxWidth: "480px",
+                minHeight: "500px",
                 borderRadius: "18px",
                 overflow: "hidden",
                 backdropFilter: "blur(5px)",
                 WebkitBackdropFilter: "blur(5px)",
-                background: "rgba(255, 255, 255, 0.18)",
+                background: "rgba(255, 255, 255, 0.98)",
                 border: "1.5px solid rgba(255, 255, 255, 0.22)",
                 boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22), 0 0 16px 0 #fbbf2440",
                 transition: "all 0.3s cubic-bezier(.4,2,.3,1)",
@@ -215,11 +207,11 @@ const SocialsSection = ({ formData, setFormData }) => {
               <div
                 className="relative flex flex-col items-center border-none"
                 style={{
-                  minHeight: "320px",
+                  minHeight: "500px",
                   justifyContent: "center",
                   padding: "2.5rem 1.2rem 2.5rem 1.2rem",
                   borderRadius: "18px",
-                  background: "rgba(255,255,255,0.65)",
+                  background: "rgba(255,255,255,0.98)",
                   boxShadow: "0 2px 16px 0 rgba(31, 38, 135, 0.10)",
                   border: "none",
                   backdropFilter: "blur(10px)",
@@ -227,59 +219,41 @@ const SocialsSection = ({ formData, setFormData }) => {
                   transition: "all 0.3s cubic-bezier(.4,2,.3,1)",
                 }}
               >
-                {/* Show loading animation if loading is true */}
-                {loading ? (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '220px', width: '100%' }}>
-                    <div className="pulsar"></div>
-                  </div>
-                ) : (
-                  <>
-                    {/* Close Button at Top Right */}
-                    <button
-                      id="close-btn"
-                      className="absolute top-2 right-2 p-1 rounded-full bg-white/70 hover:bg-white/90 text-gray-700 hover:text-gray-900 shadow transition border border-white/40"
-                      onClick={() => setShowModal(false)}
-                      aria-label="Close"
-                      style={{
-                        width: "32px",
-                        height: "32px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        cursor: "pointer",
-                        fontWeight: 600,
-                        fontSize: "1.1rem",
-                        boxShadow: "0 1px 6px rgba(31,38,135,0.10)",
-                        border: "1px solid rgba(255,255,255,0.4)",
-                        backdropFilter: "blur(3px)",
-                        WebkitBackdropFilter: "blur(3px)",
-                        transition: "all 0.2s cubic-bezier(.4,2,.3,1)",
-                      }}
-                    >
-                      <span>&#x2715;</span>
-                    </button>
-                    <div className="flex flex-col items-center justify-center w-full h-full text-center gap-2" id="support">
-                      <h2 className="text-xl font-bold mb-3 mt-2 w-full tracking-tight text-gray-800 drop-shadow-sm">Support Me</h2>
-                      <div className="grid gap-3 w-full justify-items-center">
-                        {paymentMethods.map((method) => (
-                          <div key={method.name} className="flex flex-col items-center border rounded px-4 py-4 bg-gray-50 w-full">
-                            <div className="flex items-center gap-2 mb-2 justify-center">
-                              {method.icon}
-                              <span className="font-semibold text-gray-700 text-base">{method.name}</span>
-                            </div>
-                            <div className="mb-1 text-xs text-gray-700 text-center opacity-80">{method.description}</div>
-                            {method.qr && (
-                              <div className="mb-1 w-24 h-24 flex items-center justify-center rounded-md shadow mx-auto border border-white/30 bg-white">
-                                <img src={method.qr} alt={`${method.name} QR`} className="w-20 h-20 object-contain" style={{ background: "transparent" }} />
-                              </div>
-                            )}
-                            <div className="text-xs text-gray-600 break-all text-center opacity-80">{method.details}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
+                {/* Close Button at Top Right */}
+                <button
+                  id="close-btn"
+                  className="absolute top-2 right-2 p-1 rounded-full bg-white/70 hover:bg-white/90 text-gray-700 hover:text-gray-900 shadow transition border border-white/40"
+                  onClick={() => setShowModal(false)}
+                  aria-label="Close"
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    fontSize: "1.1rem",
+                    boxShadow: "0 1px 6px rgba(31,38,135,0.10)",
+                    border: "1px solid rgba(255,255,255,0.4)",
+                    backdropFilter: "blur(3px)",
+                    WebkitBackdropFilter: "blur(3px)",
+                    transition: "all 0.2s cubic-bezier(.4,2,.3,1)",
+                  }}
+                >
+                  <span>&#x2715;</span>
+                </button>
+                <div className="flex flex-col items-center justify-center w-full h-full text-center gap-2" id="support">
+                  {/* <h2 className="text-xl font-bold mb-3 mt-2 w-full tracking-tight text-gray-800 drop-shadow-sm">Support Me</h2> */}
+                  {/* Buy Me a Coffee Official Widget */}
+                  <iframe
+                    src="https://buymeacoffee.com/widget/page/abhijeetBhale?hide_navbar=true"
+                    title="Buy Me a Coffee"
+                    style={{ border: 'none', width: '100%', minHeight: '500px', borderRadius: '12px', background: 'transparent' }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </>
