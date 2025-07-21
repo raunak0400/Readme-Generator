@@ -85,6 +85,46 @@ const App = () => {
     }
   }, [showMarkdownCard, editableMarkdown, formData, loadingPreview]);
 
+  // --- Auto-save Feature ---
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('readmeFormData');
+    if (saved) {
+      try {
+        setFormData(JSON.parse(saved));
+      } catch {}
+    }
+  }, []);
+  // Save to localStorage on every change
+  useEffect(() => {
+    localStorage.setItem('readmeFormData', JSON.stringify(formData));
+  }, [formData]);
+
+  // --- Keyboard Shortcuts ---
+  useEffect(() => {
+    const handler = (e) => {
+      // Ctrl+K or Cmd+K: Focus skills search
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (skillsSearchRef.current) skillsSearchRef.current.focus();
+      }
+      // Ctrl+S or Cmd+S: Manual save
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        localStorage.setItem('readmeFormData', JSON.stringify(formData));
+        // Optionally show a toast/alert
+        alert('Form auto-saved!');
+      }
+      // Ctrl+G or Cmd+G: Generate README
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
+        e.preventDefault();
+        handleGenerate();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [formData]);
+
   const socialBadges = {
     github: {
       urlPrefix: "https://github.com/",
@@ -369,15 +409,16 @@ const App = () => {
     'Karma': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/karma/karma-original.svg',
   };
 
-  // Email configuration - Replace with your actual EmailJS credentials
+  // Email configuration - Now loaded from environment variables
   const EMAIL_CONFIG = {
-    serviceId: 'service_06dwek7',
-    templateId: 'template_ajoib9m',
-    userId: 'ZNNAGsjutqSl9Ulqr',
-    adminEmails: [
-      'abhijeetbhale7@gmail.com', //My mail
-    ]
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
+    userId: import.meta.env.VITE_EMAILJS_USER_ID || '',
+    adminEmails: (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean)
   };
+
+  // BuyMeACoffee username from env
+  const BUYMEACOFFEE_USERNAME = import.meta.env.VITE_BUYMEACOFFEE_USERNAME || '';
 
   // Function to send email with README content
   const sendEmail = async (markdown, action = 'generated') => {
@@ -645,6 +686,7 @@ const App = () => {
   };
 
   const [showInputWarning, setShowInputWarning] = useState(false);
+  const skillsSearchRef = useRef(null); // For keyboard shortcut
 
   const handleGenerate = () => {
     setLoadingPreview(true);
@@ -724,8 +766,11 @@ const App = () => {
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <TypingSVGSection formData={formData} setFormData={setFormData} />
+        <div className="skills-section">
+          <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} searchInputRef={skillsSearchRef} />
+        </div>
         <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
-        <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} />
+        <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} buyMeAcCoffeeUsername={BUYMEACOFFEE_USERNAME} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
 
         {/* Email Consent Section */}
