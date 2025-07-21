@@ -330,6 +330,7 @@ input:focus, textarea:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 30;
 }
 
 /*This is the styling for the github star*/
@@ -1110,4 +1111,18 @@ html {
   color: #111 !important;
   font-weight: bold;
   font-size: 1.15em;
+}
+
+#template-gallery{
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+#template{
+  width: 100%;
+}
+#template-btn{
+  display: flex;
+  justify-content: end;
 }

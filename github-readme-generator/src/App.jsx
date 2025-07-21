@@ -761,14 +761,14 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
-      <Navbar />
+      <Navbar setFormData={setFormData} />
       <div className="container mx-auto p-4 max-w-4xl">
         <TitleSection formData={formData} setFormData={setFormData} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <TypingSVGSection formData={formData} setFormData={setFormData} />
-        <div className="skills-section">
+        {/* <div className="skills-section">
           <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} searchInputRef={skillsSearchRef} />
-        </div>
+        </div> */}
         <SkillsSection formData={formData} setFormData={setFormData} skillIcons={skillIcons} />
         <SocialsSection formData={formData} setFormData={setFormData} socialBadges={socialBadges} buyMeAcCoffeeUsername={BUYMEACOFFEE_USERNAME} />
         <GitHubProfileSection formData={formData} setFormData={setFormData} />
