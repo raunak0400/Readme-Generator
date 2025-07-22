@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { templates } from './Template.js';
 
-const TemplateDropdown = ({ setFormData }) => {
-  const handleSelectTemplate = (templateData) => {
-    setFormData(templateData);
+const TemplateDropdown = ({ setFormData, showNotification }) => {
+  const handleSelectTemplate = (template) => {
+    setFormData(template.data);
+    showNotification(`${template.name} Template applied`);
   };
 
   return (
@@ -27,7 +28,7 @@ const TemplateDropdown = ({ setFormData }) => {
                   className="submenu-link"
                   onClick={e => {
                     e.preventDefault();
-                    handleSelectTemplate(template.data);
+                    handleSelectTemplate(template);
                   }}
                 >
                   <div className="template-name">{template.name}</div>
@@ -199,7 +200,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const TitleSection = ({ formData, setFormData }) => {
+const TitleSection = ({ formData, setFormData, showNotification }) => {
   const [titleFocused, setTitleFocused] = React.useState(false);
   const [descFocused, setDescFocused] = React.useState(false);
 
@@ -212,7 +213,7 @@ const TitleSection = ({ formData, setFormData }) => {
       {/* Flex row for top bar */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start', width: '100%' }}>
         <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 10 }}>
-          <TemplateDropdown setFormData={setFormData} />
+          <TemplateDropdown setFormData={setFormData} showNotification={showNotification} />
         </div>
       </div>
       <h2 className="text-xl font-semibold mb-3 text-gray-800" style={{ fontSize: '2rem', width: '50%' }}>Title</h2>
