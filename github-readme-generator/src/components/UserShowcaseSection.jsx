@@ -23,16 +23,6 @@ const UserShowcaseSection = () => {
       date: "2025-06-30"
     },
     {
-      name: "Shantanu Verma",
-      githubUsername: "ShantanuV2709",
-      date: "2025-06-30"
-    },
-    {
-      name: "Taniya Khasdeo",
-      githubUsername: "Taniya-Khasdeo",
-      date: "2025-06-30"
-    },
-    {
       name: "Dhaval Shah",
       githubUsername: "dhavalshahh",
       date: "2025-07-2"
