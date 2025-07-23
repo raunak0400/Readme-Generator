@@ -86,20 +86,20 @@ const App = () => {
     }
   }, [showMarkdownCard, editableMarkdown, formData, loadingPreview]);
 
-  // --- Auto-save Feature ---
-  // Load from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('readmeFormData');
-    if (saved) {
-      try {
-        setFormData(JSON.parse(saved));
-      } catch { }
-    }
-  }, []);
-  // Save to localStorage on every change
-  useEffect(() => {
-    localStorage.setItem('readmeFormData', JSON.stringify(formData));
-  }, [formData]);
+  // // --- Auto-save Feature ---
+  // // Load from localStorage on mount
+  // useEffect(() => {
+  //   const saved = localStorage.getItem('readmeFormData');
+  //   if (saved) {
+  //     try {
+  //       setFormData(JSON.parse(saved));
+  //     } catch { }
+  //   }
+  // }, []);
+  // // Save to localStorage on every change
+  // useEffect(() => {
+  //   localStorage.setItem('readmeFormData', JSON.stringify(formData));
+  // }, [formData]);
 
   // --- Keyboard Shortcuts ---
   useEffect(() => {
