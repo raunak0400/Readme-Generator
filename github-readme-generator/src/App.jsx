@@ -93,7 +93,7 @@ const App = () => {
     if (saved) {
       try {
         setFormData(JSON.parse(saved));
-      } catch {}
+      } catch { }
     }
   }, []);
   // Save to localStorage on every change
@@ -766,6 +766,101 @@ const App = () => {
       setNotification({ show: false, message: '' });
     }, 3000); // Hide after 3 seconds
   };
+
+  const generateAIDescription = (keywords) => {
+    // Converts all keywords to lowercase to handle case-insensitivity (e.g., Frontend, frontend, FRONTEND).
+    const keywordArray = keywords.split(',').map(k => k.trim().toLowerCase());
+    let sentences = [];
+    const usedKeywords = new Set();
+
+    const addSentence = (key, sentence) => {
+        if (!usedKeywords.has(key)) {
+            sentences.push(sentence);
+            usedKeywords.add(key);
+        }
+    };
+
+    // --- Combination keywords for more specific and accurate bios ---
+    if ((keywordArray.includes('frontend') || keywordArray.includes('front-end')) && (keywordArray.includes('backend') || keywordArray.includes('back-end'))) {
+        addSentence('full-stack', 'As a **Full-Stack Developer**, I excel at bridging the gap between sophisticated backend infrastructure and engaging user interfaces. I have a holistic understanding of the entire development lifecycle, from architecting scalable databases and building robust APIs to implementing pixel-perfect, responsive UIs. I love bringing complete, end-to-end applications to life and am passionate about creating seamless digital experiences.');
+    }
+    else if (keywordArray.includes('data science') || keywordArray.includes('machine learning') || keywordArray.includes('ai')) {
+        addSentence('ai/ml', 'I am fascinated by the world of **Data Science and AI**. My experience involves analyzing large datasets, engineering insightful features, and building predictive machine learning models. I am driven by the challenge of extracting meaningful patterns from complex data and leveraging them to build intelligent, data-driven applications that solve real-world problems.');
+    }
+    
+    // --- Individual Role & Skill Keywords ---
+    if (keywordArray.includes('frontend') || keywordArray.includes('front-end')) {
+        addSentence('frontend', 'I am a passionate **Frontend Developer** with a keen eye for design and a love for creating beautiful, responsive, and intuitive user interfaces. I thrive on translating UI/UX designs into high-quality, accessible code and crafting seamless, dynamic experiences that delight users.');
+    }
+    if (keywordArray.includes('backend') || keywordArray.includes('back-end')) {
+        addSentence('backend', 'I have solid experience in **Backend Development**, where I focus on building robust, scalable, and secure server-side applications. My expertise includes designing efficient database schemas, developing powerful RESTful APIs, and ensuring the performance and reliability of the entire system.');
+    }
+    if (keywordArray.includes('devops') || keywordArray.includes('ci/cd')) {
+        addSentence('devops', 'As a **DevOps Engineer**, I specialize in automating and optimizing software development lifecycles. I have a strong background in building CI/CD pipelines, managing cloud infrastructure, and implementing monitoring solutions to ensure high availability and reliability.');
+    }
+    if (keywordArray.includes('mobile')) {
+        addSentence('mobile', 'I have a strong background in **Mobile Development**, creating native or cross-platform applications for both iOS and Android. My focus is on building apps that are not only functional and performant but also provide an excellent and intuitive user experience on any device.');
+    }
+    if (keywordArray.includes('ui/ux') || keywordArray.includes('designer')) {
+        addSentence('ui/ux', 'As a **UI/UX Designer**, I am passionate about creating user-centered designs that are both beautiful and functional. I follow a data-driven approach, conducting user research and usability testing to craft intuitive interfaces that solve user problems and achieve business goals.');
+    }
+     if (keywordArray.includes('qa') || keywordArray.includes('tester') || keywordArray.includes('quality assurance')) {
+        addSentence('qa', 'As a **QA Engineer**, I have a meticulous eye for detail and a passion for ensuring software quality. I specialize in creating comprehensive test plans, developing automated test scripts, and identifying bugs to deliver a flawless and reliable product to end-users.');
+    }
+
+    // --- Technology-Specific Keywords ---
+    if (keywordArray.includes('react') || keywordArray.includes('react.js')) {
+        addSentence('react', 'I specialize in **React** and its modern ecosystem, leveraging tools like Next.js for server-side rendering, Redux for complex state management, and Tailwind CSS for utility-first styling. I am committed to writing clean, reusable, and component-based code.');
+    }
+    if (keywordArray.includes('angular')) {
+        addSentence('angular', 'I have extensive experience with **Angular**, building feature-rich, single-page applications. I am proficient in TypeScript and RxJS, and I enjoy leveraging Angular\'s powerful framework to create modular and maintainable enterprise-level solutions.');
+    }
+    if (keywordArray.includes('vue') || keywordArray.includes('vue.js')) {
+        addSentence('vue', 'I am proficient in **Vue.js** and its progressive framework. I enjoy building interactive and performant applications using its component-based architecture, along with state management solutions like Vuex and routing with Vue Router.');
+    }
+    if (keywordArray.includes('node.js') || keywordArray.includes('nodejs') || keywordArray.includes('express')) {
+        addSentence('node.js', 'For my backend work, I specialize in **Node.js** and Express. I excel at building fast, scalable, and event-driven APIs that can handle a high volume of requests, making it a perfect choice for modern web services.');
+    }
+    if (keywordArray.includes('python')) {
+        addSentence('python', 'My language of choice for many projects is **Python**, valued for its readability and extensive libraries. I apply it across various domains, from web development with Django and Flask to data analysis and scripting.');
+    }
+    if (keywordArray.includes('django') || keywordArray.includes('flask')) {
+        addSentence('django/flask', 'In the Python ecosystem, I am skilled in using web frameworks like **Django** for large-scale projects and **Flask** for lightweight microservices, allowing me to choose the right tool for the job.');
+    }
+    if (keywordArray.includes('java') || keywordArray.includes('spring boot')) {
+        addSentence('java', 'I have a strong foundation in **Java** and the **Spring Boot** framework, which I use to build robust, secure, and high-performance backend systems for enterprise-grade applications.');
+    }
+    if (keywordArray.includes('sql') || keywordArray.includes('postgresql') || keywordArray.includes('mysql')) {
+        addSentence('sql', 'I am proficient in **SQL** and relational databases like PostgreSQL and MySQL, with expertise in database design, query optimization, and ensuring data integrity.');
+    }
+    if (keywordArray.includes('nosql') || keywordArray.includes('mongodb')) {
+        addSentence('nosql', 'I also have experience with **NoSQL** databases like MongoDB, which I leverage for applications requiring flexible data models and horizontal scalability.');
+    }
+    if (keywordArray.includes('aws') || keywordArray.includes('azure') || keywordArray.includes('gcp') || keywordArray.includes('cloud')) {
+        addSentence('cloud', 'I am experienced in deploying and managing applications on **Cloud Platforms** like AWS, Azure, or GCP, utilizing their services to build resilient, scalable, and cost-effective solutions.');
+    }
+     if (keywordArray.includes('docker') || keywordArray.includes('kubernetes') || keywordArray.includes('k8s')) {
+        addSentence('containers', 'I use **Docker** to containerize applications for consistency across environments and **Kubernetes** to orchestrate, automate, and scale them, forming the backbone of modern cloud-native architectures.');
+    }
+
+    // --- Soft Skills & Attributes ---
+    if (keywordArray.includes('passionate') || keywordArray.includes('learning')) {
+        addSentence('passionate', 'I am a **passionate and dedicated life-long learner**, always eager to explore emerging technologies and take on challenging problems. I believe in continuous improvement and am constantly looking for opportunities to expand my skill set.');
+    }
+     if (keywordArray.includes('collaborative') || keywordArray.includes('team player')) {
+        addSentence('collaborative', 'I am a **strong collaborator** who thrives in a team environment. I believe the best products are built when diverse minds work together, and I enjoy sharing knowledge and mentoring others.');
+    }
+     if (keywordArray.includes('problem solver') || keywordArray.includes('creative')) {
+        addSentence('problem-solver', 'At my core, I am a **creative problem-solver**. I enjoy dissecting complex challenges and architecting elegant, efficient solutions that not only meet technical requirements but also provide real value to users.');
+    }
+    
+    // --- Fallback description if no keywords are matched ---
+    if (sentences.length === 0) {
+      return `I am a dedicated developer with a keen interest in **${keywords}**. I thrive on solving complex problems and continuously seek opportunities to learn and grow within the tech community. My goal is to build innovative, efficient, and user-friendly solutions. I am a strong believer in collaboration and am always excited to work with a team to bring impactful projects to life.`;
+    }
+
+    return sentences.join(' ');
+  };
   
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -780,7 +875,7 @@ const App = () => {
         </div>
       )}
       <div className="container mx-auto p-4 max-w-4xl">
-        <TitleSection formData={formData} setFormData={setFormData} showNotification={showNotification} />
+        <TitleSection formData={formData} setFormData={setFormData} showNotification={showNotification} generateAIDescription={generateAIDescription} />
         <WorkSection formData={formData} setFormData={setFormData} />
         <TypingSVGSection formData={formData} setFormData={setFormData} />
         {/* <div className="skills-section">
